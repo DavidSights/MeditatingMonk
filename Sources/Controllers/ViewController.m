@@ -117,7 +117,9 @@
                      toRecipients:@[@"davyowolfmusic@gmail.com"]];
 }
 
-- (void)sendContactEmail(
+- (void)sendContactEmail {
+    
+}
 
 /// Create and show an email composition view.
 - (void)composeEmailWithSubject:(NSString *)subject message:(NSString *)message toRecipients:(NSArray<NSString*> *)recipients {
