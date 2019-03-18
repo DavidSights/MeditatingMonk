@@ -292,7 +292,7 @@
 				9A8F84E9197354EC0085296D /* MeditatingMonk-Prefix.pch */,
 				9AD53150223F097C004DBEC1 /* MeditatingMonk-Bridging-Header.h */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		9AD5314F223F020B004DBEC1 /* Views */ = {
@@ -314,19 +314,84 @@
 		9AD53155223FF08D004DBEC1 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				9AD5315E223FF7AD004DBEC1 /* Fonts */,
+				9AD5315B223FF77C004DBEC1 /* Images */,
+				9AD5315F223FF834004DBEC1 /* Audio */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		9AD53156223FF0DB004DBEC1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */,
+				9A2634C71BD4721E00E3FCDE /* TipsArray.h */,
+				9A2634C81BD4721E00E3FCDE /* TipsArray.m */,
+				9A877B121BCB505700297A74 /* Sounds.h */,
+				9A877B131BCB505700297A74 /* Sounds.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9AD5315A223FF74A004DBEC1 /* Sound Effects */ = {
+			isa = PBXGroup;
+			children = (
 				9A8AF5A019AD1B03004002E9 /* jumpSound.mp3 */,
-				9A8AF59A19AD147E004002E9 /* musicLoop.wav */,
 				9A8AF59C19AD16B3004002E9 /* gameOverSound.mp3 */,
 				9A8AF59D19AD16B3004002E9 /* highScoreSound.mp3 */,
 				9A711DCD19C2C35A003066B5 /* buttonSound.wav */,
-				9AD53157223FF20F004DBEC1 /* Minecraftia.ttf */,
-				9A6CCA63199F0EEA005538EF /* buttoniPhone@2x.png */,
-				9A6CCA64199F0EEA005538EF /* buttonPressediPhone@2x.png */,
-				9A6CCA65199F0EEA005538EF /* facebookButtoniPhone@2x.png */,
-				9A6CCA66199F0EEA005538EF /* gameCenterIconiPhone@2x.png */,
+			);
+			path = "Sound Effects";
+			sourceTree = "<group>";
+		};
+		9AD5315B223FF77C004DBEC1 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9A1892A119BBADD30016F95A /* icon@2x.png */,
+				9A8AF5A819B021B4004002E9 /* title@2x.png */,
+				9A2055A219A7087F00F2E743 /* clouds1@2x.png */,
+				9A2055A319A7087F00F2E743 /* clouds2@2x.png */,
+				9A2055A419A7087F00F2E743 /* clouds3@2x.png */,
+				9A2055A519A7087F00F2E743 /* clouds4@2x.png */,
+				9A2055A619A7087F00F2E743 /* clouds5@2x.png */,
+				9A49D6CC197F48740078C2D6 /* buttonBackground@2x.png */,
+				9A49D6CD197F48740078C2D6 /* scoreInfoBackground@2x.png */,
+				9A8F851E197484380085296D /* backgroundDay@2x.png */,
+				9A8F85161973571B0085296D /* monk@2x.png */,
+				9A8F85171973571B0085296D /* monkAwake@2x.png */,
+				9AD5315D223FF78C004DBEC1 /* iPad */,
+				9AD5315C223FF783004DBEC1 /* iPhone */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		9AD5315C223FF783004DBEC1 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
 				9A6CCA67199F0EEA005538EF /* playIconiPhone@2x.png */,
 				9A6CCA68199F0EEA005538EF /* scoreboardiPhone@2x.png */,
 				9A6CCA69199F0EEA005538EF /* twitterButtoniPhone@2x.png */,
+				9A6CCA63199F0EEA005538EF /* buttoniPhone@2x.png */,
+				9AFF510B19B4E50600751BEA /* emailButtoniPhone@2x.png */,
+				9AFF510C19B4E50600751BEA /* twitterButton2iPhone@2x.png */,
+				9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */,
+				9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */,
+				9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */,
+				9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */,
+				9A6CCA64199F0EEA005538EF /* buttonPressediPhone@2x.png */,
+				9A6CCA65199F0EEA005538EF /* facebookButtoniPhone@2x.png */,
+				9A6CCA66199F0EEA005538EF /* gameCenterIconiPhone@2x.png */,
+				9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */,
+				9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */,
+				9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */,
+				9A8AF5A619AD8D5F004002E9 /* tipCloudiPhone@2x.png */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		9AD5315D223FF78C004DBEC1 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
 				9AC01733199C18E200C1C4ED /* backgroundiPad@2x.png */,
 				9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */,
 				9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */,
@@ -348,42 +413,25 @@
 				9AD3212119C11F5900E38C83 /* twitterButton2iPad@2x.png */,
 				9AD3211B19C107F800E38C83 /* titleiPad@2x.png */,
 				9AD3211719C1061700E38C83 /* creditsButtoniPad@2x.png */,
-				9A1892A119BBADD30016F95A /* icon@2x.png */,
-				9AFF510B19B4E50600751BEA /* emailButtoniPhone@2x.png */,
-				9AFF510C19B4E50600751BEA /* twitterButton2iPhone@2x.png */,
-				9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */,
-				9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */,
-				9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */,
-				9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */,
-				9A8AF5A819B021B4004002E9 /* title@2x.png */,
-				9A2055A219A7087F00F2E743 /* clouds1@2x.png */,
-				9A2055A319A7087F00F2E743 /* clouds2@2x.png */,
-				9A2055A419A7087F00F2E743 /* clouds3@2x.png */,
-				9A2055A519A7087F00F2E743 /* clouds4@2x.png */,
-				9A2055A619A7087F00F2E743 /* clouds5@2x.png */,
-				9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */,
-				9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */,
-				9A49D6CC197F48740078C2D6 /* buttonBackground@2x.png */,
-				9A49D6CD197F48740078C2D6 /* scoreInfoBackground@2x.png */,
-				9A8F851E197484380085296D /* backgroundDay@2x.png */,
-				9A8F85161973571B0085296D /* monk@2x.png */,
-				9A8F85171973571B0085296D /* monkAwake@2x.png */,
-				9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */,
-				9A8AF5A619AD8D5F004002E9 /* tipCloudiPhone@2x.png */,
 			);
-			path = Media;
+			path = iPad;
 			sourceTree = "<group>";
 		};
-		9AD53156223FF0DB004DBEC1 /* Models */ = {
+		9AD5315E223FF7AD004DBEC1 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */,
-				9A2634C71BD4721E00E3FCDE /* TipsArray.h */,
-				9A2634C81BD4721E00E3FCDE /* TipsArray.m */,
-				9A877B121BCB505700297A74 /* Sounds.h */,
-				9A877B131BCB505700297A74 /* Sounds.m */,
+				9AD53157223FF20F004DBEC1 /* Minecraftia.ttf */,
 			);
-			path = Models;
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		9AD5315F223FF834004DBEC1 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				9AD5315A223FF74A004DBEC1 /* Sound Effects */,
+				9A8AF59A19AD147E004002E9 /* musicLoop.wav */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -678,15 +726,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Sources/MeditatingMonk-Prefix.pch";
-				INFOPLIST_FILE = "Sources/MeditatingMonk-Info.plist";
+				GCC_PREFIX_HEADER = "Sources/Supporting Files/MeditatingMonk-Prefix.pch";
+				INFOPLIST_FILE = "Sources/Supporting Files/MeditatingMonk-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.davidsights.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Sources/MeditatingMonk-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/Supporting Files/MeditatingMonk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -703,15 +751,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Sources/MeditatingMonk-Prefix.pch";
-				INFOPLIST_FILE = "Sources/MeditatingMonk-Info.plist";
+				GCC_PREFIX_HEADER = "Sources/Supporting Files/MeditatingMonk-Prefix.pch";
+				INFOPLIST_FILE = "Sources/Supporting Files/MeditatingMonk-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.davidsights.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Sources/MeditatingMonk-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/Supporting Files/MeditatingMonk-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
