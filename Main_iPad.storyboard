@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="xz5-Uh-z8T">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="9Iw-wP-bYF">
+            <objects>
+                <viewController id="xz5-Uh-z8T" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OHI-IT-LPa"/>
+                        <viewControllerLayoutGuide type="bottom" id="ojn-6l-IDD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cii-6p-2Kr" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62v-01-WgQ">
+                                <rect key="frame" x="0.0" y="958" width="768" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="84F-e5-85L"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="xz5-Uh-z8T" id="wX2-Ul-ySP"/>
+                                </connections>
+                            </adBannerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="62v-01-WgQ" firstAttribute="leading" secondItem="cii-6p-2Kr" secondAttribute="leading" id="R93-ri-JGe"/>
+                            <constraint firstItem="ojn-6l-IDD" firstAttribute="top" secondItem="62v-01-WgQ" secondAttribute="bottom" id="oUE-Ij-heT"/>
+                            <constraint firstAttribute="trailing" secondItem="62v-01-WgQ" secondAttribute="trailing" id="uRt-rb-pZ5"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KDe-4p-b1u" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

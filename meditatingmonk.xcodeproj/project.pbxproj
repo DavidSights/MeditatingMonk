@@ -1,0 +1,923 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */; };
+		9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */; };
+		9A1892A219BBADD30016F95A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1892A119BBADD30016F95A /* icon@2x.png */; };
+		9A20559719A42B7A00F2E743 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A20559619A42B7A00F2E743 /* Social.framework */; };
+		9A2055A719A7087F00F2E743 /* clouds1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2055A219A7087F00F2E743 /* clouds1@2x.png */; };
+		9A2055A819A7087F00F2E743 /* clouds2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2055A319A7087F00F2E743 /* clouds2@2x.png */; };
+		9A2055A919A7087F00F2E743 /* clouds3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2055A419A7087F00F2E743 /* clouds3@2x.png */; };
+		9A2055AA19A7087F00F2E743 /* clouds4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2055A519A7087F00F2E743 /* clouds4@2x.png */; };
+		9A2055AB19A7087F00F2E743 /* clouds5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2055A619A7087F00F2E743 /* clouds5@2x.png */; };
+		9A2634C61BD471DC00E3FCDE /* TipCloud.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2634C51BD471DC00E3FCDE /* TipCloud.m */; };
+		9A2634C91BD4721E00E3FCDE /* TipsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2634C81BD4721E00E3FCDE /* TipsArray.m */; };
+		9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A49D6CA197F48590078C2D6 /* ScoreBoard.m */; };
+		9A49D6CE197F48740078C2D6 /* buttonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A49D6CC197F48740078C2D6 /* buttonBackground@2x.png */; };
+		9A49D6CF197F48740078C2D6 /* scoreInfoBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A49D6CD197F48740078C2D6 /* scoreInfoBackground@2x.png */; };
+		9A49D6D1198350DA0078C2D6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A49D6D0198350DA0078C2D6 /* GameKit.framework */; };
+		9A49D6D3198553CC0078C2D6 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A49D6D2198553CC0078C2D6 /* iAd.framework */; };
+		9A6CCA6A199F0EEA005538EF /* buttoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA63199F0EEA005538EF /* buttoniPhone@2x.png */; };
+		9A6CCA6B199F0EEA005538EF /* buttonPressediPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA64199F0EEA005538EF /* buttonPressediPhone@2x.png */; };
+		9A6CCA6C199F0EEA005538EF /* facebookButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA65199F0EEA005538EF /* facebookButtoniPhone@2x.png */; };
+		9A6CCA6D199F0EEA005538EF /* gameCenterIconiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA66199F0EEA005538EF /* gameCenterIconiPhone@2x.png */; };
+		9A6CCA6E199F0EEA005538EF /* playIconiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA67199F0EEA005538EF /* playIconiPhone@2x.png */; };
+		9A6CCA6F199F0EEA005538EF /* scoreboardiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA68199F0EEA005538EF /* scoreboardiPhone@2x.png */; };
+		9A6CCA70199F0EEA005538EF /* twitterButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA69199F0EEA005538EF /* twitterButtoniPhone@2x.png */; };
+		9A6CCA8719A05205005538EF /* buttoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8019A05205005538EF /* buttoniPad@2x.png */; };
+		9A6CCA8819A05205005538EF /* buttonPressediPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8119A05205005538EF /* buttonPressediPad@2x.png */; };
+		9A6CCA8919A05205005538EF /* facebookButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8219A05205005538EF /* facebookButtoniPad@2x.png */; };
+		9A6CCA8A19A05205005538EF /* gameCenterIconiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8319A05205005538EF /* gameCenterIconiPad@2x.png */; };
+		9A6CCA8B19A05205005538EF /* playIconiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8419A05205005538EF /* playIconiPad@2x.png */; };
+		9A6CCA8C19A05205005538EF /* scoreboardiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8519A05205005538EF /* scoreboardiPad@2x.png */; };
+		9A6CCA8D19A05205005538EF /* twitterButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8619A05205005538EF /* twitterButtoniPad@2x.png */; };
+		9A711DCE19C2C35A003066B5 /* buttonSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9A711DCD19C2C35A003066B5 /* buttonSound.wav */; };
+		9A78818E1979E75800F6A6F4 /* Minecraftia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A78818D1979E75800F6A6F4 /* Minecraftia.ttf */; };
+		9A78818F1979E75800F6A6F4 /* Minecraftia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A78818D1979E75800F6A6F4 /* Minecraftia.ttf */; };
+		9A877B141BCB505700297A74 /* Sounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A877B131BCB505700297A74 /* Sounds.m */; };
+		9A8AF59119A92F1A004002E9 /* tipBackgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */; };
+		9A8AF59919AC2EDB004002E9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8AF59819AC2EDB004002E9 /* AVFoundation.framework */; };
+		9A8AF59B19AD147E004002E9 /* musicLoop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF59A19AD147E004002E9 /* musicLoop.wav */; };
+		9A8AF59E19AD16B3004002E9 /* gameOverSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF59C19AD16B3004002E9 /* gameOverSound.mp3 */; };
+		9A8AF59F19AD16B3004002E9 /* highScoreSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF59D19AD16B3004002E9 /* highScoreSound.mp3 */; };
+		9A8AF5A119AD1B03004002E9 /* jumpSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF5A019AD1B03004002E9 /* jumpSound.mp3 */; };
+		9A8AF5A719AD8D5F004002E9 /* tipCloudiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF5A619AD8D5F004002E9 /* tipCloudiPhone@2x.png */; };
+		9A8AF5A919B021B4004002E9 /* title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF5A819B021B4004002E9 /* title@2x.png */; };
+		9A8AF5B119B291B9004002E9 /* creditsBackgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */; };
+		9A8AF5B719B29434004002E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8AF5B619B29434004002E9 /* ViewController.m */; };
+		9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8AF5BF19B2C064004002E9 /* CreditsNode.m */; };
+		9A8F84DA197354EC0085296D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84D9197354EC0085296D /* Foundation.framework */; };
+		9A8F84DC197354EC0085296D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84DB197354EC0085296D /* CoreGraphics.framework */; };
+		9A8F84DE197354EC0085296D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84DD197354EC0085296D /* UIKit.framework */; };
+		9A8F84E0197354EC0085296D /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84DF197354EC0085296D /* SpriteKit.framework */; };
+		9A8F84E6197354EC0085296D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F84E4197354EC0085296D /* InfoPlist.strings */; };
+		9A8F84E8197354EC0085296D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F84E7197354EC0085296D /* main.m */; };
+		9A8F84EC197354EC0085296D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F84EB197354EC0085296D /* AppDelegate.m */; };
+		9A8F84EF197354EC0085296D /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F84ED197354EC0085296D /* Main_iPhone.storyboard */; };
+		9A8F84F5197354EC0085296D /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F84F4197354EC0085296D /* GameScene.m */; };
+		9A8F84F9197354EC0085296D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F84F8197354EC0085296D /* Images.xcassets */; };
+		9A8F8500197354EC0085296D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84FF197354EC0085296D /* XCTest.framework */; };
+		9A8F8501197354EC0085296D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84D9197354EC0085296D /* Foundation.framework */; };
+		9A8F8502197354EC0085296D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84DD197354EC0085296D /* UIKit.framework */; };
+		9A8F850A197354EC0085296D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F8508197354EC0085296D /* InfoPlist.strings */; };
+		9A8F850C197354EC0085296D /* MeditatingMonkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F850B197354EC0085296D /* MeditatingMonkTests.m */; };
+		9A8F85191973571B0085296D /* monk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F85161973571B0085296D /* monk@2x.png */; };
+		9A8F851A1973571B0085296D /* monkAwake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F85171973571B0085296D /* monkAwake@2x.png */; };
+		9A8F851F197484380085296D /* backgroundDay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F851E197484380085296D /* backgroundDay@2x.png */; };
+		9AC01738199C18E200C1C4ED /* backgroundiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01733199C18E200C1C4ED /* backgroundiPad@2x.png */; };
+		9AC0173A199C18E200C1C4ED /* grassAndTreeiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */; };
+		9AC0173B199C18E200C1C4ED /* monkEyesOpeniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */; };
+		9AC0173C199C18E200C1C4ED /* monkiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01737199C18E200C1C4ED /* monkiPad@2x.png */; };
+		9AC59196199C650F00C185E2 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC59195199C650F00C185E2 /* Main_iPad.storyboard */; };
+		9AD3211919C1061700E38C83 /* creditsButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211719C1061700E38C83 /* creditsButtoniPad@2x.png */; };
+		9AD3211C19C107F800E38C83 /* titleiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211B19C107F800E38C83 /* titleiPad@2x.png */; };
+		9AD3212219C11F5900E38C83 /* clouds1iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211D19C11F5900E38C83 /* clouds1iPad@2x.png */; };
+		9AD3212319C11F5900E38C83 /* clouds2iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211E19C11F5900E38C83 /* clouds2iPad@2x.png */; };
+		9AD3212419C11F5900E38C83 /* emailButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211F19C11F5900E38C83 /* emailButtoniPad@2x.png */; };
+		9AD3212519C11F5900E38C83 /* tipCloudiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3212019C11F5900E38C83 /* tipCloudiPad@2x.png */; };
+		9AD3212619C11F5900E38C83 /* twitterButton2iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3212119C11F5900E38C83 /* twitterButton2iPad@2x.png */; };
+		9AD3212819C125FE00E38C83 /* creditsBackgroundiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3212719C125FE00E38C83 /* creditsBackgroundiPad@2x.png */; };
+		9AD3213419C12B2D00E38C83 /* creditsIconiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3213319C12B2D00E38C83 /* creditsIconiPad@2x.png */; };
+		9AD3213619C12B9000E38C83 /* creditsButtonPressediPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3213519C12B9000E38C83 /* creditsButtonPressediPad@2x.png */; };
+		9AD53152223F097D004DBEC1 /* MonkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD53151223F097D004DBEC1 /* MonkNode.swift */; };
+		9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */; };
+		9AFF510719B2DC5800751BEA /* creditsButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */; };
+		9AFF510819B2DC5800751BEA /* creditsButtonPressediPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */; };
+		9AFF510A19B3EBFF00751BEA /* creditsBackground02iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */; };
+		9AFF510D19B4E50600751BEA /* emailButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510B19B4E50600751BEA /* emailButtoniPhone@2x.png */; };
+		9AFF510E19B4E50600751BEA /* twitterButton2iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510C19B4E50600751BEA /* twitterButton2iPhone@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9A8F8503197354EC0085296D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9A8F84CE197354EC0085296D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9A8F84D5197354EC0085296D;
+			remoteInfo = MeditatingMonk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPhone@2x.png"; sourceTree = "<group>"; };
+		9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPhone@2x.png"; sourceTree = "<group>"; };
+		9A1892A119BBADD30016F95A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		9A20559619A42B7A00F2E743 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		9A2055A219A7087F00F2E743 /* clouds1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds1@2x.png"; sourceTree = "<group>"; };
+		9A2055A319A7087F00F2E743 /* clouds2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds2@2x.png"; sourceTree = "<group>"; };
+		9A2055A419A7087F00F2E743 /* clouds3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds3@2x.png"; sourceTree = "<group>"; };
+		9A2055A519A7087F00F2E743 /* clouds4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds4@2x.png"; sourceTree = "<group>"; };
+		9A2055A619A7087F00F2E743 /* clouds5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds5@2x.png"; sourceTree = "<group>"; };
+		9A2634C41BD471DC00E3FCDE /* TipCloud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TipCloud.h; path = meditatingmonk/TipCloud.h; sourceTree = SOURCE_ROOT; };
+		9A2634C51BD471DC00E3FCDE /* TipCloud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TipCloud.m; path = meditatingmonk/TipCloud.m; sourceTree = SOURCE_ROOT; };
+		9A2634C71BD4721E00E3FCDE /* TipsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TipsArray.h; path = meditatingmonk/TipsArray.h; sourceTree = SOURCE_ROOT; };
+		9A2634C81BD4721E00E3FCDE /* TipsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TipsArray.m; path = meditatingmonk/TipsArray.m; sourceTree = SOURCE_ROOT; };
+		9A49D6C9197F48590078C2D6 /* ScoreBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreBoard.h; sourceTree = "<group>"; };
+		9A49D6CA197F48590078C2D6 /* ScoreBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreBoard.m; sourceTree = "<group>"; };
+		9A49D6CC197F48740078C2D6 /* buttonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonBackground@2x.png"; sourceTree = "<group>"; };
+		9A49D6CD197F48740078C2D6 /* scoreInfoBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scoreInfoBackground@2x.png"; sourceTree = "<group>"; };
+		9A49D6D0198350DA0078C2D6 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		9A49D6D2198553CC0078C2D6 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		9A6CCA63199F0EEA005538EF /* buttoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttoniPhone@2x.png"; sourceTree = "<group>"; };
+		9A6CCA64199F0EEA005538EF /* buttonPressediPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonPressediPhone@2x.png"; sourceTree = "<group>"; };
+		9A6CCA65199F0EEA005538EF /* facebookButtoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebookButtoniPhone@2x.png"; sourceTree = "<group>"; };
+		9A6CCA66199F0EEA005538EF /* gameCenterIconiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameCenterIconiPhone@2x.png"; sourceTree = "<group>"; };
+		9A6CCA67199F0EEA005538EF /* playIconiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playIconiPhone@2x.png"; sourceTree = "<group>"; };
+		9A6CCA68199F0EEA005538EF /* scoreboardiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scoreboardiPhone@2x.png"; sourceTree = "<group>"; };
+		9A6CCA69199F0EEA005538EF /* twitterButtoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitterButtoniPhone@2x.png"; sourceTree = "<group>"; };
+		9A6CCA8019A05205005538EF /* buttoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttoniPad@2x.png"; sourceTree = "<group>"; };
+		9A6CCA8119A05205005538EF /* buttonPressediPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buttonPressediPad@2x.png"; sourceTree = "<group>"; };
+		9A6CCA8219A05205005538EF /* facebookButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebookButtoniPad@2x.png"; sourceTree = "<group>"; };
+		9A6CCA8319A05205005538EF /* gameCenterIconiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gameCenterIconiPad@2x.png"; sourceTree = "<group>"; };
+		9A6CCA8419A05205005538EF /* playIconiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playIconiPad@2x.png"; sourceTree = "<group>"; };
+		9A6CCA8519A05205005538EF /* scoreboardiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scoreboardiPad@2x.png"; sourceTree = "<group>"; };
+		9A6CCA8619A05205005538EF /* twitterButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitterButtoniPad@2x.png"; sourceTree = "<group>"; };
+		9A711DCD19C2C35A003066B5 /* buttonSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonSound.wav; sourceTree = "<group>"; };
+		9A78818D1979E75800F6A6F4 /* Minecraftia.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Minecraftia.ttf; sourceTree = "<group>"; };
+		9A877B121BCB505700297A74 /* Sounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sounds.h; path = meditatingmonk/Sounds.h; sourceTree = SOURCE_ROOT; };
+		9A877B131BCB505700297A74 /* Sounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sounds.m; path = meditatingmonk/Sounds.m; sourceTree = SOURCE_ROOT; };
+		9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipBackgroundiPhone@2x.png"; sourceTree = "<group>"; };
+		9A8AF59819AC2EDB004002E9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9A8AF59A19AD147E004002E9 /* musicLoop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = musicLoop.wav; sourceTree = "<group>"; };
+		9A8AF59C19AD16B3004002E9 /* gameOverSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOverSound.mp3; sourceTree = "<group>"; };
+		9A8AF59D19AD16B3004002E9 /* highScoreSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = highScoreSound.mp3; sourceTree = "<group>"; };
+		9A8AF5A019AD1B03004002E9 /* jumpSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jumpSound.mp3; sourceTree = "<group>"; };
+		9A8AF5A619AD8D5F004002E9 /* tipCloudiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipCloudiPhone@2x.png"; sourceTree = "<group>"; };
+		9A8AF5A819B021B4004002E9 /* title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title@2x.png"; sourceTree = "<group>"; };
+		9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBackgroundiPhone@2x.png"; sourceTree = "<group>"; };
+		9A8AF5B519B29434004002E9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9A8AF5B619B29434004002E9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9A8AF5BE19B2C064004002E9 /* CreditsNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsNode.h; sourceTree = "<group>"; };
+		9A8AF5BF19B2C064004002E9 /* CreditsNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsNode.m; sourceTree = "<group>"; };
+		9A8F84D6197354EC0085296D /* MeditatingMonk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeditatingMonk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A8F84D9197354EC0085296D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9A8F84DB197354EC0085296D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		9A8F84DD197354EC0085296D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9A8F84DF197354EC0085296D /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		9A8F84E3197354EC0085296D /* MeditatingMonk-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MeditatingMonk-Info.plist"; sourceTree = "<group>"; };
+		9A8F84E5197354EC0085296D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9A8F84E7197354EC0085296D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9A8F84E9197354EC0085296D /* MeditatingMonk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeditatingMonk-Prefix.pch"; sourceTree = "<group>"; };
+		9A8F84EA197354EC0085296D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9A8F84EB197354EC0085296D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9A8F84EE197354EC0085296D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		9A8F84F3197354EC0085296D /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		9A8F84F4197354EC0085296D /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		9A8F84F8197354EC0085296D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9A8F84FE197354EC0085296D /* MeditatingMonkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeditatingMonkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A8F84FF197354EC0085296D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		9A8F8507197354EC0085296D /* MeditatingMonkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MeditatingMonkTests-Info.plist"; sourceTree = "<group>"; };
+		9A8F8509197354EC0085296D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9A8F850B197354EC0085296D /* MeditatingMonkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeditatingMonkTests.m; sourceTree = "<group>"; };
+		9A8F85161973571B0085296D /* monk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monk@2x.png"; sourceTree = "<group>"; };
+		9A8F85171973571B0085296D /* monkAwake@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkAwake@2x.png"; sourceTree = "<group>"; };
+		9A8F851E197484380085296D /* backgroundDay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backgroundDay@2x.png"; path = "../meditatingmonk/backgroundDay@2x.png"; sourceTree = "<group>"; };
+		9AC01733199C18E200C1C4ED /* backgroundiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPad@2x.png"; sourceTree = "<group>"; };
+		9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPad@2x.png"; sourceTree = "<group>"; };
+		9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkEyesOpeniPad@2x.png"; sourceTree = "<group>"; };
+		9AC01737199C18E200C1C4ED /* monkiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkiPad@2x.png"; sourceTree = "<group>"; };
+		9AC59195199C650F00C185E2 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPad.storyboard; path = ../Main_iPad.storyboard; sourceTree = "<group>"; };
+		9AD3211719C1061700E38C83 /* creditsButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtoniPad@2x.png"; sourceTree = "<group>"; };
+		9AD3211B19C107F800E38C83 /* titleiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titleiPad@2x.png"; sourceTree = "<group>"; };
+		9AD3211D19C11F5900E38C83 /* clouds1iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds1iPad@2x.png"; sourceTree = "<group>"; };
+		9AD3211E19C11F5900E38C83 /* clouds2iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds2iPad@2x.png"; sourceTree = "<group>"; };
+		9AD3211F19C11F5900E38C83 /* emailButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emailButtoniPad@2x.png"; sourceTree = "<group>"; };
+		9AD3212019C11F5900E38C83 /* tipCloudiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipCloudiPad@2x.png"; sourceTree = "<group>"; };
+		9AD3212119C11F5900E38C83 /* twitterButton2iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitterButton2iPad@2x.png"; sourceTree = "<group>"; };
+		9AD3212719C125FE00E38C83 /* creditsBackgroundiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBackgroundiPad@2x.png"; sourceTree = "<group>"; };
+		9AD3213319C12B2D00E38C83 /* creditsIconiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsIconiPad@2x.png"; sourceTree = "<group>"; };
+		9AD3213519C12B9000E38C83 /* creditsButtonPressediPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtonPressediPad@2x.png"; sourceTree = "<group>"; };
+		9AD53150223F097C004DBEC1 /* MeditatingMonk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeditatingMonk-Bridging-Header.h"; sourceTree = "<group>"; };
+		9AD53151223F097D004DBEC1 /* MonkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MonkNode.swift; path = meditatingmonk/MonkNode.swift; sourceTree = SOURCE_ROOT; };
+		9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtoniPhone@2x.png"; sourceTree = "<group>"; };
+		9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtonPressediPhone@2x.png"; sourceTree = "<group>"; };
+		9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBackground02iPhone@2x.png"; sourceTree = "<group>"; };
+		9AFF510B19B4E50600751BEA /* emailButtoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emailButtoniPhone@2x.png"; sourceTree = "<group>"; };
+		9AFF510C19B4E50600751BEA /* twitterButton2iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitterButton2iPhone@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9A8F84D3197354EC0085296D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A8AF59919AC2EDB004002E9 /* AVFoundation.framework in Frameworks */,
+				9A20559719A42B7A00F2E743 /* Social.framework in Frameworks */,
+				9A49D6D3198553CC0078C2D6 /* iAd.framework in Frameworks */,
+				9A49D6D1198350DA0078C2D6 /* GameKit.framework in Frameworks */,
+				9A8F84DC197354EC0085296D /* CoreGraphics.framework in Frameworks */,
+				9A8F84DE197354EC0085296D /* UIKit.framework in Frameworks */,
+				9A8F84E0197354EC0085296D /* SpriteKit.framework in Frameworks */,
+				9A8F84DA197354EC0085296D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A8F84FB197354EC0085296D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A8F8500197354EC0085296D /* XCTest.framework in Frameworks */,
+				9A8F8502197354EC0085296D /* UIKit.framework in Frameworks */,
+				9A8F8501197354EC0085296D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9A156606199A522200F35B2F /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				9A1892A119BBADD30016F95A /* icon@2x.png */,
+				9AFF510B19B4E50600751BEA /* emailButtoniPhone@2x.png */,
+				9AFF510C19B4E50600751BEA /* twitterButton2iPhone@2x.png */,
+				9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */,
+				9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */,
+				9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */,
+				9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */,
+				9A8AF5A819B021B4004002E9 /* title@2x.png */,
+				9A2055A219A7087F00F2E743 /* clouds1@2x.png */,
+				9A2055A319A7087F00F2E743 /* clouds2@2x.png */,
+				9A2055A419A7087F00F2E743 /* clouds3@2x.png */,
+				9A2055A519A7087F00F2E743 /* clouds4@2x.png */,
+				9A2055A619A7087F00F2E743 /* clouds5@2x.png */,
+				9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */,
+				9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */,
+				9A49D6CC197F48740078C2D6 /* buttonBackground@2x.png */,
+				9A49D6CD197F48740078C2D6 /* scoreInfoBackground@2x.png */,
+				9A8F851E197484380085296D /* backgroundDay@2x.png */,
+				9A8F85161973571B0085296D /* monk@2x.png */,
+				9A8F85171973571B0085296D /* monkAwake@2x.png */,
+				9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */,
+				9A8AF5A619AD8D5F004002E9 /* tipCloudiPhone@2x.png */,
+				9A6CCA62199F0EB8005538EF /* Scoreboard */,
+			);
+			name = iPhone;
+			sourceTree = "<group>";
+		};
+		9A156607199A524100F35B2F /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				9AD3213519C12B9000E38C83 /* creditsButtonPressediPad@2x.png */,
+				9AD3213319C12B2D00E38C83 /* creditsIconiPad@2x.png */,
+				9AD3212719C125FE00E38C83 /* creditsBackgroundiPad@2x.png */,
+				9AD3211D19C11F5900E38C83 /* clouds1iPad@2x.png */,
+				9AD3211E19C11F5900E38C83 /* clouds2iPad@2x.png */,
+				9AD3211F19C11F5900E38C83 /* emailButtoniPad@2x.png */,
+				9AD3212019C11F5900E38C83 /* tipCloudiPad@2x.png */,
+				9AD3212119C11F5900E38C83 /* twitterButton2iPad@2x.png */,
+				9AD3211B19C107F800E38C83 /* titleiPad@2x.png */,
+				9AD3211719C1061700E38C83 /* creditsButtoniPad@2x.png */,
+				9A6CCA7F19A051FC005538EF /* Scoreboard */,
+				9AC01733199C18E200C1C4ED /* backgroundiPad@2x.png */,
+				9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */,
+				9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */,
+				9AC01737199C18E200C1C4ED /* monkiPad@2x.png */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		9A2634C11BD4701400E3FCDE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9A8AF5B519B29434004002E9 /* ViewController.h */,
+				9A8AF5B619B29434004002E9 /* ViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		9A2634C21BD4701E00E3FCDE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9A8F84F3197354EC0085296D /* GameScene.h */,
+				9A8F84F4197354EC0085296D /* GameScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		9A2634C31BD4702B00E3FCDE /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				9A49D6C9197F48590078C2D6 /* ScoreBoard.h */,
+				9A49D6CA197F48590078C2D6 /* ScoreBoard.m */,
+				9A8AF5BE19B2C064004002E9 /* CreditsNode.h */,
+				9A8AF5BF19B2C064004002E9 /* CreditsNode.m */,
+				9A877B121BCB505700297A74 /* Sounds.h */,
+				9A877B131BCB505700297A74 /* Sounds.m */,
+				9A2634C41BD471DC00E3FCDE /* TipCloud.h */,
+				9A2634C51BD471DC00E3FCDE /* TipCloud.m */,
+				9AD53151223F097D004DBEC1 /* MonkNode.swift */,
+			);
+			name = Nodes;
+			sourceTree = "<group>";
+		};
+		9A2B10F81B2361AE008134A1 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				9A8AF5A019AD1B03004002E9 /* jumpSound.mp3 */,
+				9A8AF59A19AD147E004002E9 /* musicLoop.wav */,
+				9A8AF59C19AD16B3004002E9 /* gameOverSound.mp3 */,
+				9A8AF59D19AD16B3004002E9 /* highScoreSound.mp3 */,
+				9A711DCD19C2C35A003066B5 /* buttonSound.wav */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		9A3824A31BA512A100560D02 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9A78818D1979E75800F6A6F4 /* Minecraftia.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		9A6CCA62199F0EB8005538EF /* Scoreboard */ = {
+			isa = PBXGroup;
+			children = (
+				9A6CCA63199F0EEA005538EF /* buttoniPhone@2x.png */,
+				9A6CCA64199F0EEA005538EF /* buttonPressediPhone@2x.png */,
+				9A6CCA65199F0EEA005538EF /* facebookButtoniPhone@2x.png */,
+				9A6CCA66199F0EEA005538EF /* gameCenterIconiPhone@2x.png */,
+				9A6CCA67199F0EEA005538EF /* playIconiPhone@2x.png */,
+				9A6CCA68199F0EEA005538EF /* scoreboardiPhone@2x.png */,
+				9A6CCA69199F0EEA005538EF /* twitterButtoniPhone@2x.png */,
+			);
+			name = Scoreboard;
+			sourceTree = "<group>";
+		};
+		9A6CCA7F19A051FC005538EF /* Scoreboard */ = {
+			isa = PBXGroup;
+			children = (
+				9A6CCA8019A05205005538EF /* buttoniPad@2x.png */,
+				9A6CCA8119A05205005538EF /* buttonPressediPad@2x.png */,
+				9A6CCA8219A05205005538EF /* facebookButtoniPad@2x.png */,
+				9A6CCA8319A05205005538EF /* gameCenterIconiPad@2x.png */,
+				9A6CCA8419A05205005538EF /* playIconiPad@2x.png */,
+				9A6CCA8519A05205005538EF /* scoreboardiPad@2x.png */,
+				9A6CCA8619A05205005538EF /* twitterButtoniPad@2x.png */,
+			);
+			name = Scoreboard;
+			sourceTree = "<group>";
+		};
+		9A877B0E1BCB4FE800297A74 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				9A8F84ED197354EC0085296D /* Main_iPhone.storyboard */,
+				9AC59195199C650F00C185E2 /* Main_iPad.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		9A8F84CD197354EC0085296D = {
+			isa = PBXGroup;
+			children = (
+				9A8F84E1197354EC0085296D /* MeditatingMonk */,
+				9A8F8505197354EC0085296D /* MeditatingMonkTests */,
+				9A8F84D8197354EC0085296D /* Frameworks */,
+				9A8F84D7197354EC0085296D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9A8F84D7197354EC0085296D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A8F84D6197354EC0085296D /* MeditatingMonk.app */,
+				9A8F84FE197354EC0085296D /* MeditatingMonkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9A8F84D8197354EC0085296D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9A8AF59819AC2EDB004002E9 /* AVFoundation.framework */,
+				9A20559619A42B7A00F2E743 /* Social.framework */,
+				9A49D6D2198553CC0078C2D6 /* iAd.framework */,
+				9A49D6D0198350DA0078C2D6 /* GameKit.framework */,
+				9A8F84D9197354EC0085296D /* Foundation.framework */,
+				9A8F84DB197354EC0085296D /* CoreGraphics.framework */,
+				9A8F84DD197354EC0085296D /* UIKit.framework */,
+				9A8F84DF197354EC0085296D /* SpriteKit.framework */,
+				9A8F84FF197354EC0085296D /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9A8F84E1197354EC0085296D /* MeditatingMonk */ = {
+			isa = PBXGroup;
+			children = (
+				9AD53150223F097C004DBEC1 /* MeditatingMonk-Bridging-Header.h */,
+				9A8F84EA197354EC0085296D /* AppDelegate.h */,
+				9A8F84EB197354EC0085296D /* AppDelegate.m */,
+				9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */,
+				9A2634C71BD4721E00E3FCDE /* TipsArray.h */,
+				9A2634C81BD4721E00E3FCDE /* TipsArray.m */,
+				9A2634C11BD4701400E3FCDE /* View Controllers */,
+				9AD5314F223F020B004DBEC1 /* Views */,
+				9A2B10F81B2361AE008134A1 /* Audio */,
+				9A8F84F8197354EC0085296D /* Images.xcassets */,
+				9A8F84E2197354EC0085296D /* Supporting Files */,
+			);
+			path = MeditatingMonk;
+			sourceTree = "<group>";
+		};
+		9A8F84E2197354EC0085296D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A8F84E3197354EC0085296D /* MeditatingMonk-Info.plist */,
+				9A8F84E4197354EC0085296D /* InfoPlist.strings */,
+				9A8F84E7197354EC0085296D /* main.m */,
+				9A8F84E9197354EC0085296D /* MeditatingMonk-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9A8F8505197354EC0085296D /* MeditatingMonkTests */ = {
+			isa = PBXGroup;
+			children = (
+				9A8F850B197354EC0085296D /* MeditatingMonkTests.m */,
+				9A8F8506197354EC0085296D /* Supporting Files */,
+			);
+			path = MeditatingMonkTests;
+			sourceTree = "<group>";
+		};
+		9A8F8506197354EC0085296D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9A8F8507197354EC0085296D /* MeditatingMonkTests-Info.plist */,
+				9A8F8508197354EC0085296D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9A8F851B1973573A0085296D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9A156606199A522200F35B2F /* iPhone */,
+				9A156607199A524100F35B2F /* iPad */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		9AD5314F223F020B004DBEC1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9A3824A31BA512A100560D02 /* Fonts */,
+				9A8F851B1973573A0085296D /* Images */,
+				9A877B0E1BCB4FE800297A74 /* Storyboards */,
+				9A2634C31BD4702B00E3FCDE /* Nodes */,
+				9A2634C21BD4701E00E3FCDE /* Scenes */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9A8F84D5197354EC0085296D /* MeditatingMonk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A8F850F197354EC0085296D /* Build configuration list for PBXNativeTarget "MeditatingMonk" */;
+			buildPhases = (
+				9A8F84D2197354EC0085296D /* Sources */,
+				9A8F84D3197354EC0085296D /* Frameworks */,
+				9A8F84D4197354EC0085296D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MeditatingMonk;
+			productName = MeditatingMonk;
+			productReference = 9A8F84D6197354EC0085296D /* MeditatingMonk.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9A8F84FD197354EC0085296D /* MeditatingMonkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A8F8512197354EC0085296D /* Build configuration list for PBXNativeTarget "MeditatingMonkTests" */;
+			buildPhases = (
+				9A8F84FA197354EC0085296D /* Sources */,
+				9A8F84FB197354EC0085296D /* Frameworks */,
+				9A8F84FC197354EC0085296D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A8F8504197354EC0085296D /* PBXTargetDependency */,
+			);
+			name = MeditatingMonkTests;
+			productName = MeditatingMonkTests;
+			productReference = 9A8F84FE197354EC0085296D /* MeditatingMonkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9A8F84CE197354EC0085296D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = DavidSights;
+				TargetAttributes = {
+					9A8F84D5197354EC0085296D = {
+						DevelopmentTeam = N2SGMRCH23;
+						LastSwiftMigration = 1010;
+					};
+					9A8F84FD197354EC0085296D = {
+						TestTargetID = 9A8F84D5197354EC0085296D;
+					};
+				};
+			};
+			buildConfigurationList = 9A8F84D1197354EC0085296D /* Build configuration list for PBXProject "meditatingmonk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9A8F84CD197354EC0085296D;
+			productRefGroup = 9A8F84D7197354EC0085296D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9A8F84D5197354EC0085296D /* MeditatingMonk */,
+				9A8F84FD197354EC0085296D /* MeditatingMonkTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9A8F84D4197354EC0085296D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A6CCA8A19A05205005538EF /* gameCenterIconiPad@2x.png in Resources */,
+				9AFF510A19B3EBFF00751BEA /* creditsBackground02iPhone@2x.png in Resources */,
+				9AD3212619C11F5900E38C83 /* twitterButton2iPad@2x.png in Resources */,
+				9A8AF5A919B021B4004002E9 /* title@2x.png in Resources */,
+				9A8F851A1973571B0085296D /* monkAwake@2x.png in Resources */,
+				9A6CCA6A199F0EEA005538EF /* buttoniPhone@2x.png in Resources */,
+				9AFF510E19B4E50600751BEA /* twitterButton2iPhone@2x.png in Resources */,
+				9A6CCA6B199F0EEA005538EF /* buttonPressediPhone@2x.png in Resources */,
+				9A8F84E6197354EC0085296D /* InfoPlist.strings in Resources */,
+				9A8AF5B119B291B9004002E9 /* creditsBackgroundiPhone@2x.png in Resources */,
+				9A6CCA8D19A05205005538EF /* twitterButtoniPad@2x.png in Resources */,
+				9A2055A719A7087F00F2E743 /* clouds1@2x.png in Resources */,
+				9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */,
+				9A8AF5A719AD8D5F004002E9 /* tipCloudiPhone@2x.png in Resources */,
+				9A8F85191973571B0085296D /* monk@2x.png in Resources */,
+				9AFF510719B2DC5800751BEA /* creditsButtoniPhone@2x.png in Resources */,
+				9A711DCE19C2C35A003066B5 /* buttonSound.wav in Resources */,
+				9AC0173C199C18E200C1C4ED /* monkiPad@2x.png in Resources */,
+				9A2055A819A7087F00F2E743 /* clouds2@2x.png in Resources */,
+				9AFF510819B2DC5800751BEA /* creditsButtonPressediPhone@2x.png in Resources */,
+				9A6CCA8C19A05205005538EF /* scoreboardiPad@2x.png in Resources */,
+				9A8F851F197484380085296D /* backgroundDay@2x.png in Resources */,
+				9A8F84F9197354EC0085296D /* Images.xcassets in Resources */,
+				9A6CCA70199F0EEA005538EF /* twitterButtoniPhone@2x.png in Resources */,
+				9A49D6CF197F48740078C2D6 /* scoreInfoBackground@2x.png in Resources */,
+				9A8AF5A119AD1B03004002E9 /* jumpSound.mp3 in Resources */,
+				9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */,
+				9AD3211C19C107F800E38C83 /* titleiPad@2x.png in Resources */,
+				9AC01738199C18E200C1C4ED /* backgroundiPad@2x.png in Resources */,
+				9A49D6CE197F48740078C2D6 /* buttonBackground@2x.png in Resources */,
+				9A6CCA6C199F0EEA005538EF /* facebookButtoniPhone@2x.png in Resources */,
+				9AD3213619C12B9000E38C83 /* creditsButtonPressediPad@2x.png in Resources */,
+				9A2055A919A7087F00F2E743 /* clouds3@2x.png in Resources */,
+				9AD3211919C1061700E38C83 /* creditsButtoniPad@2x.png in Resources */,
+				9A6CCA8919A05205005538EF /* facebookButtoniPad@2x.png in Resources */,
+				9A2055AA19A7087F00F2E743 /* clouds4@2x.png in Resources */,
+				9AC59196199C650F00C185E2 /* Main_iPad.storyboard in Resources */,
+				9A8AF59B19AD147E004002E9 /* musicLoop.wav in Resources */,
+				9AD3212819C125FE00E38C83 /* creditsBackgroundiPad@2x.png in Resources */,
+				9A6CCA6D199F0EEA005538EF /* gameCenterIconiPhone@2x.png in Resources */,
+				9AD3213419C12B2D00E38C83 /* creditsIconiPad@2x.png in Resources */,
+				9A1892A219BBADD30016F95A /* icon@2x.png in Resources */,
+				9AC0173A199C18E200C1C4ED /* grassAndTreeiPad@2x.png in Resources */,
+				9A6CCA8719A05205005538EF /* buttoniPad@2x.png in Resources */,
+				9A8AF59F19AD16B3004002E9 /* highScoreSound.mp3 in Resources */,
+				9AD3212219C11F5900E38C83 /* clouds1iPad@2x.png in Resources */,
+				9AD3212519C11F5900E38C83 /* tipCloudiPad@2x.png in Resources */,
+				9A78818E1979E75800F6A6F4 /* Minecraftia.ttf in Resources */,
+				9A8AF59E19AD16B3004002E9 /* gameOverSound.mp3 in Resources */,
+				9A6CCA8B19A05205005538EF /* playIconiPad@2x.png in Resources */,
+				9A2055AB19A7087F00F2E743 /* clouds5@2x.png in Resources */,
+				9A8F84EF197354EC0085296D /* Main_iPhone.storyboard in Resources */,
+				9AD3212419C11F5900E38C83 /* emailButtoniPad@2x.png in Resources */,
+				9A6CCA6F199F0EEA005538EF /* scoreboardiPhone@2x.png in Resources */,
+				9A6CCA8819A05205005538EF /* buttonPressediPad@2x.png in Resources */,
+				9AD3212319C11F5900E38C83 /* clouds2iPad@2x.png in Resources */,
+				9AFF510D19B4E50600751BEA /* emailButtoniPhone@2x.png in Resources */,
+				9A6CCA6E199F0EEA005538EF /* playIconiPhone@2x.png in Resources */,
+				9A8AF59119A92F1A004002E9 /* tipBackgroundiPhone@2x.png in Resources */,
+				9AC0173B199C18E200C1C4ED /* monkEyesOpeniPad@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A8F84FC197354EC0085296D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A78818F1979E75800F6A6F4 /* Minecraftia.ttf in Resources */,
+				9A8F850A197354EC0085296D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9A8F84D2197354EC0085296D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AD53152223F097D004DBEC1 /* MonkNode.swift in Sources */,
+				9A2634C91BD4721E00E3FCDE /* TipsArray.m in Sources */,
+				9A8AF5B719B29434004002E9 /* ViewController.m in Sources */,
+				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
+				9A2634C61BD471DC00E3FCDE /* TipCloud.m in Sources */,
+				9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */,
+				9A877B141BCB505700297A74 /* Sounds.m in Sources */,
+				9A8F84F5197354EC0085296D /* GameScene.m in Sources */,
+				9A8F84EC197354EC0085296D /* AppDelegate.m in Sources */,
+				9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */,
+				9A8F84E8197354EC0085296D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A8F84FA197354EC0085296D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A8F850C197354EC0085296D /* MeditatingMonkTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9A8F8504197354EC0085296D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9A8F84D5197354EC0085296D /* MeditatingMonk */;
+			targetProxy = 9A8F8503197354EC0085296D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9A8F84E4197354EC0085296D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A8F84E5197354EC0085296D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9A8F84ED197354EC0085296D /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A8F84EE197354EC0085296D /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		9A8F8508197354EC0085296D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9A8F8509197354EC0085296D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9A8F850D197354EC0085296D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9A8F850E197354EC0085296D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9A8F8510197354EC0085296D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MeditatingMonk/MeditatingMonk-Prefix.pch";
+				INFOPLIST_FILE = "MeditatingMonk/MeditatingMonk-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.davidsights.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MeditatingMonk/MeditatingMonk-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9A8F8511197354EC0085296D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MeditatingMonk/MeditatingMonk-Prefix.pch";
+				INFOPLIST_FILE = "MeditatingMonk/MeditatingMonk-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.davidsights.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "MeditatingMonk/MeditatingMonk-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		9A8F8513197354EC0085296D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MeditatingMonk.app/MeditatingMonk";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MeditatingMonk/MeditatingMonk-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MeditatingMonkTests/MeditatingMonkTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.davidsights.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		9A8F8514197354EC0085296D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MeditatingMonk.app/MeditatingMonk";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MeditatingMonk/MeditatingMonk-Prefix.pch";
+				INFOPLIST_FILE = "MeditatingMonkTests/MeditatingMonkTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.davidsights.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9A8F84D1197354EC0085296D /* Build configuration list for PBXProject "meditatingmonk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A8F850D197354EC0085296D /* Debug */,
+				9A8F850E197354EC0085296D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A8F850F197354EC0085296D /* Build configuration list for PBXNativeTarget "MeditatingMonk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A8F8510197354EC0085296D /* Debug */,
+				9A8F8511197354EC0085296D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A8F8512197354EC0085296D /* Build configuration list for PBXNativeTarget "MeditatingMonkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A8F8513197354EC0085296D /* Debug */,
+				9A8F8514197354EC0085296D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9A8F84CE197354EC0085296D /* Project object */;
+}
