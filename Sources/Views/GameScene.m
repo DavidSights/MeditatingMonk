@@ -10,6 +10,7 @@
 #import <GameKit/GameKit.h>
 #import "Sounds.h"
 #import "TipCloud.h"
+#import "GameScenePresenterViewController.h"
 
 @interface GameScene ()
 
@@ -39,7 +40,7 @@
 @property (nonatomic) ScoreBoard *myMenu;
 @property CreditsNode *credits;
 
-@property (nonatomic) ViewController *myVC;
+@property (nonatomic) GameScenePresenterViewController *myVC;
 @property UIViewController *myUIVC;
 
 @property (nonatomic) NSUserDefaults *userDefaults;

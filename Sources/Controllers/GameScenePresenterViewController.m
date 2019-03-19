@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 DavidSights. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "GameScenePresenterViewController.h"
 #import "GameScene.h"
 
-@interface ViewController()
+@interface GameScenePresenterViewController()
 @property GameScene *scene;
 @end
 
-@implementation ViewController
+@implementation GameScenePresenterViewController
 
 // MARK: - View Lifecycle
 

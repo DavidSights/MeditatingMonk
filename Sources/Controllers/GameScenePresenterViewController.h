@@ -13,6 +13,6 @@
 #import <MessageUI/MessageUI.h>
 #import "MeditatingMonk-Swift.h"
 
-@interface ViewController : UIViewController
+@interface GameScenePresenterViewController : UIViewController
 
 @end
