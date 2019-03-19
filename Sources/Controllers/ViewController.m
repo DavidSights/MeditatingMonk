@@ -10,13 +10,8 @@
 #import "GameScene.h"
 
 @interface ViewController()
-
-@property (nonatomic) BOOL adReady;
-@property (nonatomic) BOOL playingGame;
 @property GameScene *scene;
-
 @end
-
 
 @implementation ViewController
 
@@ -25,18 +20,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.playingGame = YES;
-
+    // Set up and show the game scene.
     SKView *skView = (SKView *)self.view;
+    self.scene = [GameScene sceneWithSize:skView.bounds.size];
+    [skView presentScene:self.scene];
 
 #if DEBUG
     skView.showsFPS = true;
     skView.showsNodeCount = true;
 #endif
-
-    self.scene = [GameScene sceneWithSize:skView.bounds.size];
-    self.scene.scaleMode = SKSceneScaleModeAspectFill;
-    [skView presentScene:self.scene];
 }
 
 // MARK: - Status bar
