@@ -28,8 +28,11 @@
     self.playingGame = YES;
 
     SKView *skView = (SKView *)self.view;
-    skView.showsFPS = NO;
-    skView.showsNodeCount = NO;
+
+#if DEBUG
+    skView.showsFPS = true;
+    skView.showsNodeCount = true;
+#endif
 
     self.scene = [GameScene sceneWithSize:skView.bounds.size];
     self.scene.scaleMode = SKSceneScaleModeAspectFill;
