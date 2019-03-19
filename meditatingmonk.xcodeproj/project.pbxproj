@@ -80,6 +80,7 @@
 		9AD3213619C12B9000E38C83 /* creditsButtonPressediPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3213519C12B9000E38C83 /* creditsButtonPressediPad@2x.png */; };
 		9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */; };
 		9AD53159223FF5D8004DBEC1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD53158223FF5D8004DBEC1 /* Main_iPhone.storyboard */; };
+		9AD5316122401125004DBEC1 /* EmailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316022401125004DBEC1 /* EmailManager.swift */; };
 		9AFF510719B2DC5800751BEA /* creditsButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */; };
 		9AFF510819B2DC5800751BEA /* creditsButtonPressediPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */; };
 		9AFF510A19B3EBFF00751BEA /* creditsBackground02iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */; };
@@ -183,6 +184,7 @@
 		9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		9AD53157223FF20F004DBEC1 /* Minecraftia.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Minecraftia.ttf; sourceTree = "<group>"; };
 		9AD53158223FF5D8004DBEC1 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPhone.storyboard; path = Storyboards/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		9AD5316022401125004DBEC1 /* EmailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailManager.swift; sourceTree = "<group>"; };
 		9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtoniPhone@2x.png"; sourceTree = "<group>"; };
 		9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtonPressediPhone@2x.png"; sourceTree = "<group>"; };
 		9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBackground02iPhone@2x.png"; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				9A2634C81BD4721E00E3FCDE /* TipsArray.m */,
 				9A877B121BCB505700297A74 /* Sounds.h */,
 				9A877B131BCB505700297A74 /* Sounds.m */,
+				9AD5316022401125004DBEC1 /* EmailManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				9A8F84F5197354EC0085296D /* GameScene.m in Sources */,
 				9A8F84EC197354EC0085296D /* AppDelegate.m in Sources */,
 				9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */,
+				9AD5316122401125004DBEC1 /* EmailManager.swift in Sources */,
 				9A8F84E8197354EC0085296D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,11 +13,6 @@
 #import <MessageUI/MessageUI.h>
 #import "MeditatingMonk-Swift.h"
 
-@interface ViewController : UIViewController <ADBannerViewDelegate, GKGameCenterControllerDelegate , MFMailComposeViewControllerDelegate>
-
-@property GKLocalPlayer *localPlayer;
-
--(void)showAd;
--(void)hideAd;
+@interface ViewController : UIViewController
 
 @end
