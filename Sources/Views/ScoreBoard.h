@@ -10,10 +10,9 @@
 
 @interface ScoreBoard : SKNode
 
-@property (nonatomic) SKSpriteNode *scoreInfo, *replayButton, *gameCenterButton, *twitterButton, *facebookButton, *replayIcon, *gameCenterIcon;
+@property (nonatomic) SKSpriteNode *scoreBoardView, *replayButton, *gameCenterButton, *twitterButton, *facebookButton, *replayIcon, *gameCenterIcon;
 @property (nonatomic) int score;
 @property (nonatomic) long long highScore;
-@property (nonatomic) CGSize size;
 
 
 -(id)init:(CGSize) size;

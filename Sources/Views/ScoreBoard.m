@@ -19,55 +19,55 @@
 
 -(id)init:(CGSize) size {
     self = [super init];
-    
-    self.size = size;
-    
-    if (!DeviceManager.isTablet) {
-        // Set up for iPhone
-        self.scoreInfo = [SKSpriteNode spriteNodeWithImageNamed:@"scoreboardiPhone"];
-        self.replayButton = [SKSpriteNode spriteNodeWithImageNamed:@"buttoniPhone"];
-        self.gameCenterButton = [SKSpriteNode spriteNodeWithImageNamed:@"buttoniPhone"];
-        self.twitterButton = [SKSpriteNode spriteNodeWithImageNamed:@"twitterButtoniPhone"];
-        self.facebookButton = [SKSpriteNode spriteNodeWithImageNamed:@"facebookButtoniPhone"];
-        self.replayIcon = [SKSpriteNode spriteNodeWithImageNamed:@"playIconiPhone"];
-        self.gameCenterIcon = [SKSpriteNode spriteNodeWithImageNamed:@"gameCenterIconiPhone"];
-        self.scoreInfo.position = CGPointMake(0,50);
-        self.replayButton.position = CGPointMake(-80, -110);
-        self.gameCenterButton.position = CGPointMake(80, -110);
-        self.twitterButton.position = CGPointMake(-70, -60);
-        self.facebookButton.position = CGPointMake(70, -60);
 
-    } else {
-        // Set up for iPad
-        self.scoreInfo = [SKSpriteNode spriteNodeWithImageNamed:@"scoreboardiPad"];
-        self.replayButton = [SKSpriteNode spriteNodeWithImageNamed:@"buttoniPad"];
-        self.gameCenterButton = [SKSpriteNode spriteNodeWithImageNamed:@"buttoniPad"];
-        self.twitterButton = [SKSpriteNode spriteNodeWithImageNamed:@"twitterButtoniPad"];
-        self.facebookButton = [SKSpriteNode spriteNodeWithImageNamed:@"facebookButtoniPad"];
-        self.replayIcon = [SKSpriteNode spriteNodeWithImageNamed:@"playIconiPad"];
-        self.gameCenterIcon = [SKSpriteNode spriteNodeWithImageNamed:@"gameCenterIconiPad"];
-        self.scoreInfo.position = CGPointMake(0,50);
-        self.replayButton.position = CGPointMake(-180, -290);
-        self.gameCenterButton.position = CGPointMake(180, self.replayButton.position.y);
-        self.twitterButton.position = CGPointMake(-160, -140);
-        self.facebookButton.position = CGPointMake(160, -140);
-    }
-    
-    self.replayButton.name = @"replayButton";
-    self.gameCenterButton.name = @"gameCenterButton";
-    self.twitterButton.name = @"twitterButton";
-    self.facebookButton.name = @"facebookButton";
-    self.replayIcon.name = @"replayButton";
-    self.gameCenterIcon.name = @"gameCenterButton";
+    // Set up the container view.
+
+    self.scoreBoardView = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"scoreboardiPad" : @"scoreboardiPhone")
+                                         identifierName:nil
+                                              positionX:0
+                                              positionY:50];
+    // Set up the buttons.
+
+    self.replayButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"buttoniPad" : @"buttoniPhone")
+                                       identifierName:@"replayButton"
+                                            positionX:-80
+                                            positionY:(DeviceManager.isTablet ? -290 : -110)];
+
+
+    self.gameCenterButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"buttoniPad" : @"buttoniPhone")
+                                           identifierName:@"gameCenterButton"
+                                                positionX:self.replayButton.position.x*-1
+                                                positionY:self.replayButton.position.y];
+
+    self.twitterButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"twitterButtoniPad" : @"twitterButtoniPhone")
+                                        identifierName:@"twitterButton"
+                                             positionX:-70
+                                             positionY:(DeviceManager.isTablet ? -140 : -60)];
+
+    self.facebookButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"facebookButtoniPad" : @"facebookButtoniPhone")
+                                         identifierName:@"facebookButton"
+                                              positionX:70
+                                              positionY:self.twitterButton.position.y];
+    // Set up the icons.
+
+    self.replayIcon = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"playIconiPad" : @"playIconiPhone")
+                                     identifierName:@"replayButton"
+                                          positionX:0
+                                          positionY:0];
+
+    self.gameCenterIcon = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"gameCenterIconiPad" : @"gameCenterIconiPhone")
+                                         identifierName:@"gameCenterButton"
+                                              positionX:0
+                                              positionY:0];
 
     self.position = CGPointMake(size.width/2, size.height * 2);
     
-    [self addChild:self.scoreInfo];
+    [self addChild:self.scoreBoardView];
     [self addChild:self.replayButton];
     [self addChild:self.gameCenterButton];
 
-    [self.scoreInfo addChild:self.twitterButton];
-    [self.scoreInfo addChild:self.facebookButton];
+    [self.scoreBoardView addChild:self.twitterButton];
+    [self.scoreBoardView addChild:self.facebookButton];
     [self.replayButton addChild:self.replayIcon];
     [self.gameCenterButton addChild:self.gameCenterIcon];
     
@@ -84,7 +84,7 @@
         self.currentScoreLabel.fontSize = 70;
         self.currentScoreLabel.position = CGPointMake(-160, 70);
     }
-    [self.scoreInfo addChild:self.currentScoreLabel];
+    [self.scoreBoardView addChild:self.currentScoreLabel];
     
     SKLabelNode *yourScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
     yourScoreLabel.fontColor = lightColor;
@@ -95,7 +95,7 @@
         yourScoreLabel.fontSize = 35;
         yourScoreLabel.position = CGPointMake(-160, 170);
     }
-    [self.scoreInfo addChild:yourScoreLabel];
+    [self.scoreBoardView addChild:yourScoreLabel];
     
     self.highScoreNumberLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
     self.highScoreNumberLabel.fontSize = 30;
@@ -108,7 +108,7 @@
         self.highScoreNumberLabel.position = CGPointMake(160, 70);
     }
 
-    [self.scoreInfo addChild:self.highScoreNumberLabel];
+    [self.scoreBoardView addChild:self.highScoreNumberLabel];
     
     SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
     highScoreLabel.fontColor = lightColor;
@@ -121,7 +121,7 @@
         highScoreLabel.fontSize = 35;
     }
     
-    [self.scoreInfo addChild:highScoreLabel];
+    [self.scoreBoardView addChild:highScoreLabel];
     
     SKLabelNode *shareLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
     shareLabel.text = @"share your score";
@@ -134,7 +134,7 @@
         shareLabel.position = CGPointMake(0, -35);
     }
     
-    [self.scoreInfo addChild:shareLabel];
+    [self.scoreBoardView addChild:shareLabel];
 
     SKSpriteNode *creditsButton = [SKSpriteNode new];
 
@@ -169,21 +169,29 @@
     return self;
 }
 
-- (void) showScore:(int) currentScore {
-    if (!DeviceManager.isTablet) {
-        [self runAction:[SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2) duration:.5]];
-    } else {
-        [self runAction:[SKAction moveTo:CGPointMake(self.size.width/2, (self.size.height/2) + 15) duration:.5]];
-    }
+- (void)showScore:(int)currentScore {
     
+    // Move the scoreboard into its viewable position.
+    CGSize size = self.scene.view.frame.size;
+    int xPosition = size.width / 2;
+    int yPosition = (DeviceManager.isTablet ? ((size.height/2) + 15) : size.height/2);
+    [self runAction:[SKAction moveTo:CGPointMake(xPosition, yPosition) duration:.5]];
+
+    // Update the scoreboard's content.
     self.currentScoreLabel.text = [NSString stringWithFormat:@"%i", currentScore];
     self.highScoreNumberLabel.text = [NSString stringWithFormat:@"%lli", self.highScore];
 }
 
 - (void) hideScore {
-    [self runAction:[SKAction moveTo:CGPointMake(self.size.width/2, self.size.height * 2) duration:.5]];
+    CGSize size = self.scene.view.frame.size;
+    [self runAction:[SKAction moveTo:CGPointMake(size.width/2, size.height * 2) duration:.5]];
 }
 
-
+- (SKSpriteNode *)imageSpriteWithFileName:(NSString *)fileName identifierName:(NSString *)identifierName positionX:(int)x positionY:(int)y {
+    SKSpriteNode *image = [SKSpriteNode spriteNodeWithImageNamed:fileName];
+    image.position = CGPointMake(x, y);
+    image.name = identifierName;
+    return image;
+}
 
 @end
