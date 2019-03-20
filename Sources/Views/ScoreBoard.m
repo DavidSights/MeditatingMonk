@@ -12,12 +12,13 @@
 @interface ScoreBoard()
 
 @property SKLabelNode *currentScoreLabel, *highScoreNumberLabel;
+@property (nonatomic) SKSpriteNode *scoreBoardView, *replayButton, *gameCenterButton, *twitterButton, *facebookButton, *replayIcon, *gameCenterIcon;
 
 @end
 
 @implementation ScoreBoard
 
--(id)init:(CGSize) size {
+- (id)init:(CGSize)size {
     self = [super init];
 
     // Set up the container view.
