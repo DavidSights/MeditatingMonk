@@ -124,7 +124,7 @@
     [self.scoreInfo addChild:highScoreLabel];
     
     SKLabelNode *shareLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
-    shareLabel.text = @"share you score";
+    shareLabel.text = @"share your score";
     shareLabel.fontSize = 12;
     shareLabel.fontColor = lightColor;
     shareLabel.position = CGPointMake(0, -16);

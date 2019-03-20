@@ -6,16 +6,22 @@
 //  Copyright (c) 2014 DavidSights. All rights reserved.
 //
 
-#import "GameScene.h"
+#import <SpriteKit/SpriteKit.h>
 #import <GameKit/GameKit.h>
+#import <Social/Social.h>
+#import "GameScenePresenterViewController.h"
+#import "GameScene.h"
 #import "Sounds.h"
 #import "TipCloud.h"
-#import "GameScenePresenterViewController.h"
+#import "ScoreBoard.h"
+#import "CreditsNode.h"
 
-@interface GameScene ()
+@interface GameScene () <SKPhysicsContactDelegate>
+
+@property GKLocalPlayer *player;
 
 // Flags
-@property (nonatomic) BOOL playGame, ignoreTouches, scoreShown, timerStarted, monkHitSomething, gameStarted, gameFinished, iPhone, iPhone35, iPad, musicPlaying, creditsShowing, firstHop;
+@property (nonatomic) BOOL playGame, ignoreTouches, scoreShown, timerStarted, monkHitSomething, gameStarted, gameFinished, musicPlaying, creditsShowing, firstHop;
 
 // Views
 @property SKSpriteNode *monkNode, *background, *grassAndTree, *clouds1, *clouds2, *tipBackground;
@@ -26,13 +32,15 @@
 @property SKNode *grassEdge, *branchEdge;
 
 // Score
-@property (nonatomic) int startLabelCount, currentScore, totalTaps, combinedScores, resetCount;
+@property (nonatomic) int currentScore, totalTaps, combinedScores, resetCount;
 @property (nonatomic) long long highScore;
 
 @property (nonatomic) NSArray *loadedAchievements;
 @property (nonatomic) GKScore *retrievedScore;
 
+/// A controller for social features, like posting to Twitter and Facebook.
 @property (strong, nonatomic) SLComposeViewController *SLComposeVC;
+
 @property CGVector floatUp;
 
 @property (strong, nonatomic) AVAudioPlayer *musicPlayer;
@@ -68,7 +76,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 
         [self setupScoreBoard:size]; // Needs to be called after device size has been determined.
 
-        [self showStartOption];
+        [self setUpAndShowTitleViews];
 
         [self hideiAd];
 
@@ -94,14 +102,12 @@ static const uint32_t grassCategory = 0x1 << 2;
     // World and monk physics
     float floatAlt = 1;
 
-    if (self.iPhone || self.iPhone35) {
+    if (!DeviceManager.isTablet) {
         float dAlt = 1.1;
         self.physicsWorld.gravity = CGVectorMake(0, -8);
         self.floatUp = CGVectorMake(0, 1100 * floatAlt);
         self.monkNode.physicsBody.density = self.monkNode.physicsBody.density * dAlt;
-    }
-
-    if (self.iPad) {
+    } else {
         NSLog(@"monk densitiy = %f", self.monkNode.physicsBody.density);
         self.physicsWorld.gravity = CGVectorMake(0, -15);
         self.floatUp = CGVectorMake(0, 1200 * floatAlt);
@@ -134,7 +140,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 - (void)setupScoreBoard:(CGSize)size {
 
-    int scoreLabelFontSize = self.iPad ? 60 : 30;
+    int scoreLabelFontSize = DeviceManager.isTablet ? 60 : 30;
 
     // Create score label - moved here because it was laggy during the first click to begin the game.
     self.currentScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
@@ -177,16 +183,10 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 - (void) deviceSpecificSetupWithSize:(CGSize)size {
 
-    self.iPhone = NO;
-    self.iPhone35 = NO;
-    self.iPad = NO;
-
-    if (size.height == 568 && size.width == 320) {self.iPhone = YES;}
-    if (size.width == 320 && size.height == 480) {self.iPhone35 = YES;}
-    if (size.width == 768 && size.height == 1024) {self.iPad = YES;}
-
-    self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-
+    self.backgroundColor = [SKColor colorWithRed:0.15
+                                           green:0.15
+                                            blue:0.3
+                                           alpha:1.0];
     [self addBackground:size];
     [self addMonk:size];
     [self addGrassEdge:size];
@@ -194,14 +194,13 @@ static const uint32_t grassCategory = 0x1 << 2;
 
     self.physicsWorld.contactDelegate = self;
 
-    //4 inch screen
-    if ((size.height == 568 && size.width == 320) || (size.width == 320 && size.height == 480)) {
+    if (!DeviceManager.isTablet) {
+        // Set up for iPhone
         self.openEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monkAwake@2x" ofType:@"png" ]]];
         self.closeEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monk@2x" ofType:@"png"]]];
-    }
 
-    //iPad
-    if (size.width == 768 && size.height == 1024) {
+    } else {
+        // Set up for iPad
         self.openEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monkEyesOpeniPad@2x" ofType:@"png" ]]];
         self.closeEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monkiPad@2x" ofType:@"png"]]];
     }
@@ -260,39 +259,20 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 - (void) addBackground:(CGSize)size {
 
-    NSLog(@"MyScene, -addBackground: Device size = %f x %f", size.width, size.height);
-
-    //Prepare image for 4 inch screen
-    if (size.height == 568 && size.width == 320) {
-        self.background = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundiPhone"];
-        self.grassAndTree = [SKSpriteNode spriteNodeWithImageNamed:@"grassAndTreeiPhone"];
-        self.background.position = CGPointMake(size.width/2, size.height/2);
-        self.grassAndTree.position = CGPointMake(size.width/2, size.height/2);
+    if (self.background != nil && self.grassAndTree != nil) {
+        // Prevent setting up objects again.
+        return;
     }
 
-    //Prepare image for 3.5 inch screen
-    if (size.width == 320 && size.height == 480) {
-        self.background = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundiPhone"];
-        self.grassAndTree = [SKSpriteNode spriteNodeWithImageNamed:@"grassAndTreeiPhone"];
-        int offset = 33;
-        self.background.position = CGPointMake(size.width/2, (size.height/2) - offset);
-        self.grassAndTree.position = CGPointMake(size.width/2, (size.height/2) - offset);
-    }
+    // Set up background objects.
+    self.background = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"backgroundiPad" : @"backgroundiPhone")];
+    self.grassAndTree = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"grassAndTreeiPad" : @"grassAndTreeiPhone")];
+    self.background.position = CGPointMake(size.width/2, size.height/2);
+    self.grassAndTree.position = CGPointMake(size.width/2, size.height/2);
 
-    //Prepare for iPad
-    if (size.width == 768 && size.height == 1024) {
-        self.background = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundiPad"];
-        self.grassAndTree = [SKSpriteNode spriteNodeWithImageNamed:@"grassAndTreeiPad"];
-        self.background.position = CGPointMake(size.width/2, size.height/2);
-        self.grassAndTree.position = CGPointMake(size.width/2, size.height/2);
-    }
-
-    if (self.background != nil) {
-        [self addChild:self.background];
-        [self addChild:self.grassAndTree];
-    } else {
-        NSLog(@"MyScene, -addBackground: Error: No background image detected.");
-    }
+    // Show background elements.
+    [self addChild:self.background];
+    [self addChild:self.grassAndTree];
 }
 
 - (void) addGrassEdge:(CGSize)size {
@@ -347,21 +327,9 @@ static const uint32_t grassCategory = 0x1 << 2;
     [self addChild:self.branchEdge];
 }
 
-- (void) setupClouds
-{
-    NSString *cloudsImage1;
-    NSString *cloudsImage2;
-
-    if (self.iPhone || self.iPhone35) {
-        cloudsImage1 = @"clouds1";
-        cloudsImage2 = @"clouds2";
-    } else if (self.iPad) {
-        cloudsImage1 = @"clouds1iPad";
-        cloudsImage2 = @"clouds2iPad";
-    }
-
-    self.clouds1 = [SKSpriteNode spriteNodeWithImageNamed:cloudsImage1];
-    self.clouds2 = [SKSpriteNode spriteNodeWithImageNamed:cloudsImage2];
+- (void)setUpClouds {
+    self.clouds1 = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"clouds1iPad" : @"clouds1")];
+    self.clouds2 = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"clouds2iPad" : @"clouds2")];
     self.clouds1.anchorPoint = CGPointMake(0, 0.5);
     self.clouds2.anchorPoint = CGPointMake(0, 0.5);
     self.clouds1.position = CGPointMake(self.size.width, 80);
@@ -369,7 +337,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 }
 
 - (void) addClouds {
-    [self setupClouds];
+    [self setUpClouds];
     CGPoint cloudDestination = CGPointMake((0 -(self.size.width/2)) - (self.clouds1.size.width),100);
     CGPoint cloudStart = CGPointMake(self.size.width, 100);
     SKAction *moveClouds = [SKAction moveTo:cloudDestination duration:20];
@@ -400,86 +368,69 @@ static const uint32_t grassCategory = 0x1 << 2;
     }
 }
 
-- (void) showStartOption {
+- (void)setUpAndShowTitleViews {
 
-    for (SKNode* node in self.children) {
+    int taptoStartFontSize = 20;
+    int directionsFontSize = 14;
+    float dropShadowDistance = (DeviceManager.isTablet ? 3.8 : 2.5);
+    float dropShadowDistance2 = (DeviceManager.isTablet ? 3.8 : 2);
 
-        if ([node.name isEqualToString:@"startLabel"]) {
-            self.startLabelCount++;
-        }
-    }
+    // Set up the title.
+    SKSpriteNode *titleImageNode = [SKSpriteNode spriteNodeWithImageNamed: (!DeviceManager.isTablet ? @"title" : @"titleiPad")];
+    titleImageNode.position = CGPointMake(self.size.width/2, (!DeviceManager.isTablet ? 440 : 800));
+    titleImageNode.name = @"startLabel";
+    [self addChild:titleImageNode];
 
-    if (self.startLabelCount < 1) {
-        SKSpriteNode *title = [SKSpriteNode spriteNodeWithImageNamed:@"title"];
+    // Note: Drop shadows are being created here by creating a second label
+    // to serve as the drop shadown, which is positioned just beneath its corresponding label.
 
-        if (_iPhone) {
-            title.position = CGPointMake(self.size.width/2, 440);
-        } else if (_iPhone35) {
-            title.position = CGPointMake(self.size.width/2, 400);
-        } else if (_iPad) {
-            title = [SKSpriteNode spriteNodeWithImageNamed:@"titleiPad"];
-            title.position = CGPointMake(self.size.width/2, 800);
-        }
+    // Set up labels.
 
-        title.name = @"startLabel";
+    SKLabelNode *tapToStartLabel = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
+    tapToStartLabel.text = @"tap to float";
+    tapToStartLabel.name = @"startLabel";
+    [tapToStartLabel setFontColor:SKColor.whiteColor];
+    tapToStartLabel.fontSize = taptoStartFontSize;
+    tapToStartLabel.position = CGPointMake(self.size.width/2, (DeviceManager.isTablet ? 100 : 90));
+    [self addChild:tapToStartLabel];
 
-        SKLabelNode * tapToStart = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
-        SKLabelNode *directions = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
-        SKLabelNode * tapToStartDS = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
-        SKLabelNode *directionsDS = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
-        [directions setFontColor:[SKColor whiteColor]];
-        [tapToStart setFontColor:[SKColor whiteColor]];
-        [directionsDS setFontColor:[SKColor blackColor]];
-        [tapToStartDS setFontColor:[SKColor blackColor]];
-        tapToStart.name = @"startLabel";
-        directions.name = @"startLabel";
-        tapToStartDS.name = @"startLabel";
-        directionsDS.name = @"startLabel";
+    SKLabelNode *tapToStartLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
+    tapToStartLabelDropShadow.text = tapToStartLabel.text;
+    tapToStartLabelDropShadow.name = @"startLabel";
+    [tapToStartLabelDropShadow setFontColor:SKColor.blackColor];
+    tapToStartLabelDropShadow.fontSize = taptoStartFontSize;
+    tapToStartLabelDropShadow.position = CGPointMake(tapToStartLabel.position.x + dropShadowDistance, tapToStartLabel.position.y - dropShadowDistance);
+    [self addChild:tapToStartLabelDropShadow];
 
-        if (self.iPhone || self.iPhone35) {
-            int tap = 20;
-            int dir = 14;
-            tapToStart.fontSize = tap;
-            directions.fontSize = dir;
-            tapToStartDS.fontSize = tap;
-            directionsDS.fontSize = dir;
-        }
+    SKLabelNode *directionsLabel = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
+    directionsLabel.text = @"don't hit the tree or ground";
+    directionsLabel.name = @"startLabel";
+    [directionsLabel setFontColor:SKColor.whiteColor];
+    directionsLabel.fontSize = directionsFontSize;
+    directionsLabel.position = CGPointMake(self.size.width/2, tapToStartLabel.position.y - (DeviceManager.isTablet ? 50 : 20));
+    [self addChild:directionsLabel];
 
-        float DS1 = 2.5;
-        float DS2 = 2;
+    SKLabelNode *directionsLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
+    directionsLabelDropShadow.text = directionsLabel.text;
+    directionsLabelDropShadow.name = @"startLabel";
+    [directionsLabelDropShadow setFontColor:SKColor.blackColor];
+    directionsLabelDropShadow.fontSize = directionsFontSize;
+    directionsLabelDropShadow.position = CGPointMake(directionsLabel.position.x + dropShadowDistance2, directionsLabel.position.y - dropShadowDistance2);
+    [self addChild:directionsLabelDropShadow];
 
-        tapToStart.text = @"tap to float";
-        directions.text = @"don't hit the tree or ground";
-        tapToStartDS.text = tapToStart.text;
-        directionsDS.text = directions.text;
+    SKAction *hideAction = [SKAction fadeOutWithDuration:0];
+    SKAction *waitAction = [SKAction waitForDuration:.35];
+    SKAction *showAction = [SKAction fadeInWithDuration:0];
+    NSArray<SKAction*> *actionSequence = @[hideAction, waitAction, showAction, waitAction];
+    SKAction *blink = [SKAction repeatActionForever:[SKAction sequence:actionSequence]];
 
-        if (_iPhone || _iPhone35) {
-            tapToStart.position = CGPointMake(self.size.width/2, 90);
-            directions.position = CGPointMake(self.size.width/2, tapToStart.position.y - 20);
-            tapToStartDS.position = CGPointMake(tapToStart.position.x + DS1, tapToStart.position.y - DS1);
-            directionsDS.position = CGPointMake(directions.position.x + DS2, directions.position.y - DS2);
-        } else if (_iPad) {
-            DS1 = 3.8;
-            DS2 = 3.8;
-            tapToStart.position = CGPointMake(self.size.width/2, 100);
-            directions.position = CGPointMake(self.size.width/2, tapToStart.position.y - 50);
-            tapToStartDS.position = CGPointMake(tapToStart.position.x + DS1, tapToStart.position.y - DS1);
-            directionsDS.position = CGPointMake(directions.position.x + DS2, directions.position.y - DS2);
-        }
+    NSArray<SKLabelNode*> *blinkingLabels = @[tapToStartLabel,
+                                              tapToStartLabelDropShadow,
+                                              directionsLabel,
+                                              directionsLabelDropShadow];
 
-        [self addChild:title];
-        [self addChild:tapToStartDS];
-        [self addChild:directionsDS];
-        [self addChild:tapToStart];
-        [self addChild:directions];
-
-        SKAction *off = [SKAction fadeOutWithDuration:0];
-        SKAction *on = [SKAction fadeInWithDuration:0];
-        SKAction *blink = [SKAction repeatActionForever:[SKAction sequence:@[off, [SKAction waitForDuration:.35], on, [SKAction waitForDuration:.5]]]];
-        [tapToStart runAction:blink];
-        [tapToStartDS runAction:blink];
-        [directions runAction:blink];
-        [directionsDS runAction:blink];
+    for (SKLabelNode *label in blinkingLabels) {
+        [label runAction:blink];
     }
 }
 
@@ -657,8 +608,6 @@ static const uint32_t grassCategory = 0x1 << 2;
 
             // Timer/Score actions
 
-            self.startLabelCount = 0;
-
             [self startTimer];
 
             [self showScore];
@@ -667,10 +616,9 @@ static const uint32_t grassCategory = 0x1 << 2;
 
         } else {
             self.resetCount++;
+
             if (_resetCount >= 30) {
-                _resetCount = 0;
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Secret Reset Option" message:@"You tapped 30 times after a game. Would you like to reset your score?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-                [alert show];
+                [self.gameSceneDelegate showScoreResetOption];
             };
         }
 

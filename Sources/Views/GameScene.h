@@ -2,24 +2,15 @@
 //  MyScene.h
 //  MeditatingMonk
 //
-
 //  Copyright (c) 2014 DavidSights. All rights reserved.
 //
 
-#import <SpriteKit/SpriteKit.h>
-#import "ScoreBoard.h"
-#import <iAd/iAd.h>
-#import <GameKit/GameKit.h>
-#import <Social/Social.h>
-#import <AVFoundation/AVFoundation.h>
-#import "CreditsNode.h"
-#import <MessageUI/MessageUI.h>
+@protocol GameSceneDelegate
+- (void)showScoreResetOption;
+@end
 
+@interface GameScene : SKScene
 
-@interface GameScene : SKScene <SKPhysicsContactDelegate, ADBannerViewDelegate, MFMailComposeViewControllerDelegate>
-
-@property GKLocalPlayer *player;
-
-- (void) loadHighScore;
+@property (weak) id<GameSceneDelegate> gameSceneDelegate;
 
 @end

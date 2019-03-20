@@ -9,5 +9,7 @@
 import Foundation
 
 class DeviceManager: NSObject {
+
+    /// Describes whether or not the user is using an iPad device.
     @objc static var isTablet = false
 }
