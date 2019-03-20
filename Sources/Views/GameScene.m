@@ -15,6 +15,7 @@
 #import "TipCloud.h"
 #import "ScoreBoard.h"
 #import "CreditsNode.h"
+#import "MeditatingMonk-Swift.h"
 
 @interface GameScene () <SKPhysicsContactDelegate>
 

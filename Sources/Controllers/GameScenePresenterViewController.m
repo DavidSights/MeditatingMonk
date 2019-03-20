@@ -7,7 +7,10 @@
 //
 
 #import "GameScenePresenterViewController.h"
+#import <SpriteKit/SpriteKit.h>
+#import <GameKit/GameKit.h>
 #import "GameScene.h"
+#import "MeditatingMonk-Swift.h"
 
 @interface GameScenePresenterViewController () <GameSceneDelegate>
 @property GameScene *gameScene;
