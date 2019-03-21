@@ -225,8 +225,8 @@
 		9A2634C11BD4701400E3FCDE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9A8AF5B519B29434004002E9 /* GameScenePresenterViewController.h */,
-				9A8AF5B619B29434004002E9 /* GameScenePresenterViewController.m */,
+				9AD5316522434A10004DBEC1 /* View Controllers */,
+				9AD5316622434A1D004DBEC1 /* Game Scenes */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -304,8 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				9A877B0E1BCB4FE800297A74 /* Storyboards */,
-				9A8F84F3197354EC0085296D /* GameScene.h */,
-				9A8F84F4197354EC0085296D /* GameScene.m */,
 				9A49D6C9197F48590078C2D6 /* ScoreBoard.h */,
 				9A49D6CA197F48590078C2D6 /* ScoreBoard.m */,
 				9A8AF5BE19B2C064004002E9 /* CreditsNode.h */,
@@ -446,6 +444,24 @@
 				9AD53163224324C5004DBEC1 /* DataManager.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		9AD5316522434A10004DBEC1 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9A8AF5B519B29434004002E9 /* GameScenePresenterViewController.h */,
+				9A8AF5B619B29434004002E9 /* GameScenePresenterViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		9AD5316622434A1D004DBEC1 /* Game Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9A8F84F3197354EC0085296D /* GameScene.h */,
+				9A8F84F4197354EC0085296D /* GameScene.m */,
+			);
+			path = "Game Scenes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
