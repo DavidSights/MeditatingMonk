@@ -139,15 +139,6 @@ static const uint32_t grassCategory = 0x1 << 2;
 
     int scoreLabelFontSize = DeviceManager.isTablet ? 60 : 30;
 
-    // Set up score label
-    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
-    self.scoreLabel.text = @"0";
-    self.scoreLabel.fontSize = scoreLabelFontSize;
-    [self.scoreLabel setFontColor:[SKColor whiteColor]];
-    self.scoreLabel.name = @"currentScoreLabel";
-    self.scoreLabel.position = CGPointMake(size.width/2, (self.size.height/10) * 11);
-    [self addChild:self.scoreLabel];
-
     // Set up score label drop shadow. There has to be a better way to do this.
     self.scoreLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
     self.scoreLabelDropShadow.text = @"0";
@@ -156,6 +147,15 @@ static const uint32_t grassCategory = 0x1 << 2;
     self.scoreLabelDropShadow.name = @"currentScoreLabelDropShadow";
     self.scoreLabelDropShadow.position = CGPointMake(self.scoreLabel.position.x, self.scoreLabel.position.y);
     [self addChild:self.scoreLabelDropShadow];
+
+    // Set up score label
+    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    self.scoreLabel.text = @"0";
+    self.scoreLabel.fontSize = scoreLabelFontSize;
+    [self.scoreLabel setFontColor:[SKColor whiteColor]];
+    self.scoreLabel.name = @"currentScoreLabel";
+    self.scoreLabel.position = CGPointMake(size.width/2, (self.size.height/10) * 11);
+    [self addChild:self.scoreLabel];
 
     // Set up scoreboard.
     self.scoreboard = [[ScoreBoard alloc] init:size];
@@ -339,11 +339,6 @@ static const uint32_t grassCategory = 0x1 << 2;
     [self.clouds2 runAction:[SKAction sequence:@[[SKAction waitForDuration:10],[SKAction repeatActionForever:[SKAction sequence:@[moveClouds, returnClouds]]]]]];
 }
 
-- (void)resetMonkHit {
-    self.monkHitSomething = NO;
-    NSLog(@"Monk can hit things and cause actions again.");
-}
-
 #pragma mark - Grpahics and Animations
 
 - (void)startLabelFadeAwayIfNcessary {
@@ -450,8 +445,10 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 - (void)showCurrentScoreLabel {
 
-    float dropShadowOffset = (DeviceManager.isTablet ? 3.9 : 3.7);
     int scoreLabelYPosition = (self.size.height - (DeviceManager.isTablet ? 80 : 47));
+    float dropShadowOffset = (DeviceManager.isTablet ? 3.9 : 3.7);
+
+    if (self.scoreLabel.position.y == scoreLabelYPosition) { return; }
 
     // Reset the score to show a new score counter.
     DataManager.currentScore = 0;
@@ -508,7 +505,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 #pragma mark - Physics
 
-- (void)createAndPerformChanceBasedImpulse {
+- (void)makeMonkJump {
 
     CGVector OGFloatUp = self.floatUp;
 
@@ -541,64 +538,51 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 }
 
-- (void)startTimer {
+- (void)beginCountingScore {
 
-    if (self.timerStarted == NO) {
+    // Prevent animating the current score/timer unnecessarily.
+    if ([self actionForKey:updateScoreTimerKey] != nil) { return; }
 
-        self.timerStarted = YES;
+    NSArray<SKAction*> *actions = @[[SKAction waitForDuration:1],
+                                    [SKAction performSelector:@selector(incrementScore) onTarget:self]];
 
-        NSArray<SKAction*> *actions = @[[SKAction waitForDuration:1],
-                                        [SKAction performSelector:@selector(incrementScore) onTarget:self]];
-
-        [self runAction: [SKAction repeatActionForever:[SKAction sequence:actions]] withKey:updateScoreTimerKey];
-    }
+    [self runAction: [SKAction repeatActionForever:[SKAction sequence:actions]] withKey:updateScoreTimerKey];
 }
 
 #pragma mark - Interaction
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)triggerGameAction {
+    DataManager.totalTaps++;
+
+    // Monk actions
+    [self makeMonkJump];
+    [self.sounds playJumpSound];
+
+    [self.monkNode runAction:self.closeEyes];
+
+    // Timer/Score actions
+    [self beginCountingScore];
+    [self showCurrentScoreLabel];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
     [self startLabelFadeAwayIfNcessary];
 
-    if (self.ignoreTouches == NO) {
+    if (self.gameActive) {
+        [self triggerGameAction];
+        return;
+    }
 
-        if (self.gameActive == YES) {
-
-            // Monk actions
-
-            [self createAndPerformChanceBasedImpulse];
-
-            [self.sounds playJumpSound];
-
-            [self.monkNode runAction:self.closeEyes];
-
-            // Timer/Score actions
-
-            [self startTimer];
-
-            [self showCurrentScoreLabel];
-            [self resetMonkHit];
-
-            DataManager.totalTaps++;
-
-        } else {
-            self.secretResetOptionCounter++;
-
-            if (_secretResetOptionCounter >= 30) {
-                [self.gameSceneDelegate showScoreResetOption];
-            };
-        }
-
-        NSString *name = [[NSString alloc] init];
         for (UITouch *touch in touches) {
-            //Only check for buttons pressed in menu node if the credits node isn't showing
+
+            // Only check for buttons pressed in menu node if the credits node isn't showing
             if (self.creditsShowing == NO) {
 
-                //Set up for checking for buttons in menu node
-                SKNode *touchedElement = [self.scoreboard nodeAtPoint:[touch locationInNode:self.scoreboard]];
-                name = touchedElement.name;
+                /// The node that was touched by the user.
+                SKNode *scoreboardNode = [self.scoreboard nodeAtPoint:[touch locationInNode:self.scoreboard]];
 
-                if ([name isEqual: @"replayButton"]) {
+                if ([scoreboardNode.name isEqual: @"replayButton"]) {
                     [self.scoreboard hideScore];
                     self.gameActive = YES;
                     //Hide iAd
@@ -611,12 +595,12 @@ static const uint32_t grassCategory = 0x1 << 2;
                     }
                 }
 
-                if ([name isEqual:@"gameCenterButton"]) {
+                if ([scoreboardNode.name isEqual:@"gameCenterButton"]) {
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"showGameCenter" object:self];
                     [self.sounds playButtonSound];
                 }
 
-                if ([name isEqual:@"twitterButton"] && self.creditsShowing == NO) {
+                if ([scoreboardNode.name isEqual:@"twitterButton"] && self.creditsShowing == NO) {
 
                     [self.sounds playButtonSound];
 
@@ -668,7 +652,7 @@ static const uint32_t grassCategory = 0x1 << 2;
                         [noTwitterAlert show];
                     }
                 }
-                if ([name isEqual:@"facebookButton"] && self.creditsShowing == NO) {
+                if ([scoreboardNode.name isEqual:@"facebookButton"] && self.creditsShowing == NO) {
 
                     [self.sounds playButtonSound];
 
@@ -719,7 +703,7 @@ static const uint32_t grassCategory = 0x1 << 2;
                         [alert show];
                     }
                 }
-                if ([name isEqual: @"creditsButton"] && self.creditsShowing == NO) {
+                if ([scoreboardNode.name isEqual: @"creditsButton"] && self.creditsShowing == NO) {
 
                     [self.sounds playButtonSound];
 
@@ -732,10 +716,9 @@ static const uint32_t grassCategory = 0x1 << 2;
             if (self.creditsShowing == YES) {
                 for (UITouch *touch in touches) {
 
-                    SKNode *touchedElement = [self.credits nodeAtPoint:[touch locationInNode:self.credits]];
-                    name = touchedElement.name;
+                    SKNode *creditsNode = [self.credits nodeAtPoint:[touch locationInNode:self.credits]];
 
-                    if ([name isEqual:@"davidTwitter"]) {
+                    if ([creditsNode.name isEqual:@"davidTwitter"]) {
 
                         [self.sounds playButtonSound];
 
@@ -743,14 +726,14 @@ static const uint32_t grassCategory = 0x1 << 2;
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/davidsights"]];
                     }
 
-                    if ([name isEqual:@"davyTwitter"]) {
+                    if ([creditsNode.name isEqual:@"davyTwitter"]) {
 
                         [self.sounds playButtonSound];
                         NSLog(@"davy twitter button pressed");
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/davywolfmusic"]];
                     }
 
-                    if ([name isEqual:@"goBack"]) {
+                    if ([creditsNode.name isEqual:@"goBack"]) {
 
                         [self.sounds playButtonSound];
 
@@ -758,18 +741,18 @@ static const uint32_t grassCategory = 0x1 << 2;
                         self.secretResetOptionCounter = 0;
                     }
 
-                    if ([name isEqual:@"rate"]) {
+                    if ([creditsNode.name isEqual:@"rate"]) {
 
                         [self.sounds playButtonSound];
 
                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8"]];
                     }
 
-                    if ([name isEqual:@"davidEmail"]) {
+                    if ([creditsNode.name isEqual:@"davidEmail"]) {
                         [self.sounds playButtonSound];
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"emailDavid" object:self];
                     }
-                    if ([name isEqual:@"davyEmail"]) {
+                    if ([creditsNode.name isEqual:@"davyEmail"]) {
                         [self.sounds playButtonSound];
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"emailDavy" object:self];
                     }
@@ -782,7 +765,6 @@ static const uint32_t grassCategory = 0x1 << 2;
             self.gameStarted = YES;
             self.gameActive = YES;
         }
-    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -888,7 +870,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 #pragma mark - Score
 
 - (void)incrementScore {
-    DataManager.currentScore++;
+    DataManager.currentScore = DataManager.currentScore + 1;
     NSString *currentScoreString = [NSString stringWithFormat:@"%li", DataManager.currentScore];
     self.scoreLabel.text = currentScoreString;
     self.scoreLabelDropShadow.text = currentScoreString;
@@ -898,6 +880,9 @@ static const uint32_t grassCategory = 0x1 << 2;
     [self removeActionForKey:updateScoreTimerKey];
     [self.scoreboard reloadData];
     [self hideScoreLabel];
+
+    CGSize size = self.scene.view.frame.size;
+    self.scoreboard.position = CGPointMake(size.width/2, size.height/2);
 }
 
 @end
