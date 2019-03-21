@@ -68,22 +68,17 @@ static const uint32_t grassCategory = 0x1 << 2;
         [self initialFlagsSetup];
 
         [self deviceSpecificSetupWithSize:size];
-
-        [self setupScoreBoard:size]; // Needs to be called after device size has been determined.
+        [self setUpScoreboardWithSize:size];
 
         [self setUpAndShowTitleViews];
 
-        [self hideiAd];
-
         [self addClouds];
-
-        [self loadAchievements];
 
         [self setUpMusic];
 
         [self setupCredits];
 
-        [self setupPhysics];
+        [self setUpPhysics];
 
         self.sounds = [Sounds new];
         [self addChild:self.sounds];
@@ -94,7 +89,7 @@ static const uint32_t grassCategory = 0x1 << 2;
     return self;
 }
 
-- (void)setupPhysics {
+- (void)setUpPhysics {
 
     // World and monk physics
     float floatAlt = 1;
@@ -112,7 +107,7 @@ static const uint32_t grassCategory = 0x1 << 2;
     }
 }
 
-- (void) setupCredits {
+- (void)setupCredits {
 
     CGSize size = self.view.frame.size;
 
@@ -122,20 +117,7 @@ static const uint32_t grassCategory = 0x1 << 2;
     self.creditsShowing = NO;
 }
 
-- (void) loadAchievements {
-
-    //Load achievements
-    [GKAchievement loadAchievementsWithCompletionHandler:^(NSArray *achievements, NSError *error) {
-
-        if (error == nil) {
-            self.loadedAchievements = achievements;
-        } else {
-            NSLog(@"MyScene, -handleAchievements: There was an error while loading achievements: %@", error);
-        }
-    }];
-}
-
-- (void)setupScoreBoard:(CGSize)size {
+- (void)setUpScoreboardWithSize:(CGSize)size {
 
     int scoreLabelFontSize = DeviceManager.isTablet ? 60 : 30;
 
@@ -163,8 +145,7 @@ static const uint32_t grassCategory = 0x1 << 2;
     [self addChild:self.scoreboard];
 }
 
-- (void) initialFlagsSetup {
-
+- (void)initialFlagsSetup {
     self.gameActive = NO;
     self.firstHop = NO;
     self.scoreShown = NO;
@@ -208,8 +189,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 
     if (error) {
         NSLog(@"There was an error loading music: %@", error);
-    }
-    else {
+    } else {
         self.musicPlayer.numberOfLoops = -1;
         [self.musicPlayer prepareToPlay];
         [self.musicPlayer play];
@@ -218,7 +198,7 @@ static const uint32_t grassCategory = 0x1 << 2;
     self.musicPlaying = YES;
 }
 
-- (void) stopMusic {
+- (void)stopMusic {
     [self.musicPlayer stop];
     self.musicPlayer.currentTime = 0;
     self.musicPlaying = NO;
@@ -248,7 +228,7 @@ static const uint32_t grassCategory = 0x1 << 2;
     [self addChild:self.monkNode];
 }
 
-- (void) addBackground:(CGSize)size {
+- (void)addBackground:(CGSize)size {
 
     if (self.background != nil && self.grassAndTree != nil) {
         // Prevent setting up objects again.
@@ -266,7 +246,7 @@ static const uint32_t grassCategory = 0x1 << 2;
     [self addChild:self.grassAndTree];
 }
 
-- (void) addGrassEdge:(CGSize)size {
+- (void)addGrassEdge:(CGSize)size {
 
     self.grassEdge = [SKNode node];
 
@@ -341,7 +321,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 #pragma mark - Grpahics and Animations
 
-- (void)startLabelFadeAwayIfNcessary {
+- (void)startLabelFadeAwayIfNecessary {
 
     if (self.gameStarted == NO) {
 
@@ -443,11 +423,12 @@ static const uint32_t grassCategory = 0x1 << 2;
     }];
 }
 
-- (void)showCurrentScoreLabel {
+- (void)showScoreLabelIfNecessary {
 
     int scoreLabelYPosition = (self.size.height - (DeviceManager.isTablet ? 80 : 47));
     float dropShadowOffset = (DeviceManager.isTablet ? 3.9 : 3.7);
 
+    // Prevent unnecessarily setting up the score label again.
     if (self.scoreLabel.position.y == scoreLabelYPosition) { return; }
 
     // Reset the score to show a new score counter.
@@ -480,11 +461,6 @@ static const uint32_t grassCategory = 0x1 << 2;
     //Show iAd
     NSLog(@"Showing ad from contacting grass.");
     [[NSNotificationCenter defaultCenter]postNotificationName:@"showsBanner" object:self];
-}
-
-- (void) hideiAd {
-    //Hide iAd
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"hidesBanner" object:self];
 }
 
 - (void)showEnlighteningThought {
@@ -538,7 +514,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 }
 
-- (void)beginCountingScore {
+- (void)beginCountingScoreIfNecessary {
 
     // Prevent animating the current score/timer unnecessarily.
     if ([self actionForKey:updateScoreTimerKey] != nil) { return; }
@@ -552,22 +528,20 @@ static const uint32_t grassCategory = 0x1 << 2;
 #pragma mark - Interaction
 
 - (void)triggerGameAction {
-    DataManager.totalTaps++;
+    [self beginCountingScoreIfNecessary];
+    [self showScoreLabelIfNecessary];
+
+    DataManager.totalTaps = DataManager.totalTaps + 1;
 
     // Monk actions
     [self makeMonkJump];
     [self.sounds playJumpSound];
-
     [self.monkNode runAction:self.closeEyes];
-
-    // Timer/Score actions
-    [self beginCountingScore];
-    [self showCurrentScoreLabel];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
-    [self startLabelFadeAwayIfNcessary];
+    [self startLabelFadeAwayIfNecessary];
 
     if (self.gameActive) {
         [self triggerGameAction];
