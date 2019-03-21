@@ -574,197 +574,197 @@ static const uint32_t grassCategory = 0x1 << 2;
         return;
     }
 
-        for (UITouch *touch in touches) {
+    for (UITouch *touch in touches) {
 
-            // Only check for buttons pressed in menu node if the credits node isn't showing
-            if (self.creditsShowing == NO) {
+        // Only check for buttons pressed in menu node if the credits node isn't showing
+        if (self.creditsShowing == NO) {
 
-                /// The node that was touched by the user.
-                SKNode *scoreboardNode = [self.scoreboard nodeAtPoint:[touch locationInNode:self.scoreboard]];
+            /// The node that was touched by the user.
+            SKNode *scoreboardNode = [self.scoreboard nodeAtPoint:[touch locationInNode:self.scoreboard]];
 
-                if ([scoreboardNode.name isEqual: @"replayButton"]) {
-                    [self.scoreboard hideScore];
-                    self.gameActive = YES;
-                    //Hide iAd
-                    [[NSNotificationCenter defaultCenter]postNotificationName:@"hidesBanner" object:self];
-                    [self hideTip];
-                    if (self.musicPlaying == NO) {
-                        [self.musicPlayer play];
-                        self.musicPlaying = YES;
-                        self.secretResetOptionCounter = 0;
-                    }
-                }
-
-                if ([scoreboardNode.name isEqual:@"gameCenterButton"]) {
-                    [[NSNotificationCenter defaultCenter]postNotificationName:@"showGameCenter" object:self];
-                    [self.sounds playButtonSound];
-                }
-
-                if ([scoreboardNode.name isEqual:@"twitterButton"] && self.creditsShowing == NO) {
-
-                    [self.sounds playButtonSound];
-
-                    NSLog(@"Twitter button pressed.");
-
-                    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-                        self.SLComposeVC = [[SLComposeViewController alloc] init];
-                        self.SLComposeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-
-                        NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %li! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", DataManager.currentScore];
-
-                        [self.SLComposeVC setInitialText:shareText];
-
-                        //Take a screenshot and set it equal to UIImage *scoreImage
-                        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
-                        [self.view drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
-                        UIImage *scoreImage = UIGraphicsGetImageFromCurrentImageContext();
-                        UIGraphicsEndImageContext();
-
-                        [self.SLComposeVC addImage:scoreImage];
-
-                        UIViewController *controller = self.view.window.rootViewController;
-                        [controller presentViewController:self.SLComposeVC animated: YES completion:nil];
-
-                        [self.SLComposeVC setCompletionHandler:^(SLComposeViewControllerResult result) {
-                            NSString *output = [[NSString alloc] init];
-                            switch (result) {
-                                case SLComposeViewControllerResultCancelled:
-                                    output = @"cancelled";
-                                    break;
-                                case SLComposeViewControllerResultDone:
-                                    output = @"done";
-                                    break;
-                                default:
-                                    break;
-                            }
-                            if ([output isEqual: @"cancelled"]) {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Twitter" message:@"You did not share your score." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-                                [alert show];
-                            }
-                            if ([output isEqualToString:@"done"]) {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Twitter" message:@"You successfully shared your score!" delegate:nil cancelButtonTitle:@"Cool" otherButtonTitles: nil];
-                                [alert show];
-                            }
-                        }];
-                    }
-                    else {
-                        UIAlertView *noTwitterAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not share to Twitter. Please make sure you are signed into your Twitter account in your device's settings." delegate:nil cancelButtonTitle:@"Bummer" otherButtonTitles:nil];
-                        [noTwitterAlert show];
-                    }
-                }
-                if ([scoreboardNode.name isEqual:@"facebookButton"] && self.creditsShowing == NO) {
-
-                    [self.sounds playButtonSound];
-
-                    // Share to facebook
-                    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
-                        self.SLComposeVC = [[SLComposeViewController alloc] init];
-                        self.SLComposeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-
-                        NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %li! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", DataManager.currentScore];
-
-                        [self.SLComposeVC setInitialText:shareText];
-
-                        //Take a screenshot and set it equal to UIImage *scoreImage
-                        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
-                        [self.view drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
-                        UIImage *scoreImage = UIGraphicsGetImageFromCurrentImageContext();
-                        UIGraphicsEndImageContext();
-
-                        [self.SLComposeVC addImage:scoreImage];
-
-                        UIViewController *controller = self.view.window.rootViewController;
-                        [controller presentViewController:self.SLComposeVC animated: YES completion:nil];
-
-                        [self.SLComposeVC setCompletionHandler:^(SLComposeViewControllerResult result) {
-                            NSString *output = [[NSString alloc] init];
-                            switch (result) {
-                                case SLComposeViewControllerResultCancelled:
-                                    output = @"cancelled";
-                                    break;
-                                case SLComposeViewControllerResultDone:
-                                    output = @"done";
-                                    break;
-                                default:
-                                    break;
-                            }
-                            if ([output isEqual: @"cancelled"]) {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook" message:@"You did not share your score." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-                                [alert show];
-                            }
-                            if ([output isEqualToString:@"done"]) {
-                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook" message:@"You successfully shared your score!" delegate:nil cancelButtonTitle:@"Cool" otherButtonTitles: nil];
-                                [alert show];
-                            }
-                        }];
-                    }
-                    else {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not share to Facebook. Please make sure you are signed into your Facebook account in your device's settings." delegate:nil cancelButtonTitle:@"Bummer" otherButtonTitles:nil];
-                        [alert show];
-                    }
-                }
-                if ([scoreboardNode.name isEqual: @"creditsButton"] && self.creditsShowing == NO) {
-
-                    [self.sounds playButtonSound];
-
-                    [self showCredits];
-                    _secretResetOptionCounter = 0;
+            if ([scoreboardNode.name isEqual: @"replayButton"]) {
+                [self.scoreboard hideScore];
+                self.gameActive = YES;
+                //Hide iAd
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"hidesBanner" object:self];
+                [self hideTip];
+                if (self.musicPlaying == NO) {
+                    [self.musicPlayer play];
+                    self.musicPlaying = YES;
+                    self.secretResetOptionCounter = 0;
                 }
             }
 
-            //If credits are showing, check for any buttons pressed within the credits node.
-            if (self.creditsShowing == YES) {
-                for (UITouch *touch in touches) {
+            if ([scoreboardNode.name isEqual:@"gameCenterButton"]) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"showGameCenter" object:self];
+                [self.sounds playButtonSound];
+            }
 
-                    SKNode *creditsNode = [self.credits nodeAtPoint:[touch locationInNode:self.credits]];
+            if ([scoreboardNode.name isEqual:@"twitterButton"] && self.creditsShowing == NO) {
 
-                    if ([creditsNode.name isEqual:@"davidTwitter"]) {
+                [self.sounds playButtonSound];
 
-                        [self.sounds playButtonSound];
+                NSLog(@"Twitter button pressed.");
 
-                        NSLog(@"David twitter button pressed");
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/davidsights"]];
-                    }
+                if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+                    self.SLComposeVC = [[SLComposeViewController alloc] init];
+                    self.SLComposeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
 
-                    if ([creditsNode.name isEqual:@"davyTwitter"]) {
+                    NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %li! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", DataManager.currentScore];
 
-                        [self.sounds playButtonSound];
-                        NSLog(@"davy twitter button pressed");
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/davywolfmusic"]];
-                    }
+                    [self.SLComposeVC setInitialText:shareText];
 
-                    if ([creditsNode.name isEqual:@"goBack"]) {
+                    //Take a screenshot and set it equal to UIImage *scoreImage
+                    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
+                    [self.view drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
+                    UIImage *scoreImage = UIGraphicsGetImageFromCurrentImageContext();
+                    UIGraphicsEndImageContext();
 
-                        [self.sounds playButtonSound];
+                    [self.SLComposeVC addImage:scoreImage];
 
-                        [self hideCredits];
-                        self.secretResetOptionCounter = 0;
-                    }
+                    UIViewController *controller = self.view.window.rootViewController;
+                    [controller presentViewController:self.SLComposeVC animated: YES completion:nil];
 
-                    if ([creditsNode.name isEqual:@"rate"]) {
-
-                        [self.sounds playButtonSound];
-
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8"]];
-                    }
-
-                    if ([creditsNode.name isEqual:@"davidEmail"]) {
-                        [self.sounds playButtonSound];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"emailDavid" object:self];
-                    }
-                    if ([creditsNode.name isEqual:@"davyEmail"]) {
-                        [self.sounds playButtonSound];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"emailDavy" object:self];
-                    }
+                    [self.SLComposeVC setCompletionHandler:^(SLComposeViewControllerResult result) {
+                        NSString *output = [[NSString alloc] init];
+                        switch (result) {
+                            case SLComposeViewControllerResultCancelled:
+                                output = @"cancelled";
+                                break;
+                            case SLComposeViewControllerResultDone:
+                                output = @"done";
+                                break;
+                            default:
+                                break;
+                        }
+                        if ([output isEqual: @"cancelled"]) {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Twitter" message:@"You did not share your score." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                            [alert show];
+                        }
+                        if ([output isEqualToString:@"done"]) {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Twitter" message:@"You successfully shared your score!" delegate:nil cancelButtonTitle:@"Cool" otherButtonTitles: nil];
+                            [alert show];
+                        }
+                    }];
                 }
+                else {
+                    UIAlertView *noTwitterAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not share to Twitter. Please make sure you are signed into your Twitter account in your device's settings." delegate:nil cancelButtonTitle:@"Bummer" otherButtonTitles:nil];
+                    [noTwitterAlert show];
+                }
+            }
+            if ([scoreboardNode.name isEqual:@"facebookButton"] && self.creditsShowing == NO) {
+
+                [self.sounds playButtonSound];
+
+                // Share to facebook
+                if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+                    self.SLComposeVC = [[SLComposeViewController alloc] init];
+                    self.SLComposeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+
+                    NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %li! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", DataManager.currentScore];
+
+                    [self.SLComposeVC setInitialText:shareText];
+
+                    //Take a screenshot and set it equal to UIImage *scoreImage
+                    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
+                    [self.view drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
+                    UIImage *scoreImage = UIGraphicsGetImageFromCurrentImageContext();
+                    UIGraphicsEndImageContext();
+
+                    [self.SLComposeVC addImage:scoreImage];
+
+                    UIViewController *controller = self.view.window.rootViewController;
+                    [controller presentViewController:self.SLComposeVC animated: YES completion:nil];
+
+                    [self.SLComposeVC setCompletionHandler:^(SLComposeViewControllerResult result) {
+                        NSString *output = [[NSString alloc] init];
+                        switch (result) {
+                            case SLComposeViewControllerResultCancelled:
+                                output = @"cancelled";
+                                break;
+                            case SLComposeViewControllerResultDone:
+                                output = @"done";
+                                break;
+                            default:
+                                break;
+                        }
+                        if ([output isEqual: @"cancelled"]) {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook" message:@"You did not share your score." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                            [alert show];
+                        }
+                        if ([output isEqualToString:@"done"]) {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook" message:@"You successfully shared your score!" delegate:nil cancelButtonTitle:@"Cool" otherButtonTitles: nil];
+                            [alert show];
+                        }
+                    }];
+                }
+                else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Could not share to Facebook. Please make sure you are signed into your Facebook account in your device's settings." delegate:nil cancelButtonTitle:@"Bummer" otherButtonTitles:nil];
+                    [alert show];
+                }
+            }
+            if ([scoreboardNode.name isEqual: @"creditsButton"] && self.creditsShowing == NO) {
+
+                [self.sounds playButtonSound];
+
+                [self showCredits];
+                _secretResetOptionCounter = 0;
             }
         }
 
-        if (self.gameStarted == NO) {
-            // Allows dismissal of UI that appears when app is launched.
-            self.gameStarted = YES;
-            self.gameActive = YES;
+        //If credits are showing, check for any buttons pressed within the credits node.
+        if (self.creditsShowing == YES) {
+            for (UITouch *touch in touches) {
+
+                SKNode *creditsNode = [self.credits nodeAtPoint:[touch locationInNode:self.credits]];
+
+                if ([creditsNode.name isEqual:@"davidTwitter"]) {
+
+                    [self.sounds playButtonSound];
+
+                    NSLog(@"David twitter button pressed");
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/davidsights"]];
+                }
+
+                if ([creditsNode.name isEqual:@"davyTwitter"]) {
+
+                    [self.sounds playButtonSound];
+                    NSLog(@"davy twitter button pressed");
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/davywolfmusic"]];
+                }
+
+                if ([creditsNode.name isEqual:@"goBack"]) {
+
+                    [self.sounds playButtonSound];
+
+                    [self hideCredits];
+                    self.secretResetOptionCounter = 0;
+                }
+
+                if ([creditsNode.name isEqual:@"rate"]) {
+
+                    [self.sounds playButtonSound];
+
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8"]];
+                }
+
+                if ([creditsNode.name isEqual:@"davidEmail"]) {
+                    [self.sounds playButtonSound];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"emailDavid" object:self];
+                }
+                if ([creditsNode.name isEqual:@"davyEmail"]) {
+                    [self.sounds playButtonSound];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"emailDavy" object:self];
+                }
+            }
         }
+    }
+
+    if (self.gameStarted == NO) {
+        // Allows dismissal of UI that appears when app is launched.
+        self.gameStarted = YES;
+        self.gameActive = YES;
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
