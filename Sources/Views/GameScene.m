@@ -22,19 +22,17 @@
 @property GKLocalPlayer *player;
 
 // Flags
-@property (nonatomic) BOOL playGame, ignoreTouches, scoreShown, timerStarted, monkHitSomething, gameStarted, gameFinished, musicPlaying, creditsShowing, firstHop;
+@property (nonatomic) BOOL gameActive, ignoreTouches, scoreShown, timerStarted, monkHitSomething, gameStarted, gameFinished, musicPlaying, creditsShowing, firstHop;
 
 // Views
 @property SKSpriteNode *monkNode, *background, *grassAndTree, *clouds1, *clouds2, *tipBackground;
-@property SKLabelNode *currentScoreLabel, *currentScoreLabelDropShadow;
+@property SKLabelNode *scoreLabel, *scoreLabelDropShadow;
 
 // Actions
 @property SKAction *openEyes, *closeEyes;
 @property SKNode *grassEdge, *branchEdge;
 
-// Score
-@property (nonatomic) int currentScore, totalTaps, combinedScores, resetCount;
-@property (nonatomic) long long highScore;
+@property int secretResetOptionCounter;
 
 @property (nonatomic) NSArray *loadedAchievements;
 @property (nonatomic) GKScore *retrievedScore;
@@ -46,15 +44,10 @@
 
 @property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 
-@property (nonatomic) ScoreBoard *myMenu;
+@property (nonatomic) ScoreBoard *scoreboard;
 @property CreditsNode *credits;
 
-@property (nonatomic) GameScenePresenterViewController *myVC;
-@property UIViewController *myUIVC;
-
-@property (nonatomic) NSUserDefaults *userDefaults;
-
-@property Sounds* sounds;
+@property Sounds *sounds;
 
 @end
 
@@ -63,13 +56,14 @@ static const uint32_t monkCategory = 0x1;
 static const uint32_t treeCategroy = 0x1 << 1;
 static const uint32_t grassCategory = 0x1 << 2;
 
-@implementation GameScene
+@implementation GameScene {
+    NSString *updateScoreTimerKey;
+}
 
 - (id)initWithSize:(CGSize)size {
+    updateScoreTimerKey = @"updateScoreTimer";
 
     if (self = [super initWithSize:size]) {
-
-        self.userDefaults = [NSUserDefaults standardUserDefaults];
 
         [self initialFlagsSetup];
 
@@ -93,6 +87,8 @@ static const uint32_t grassCategory = 0x1 << 2;
 
         self.sounds = [Sounds new];
         [self addChild:self.sounds];
+
+        self.gameStarted = NO;
     }
 
     return self;
@@ -143,39 +139,33 @@ static const uint32_t grassCategory = 0x1 << 2;
 
     int scoreLabelFontSize = DeviceManager.isTablet ? 60 : 30;
 
-    // Create score label - moved here because it was laggy during the first click to begin the game.
-    self.currentScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
-    self.currentScoreLabel.text = @"0";
-    self.currentScoreLabel.fontSize = scoreLabelFontSize;
-    [self.currentScoreLabel setFontColor:[SKColor whiteColor]];
-    self.currentScoreLabel.name = @"currentScoreLabel";
-    self.currentScoreLabel.position = CGPointMake(size.width/2, (self.size.height/10) * 11);
+    // Set up score label
+    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    self.scoreLabel.text = @"0";
+    self.scoreLabel.fontSize = scoreLabelFontSize;
+    [self.scoreLabel setFontColor:[SKColor whiteColor]];
+    self.scoreLabel.name = @"currentScoreLabel";
+    self.scoreLabel.position = CGPointMake(size.width/2, (self.size.height/10) * 11);
+    [self addChild:self.scoreLabel];
 
-    // Drop shadow text
-    self.currentScoreLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
-    self.currentScoreLabelDropShadow.text = @"0";
-    self.currentScoreLabelDropShadow.fontSize = scoreLabelFontSize;
-    [self.currentScoreLabelDropShadow setFontColor:[SKColor blackColor]];
-    self.currentScoreLabelDropShadow.name = @"currentScoreLabelDropShadow";
-    self.currentScoreLabelDropShadow.position = CGPointMake(self.currentScoreLabel.position.x, self.currentScoreLabel.position.y);
+    // Set up score label drop shadow. There has to be a better way to do this.
+    self.scoreLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    self.scoreLabelDropShadow.text = @"0";
+    self.scoreLabelDropShadow.fontSize = scoreLabelFontSize;
+    [self.scoreLabelDropShadow setFontColor:[SKColor blackColor]];
+    self.scoreLabelDropShadow.name = @"currentScoreLabelDropShadow";
+    self.scoreLabelDropShadow.position = CGPointMake(self.scoreLabel.position.x, self.scoreLabel.position.y);
+    [self addChild:self.scoreLabelDropShadow];
 
-    // Prepare score to be added.
-    self.myMenu = [[ScoreBoard alloc] init:size];
-    [self addChild:self.myMenu];
-
-    self.gameStarted = NO;
-
-    // Create score label with drop shadow. Add drop shadow first so it's behind the actual label.
-    [self addChild:self.currentScoreLabelDropShadow];
-    [self addChild:self.currentScoreLabel];
-
-    self.combinedScores = (int)[self.userDefaults integerForKey:@"combinedScores"];
-    self.totalTaps = (int)[self.userDefaults integerForKey:@"totalTaps"];
+    // Set up scoreboard.
+    self.scoreboard = [[ScoreBoard alloc] init:size];
+    self.scoreboard.position = CGPointMake(size.width/2, size.height * 2);
+    [self addChild:self.scoreboard];
 }
 
 - (void) initialFlagsSetup {
 
-    self.playGame = NO;
+    self.gameActive = NO;
     self.firstHop = NO;
     self.scoreShown = NO;
     self.ignoreTouches = NO;
@@ -349,7 +339,7 @@ static const uint32_t grassCategory = 0x1 << 2;
     [self.clouds2 runAction:[SKAction sequence:@[[SKAction waitForDuration:10],[SKAction repeatActionForever:[SKAction sequence:@[moveClouds, returnClouds]]]]]];
 }
 
-- (void) resetMonkHit {
+- (void)resetMonkHit {
     self.monkHitSomething = NO;
     NSLog(@"Monk can hit things and cause actions again.");
 }
@@ -458,45 +448,34 @@ static const uint32_t grassCategory = 0x1 << 2;
     }];
 }
 
--(void) showCurrentScore{
-    float DS = 3.7;
-    if (self.size.height == 1024 && self.size.width == 768) { DS = DS + 3.9; }
+- (void)showCurrentScoreLabel {
 
-    //Reset the score to show a new score counter.
-    self.currentScoreLabel.text=@"0";
-    self.currentScoreLabelDropShadow.text = @"0";
-    self.currentScore = 0;
+    float dropShadowOffset = (DeviceManager.isTablet ? 3.9 : 3.7);
+    int scoreLabelYPosition = (self.size.height - (DeviceManager.isTablet ? 80 : 47));
 
-    int currentScoreLabelPosition = (self.size.height - 50);
+    // Reset the score to show a new score counter.
+    DataManager.currentScore = 0;
+    NSString *currentScoreString = [NSString stringWithFormat:@"%li", (long)DataManager.currentScore];
+    self.scoreLabel.text = currentScoreString;
+    self.scoreLabelDropShadow.text = currentScoreString;
 
-    if (self.size.width == 320 && self.size.height == 480) {
-        currentScoreLabelPosition = self.size.height - 47;
-    }
+    // Show the score label with animation.
+    [self.scoreLabel runAction:[SKAction moveTo:CGPointMake(self.size.width/2, scoreLabelYPosition) duration:.5]];
+    [self.scoreLabelDropShadow runAction:[SKAction moveTo:CGPointMake(self.size.width/2 + dropShadowOffset, (scoreLabelYPosition - dropShadowOffset)) duration:.5]];
 
-    if ( self.size.height == 1024 && self.size.width == 768 ) {currentScoreLabelPosition = self.size.height - 80;}
-
-    //set and run animation for actual label to enter
-    [self.currentScoreLabel runAction:[SKAction moveTo:CGPointMake(self.size.width/2, currentScoreLabelPosition) duration:.5]];
-    //set and run animation for dropshadow label
-    [self.currentScoreLabelDropShadow runAction:[SKAction moveTo:CGPointMake(self.size.width/2 + DS, (currentScoreLabelPosition - DS)) duration:.5]];
-
-    self.scoreShown = YES;
-
-    [self resetMonkHit]; // Called here temporarily to find a good place for reseting monk hit flag.
+    self.scoreShown = true;
 }
 
--(void) hideCurrentScore {
+- (void)hideScoreLabel {
 
     float DS = 3.7;
     if (self.size.height == 1024 && self.size.width == 768) { DS = DS + 10; }
 
-    //Before hiding the current score, save the counted score to the currentScore int.
-    self.currentScore = [self.currentScoreLabel.text intValue];
 
     //set and run animation for actual label to hide
-    [self.currentScoreLabel runAction:[SKAction moveTo:CGPointMake(self.size.width/2, (self.size.height + 50)) duration:.5]];
+    [self.scoreLabel runAction:[SKAction moveTo:CGPointMake(self.size.width/2, (self.size.height + 50)) duration:.5]];
     //set and run animation for dropshadow hide
-    [self.currentScoreLabelDropShadow runAction:[SKAction moveTo:CGPointMake(self.size.width/2 + DS, self.size.height + (50 + DS)) duration:.5]];
+    [self.scoreLabelDropShadow runAction:[SKAction moveTo:CGPointMake(self.size.width/2 + DS, self.size.height + (50 + DS)) duration:.5]];
     self.scoreShown = NO;
 }
 
@@ -511,15 +490,10 @@ static const uint32_t grassCategory = 0x1 << 2;
     [[NSNotificationCenter defaultCenter]postNotificationName:@"hidesBanner" object:self];
 }
 
-- (void)showTip {
-    if (self.currentScore >= 10) {
-        TipCloud *tip = [TipCloud new];
-        [tip positionWithFrame:self.frame];
-        [self addChild:tip];
-        NSLog(@"Tip shown.");
-    } else {
-        NSLog(@"Tip not shown due to low score.");
-    }
+- (void)showEnlighteningThought {
+    TipCloud *tip = [TipCloud new];
+    [tip positionWithFrame:self.frame];
+    [self addChild:tip];
 }
 
 - (void)hideTip {
@@ -567,25 +541,16 @@ static const uint32_t grassCategory = 0x1 << 2;
 
 }
 
--(void)startTimer {
+- (void)startTimer {
 
     if (self.timerStarted == NO) {
 
         self.timerStarted = YES;
 
-        [self runAction: [SKAction repeatActionForever:
-                          [SKAction sequence:@[
-                                               [SKAction waitForDuration:1],
-                                               [SKAction performSelector:@selector(incrementScore) onTarget:self]
-                                               ]
-                           ]] withKey:@"timer"];
-    }
-}
+        NSArray<SKAction*> *actions = @[[SKAction waitForDuration:1],
+                                        [SKAction performSelector:@selector(incrementScore) onTarget:self]];
 
-- (void)showScore {
-    if (self.scoreShown == NO) {
-        [self showCurrentScore];
-        self.scoreShown = YES;
+        [self runAction: [SKAction repeatActionForever:[SKAction sequence:actions]] withKey:updateScoreTimerKey];
     }
 }
 
@@ -597,7 +562,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 
     if (self.ignoreTouches == NO) {
 
-        if (self.playGame == YES) {
+        if (self.gameActive == YES) {
 
             // Monk actions
 
@@ -611,14 +576,15 @@ static const uint32_t grassCategory = 0x1 << 2;
 
             [self startTimer];
 
-            [self showScore];
+            [self showCurrentScoreLabel];
+            [self resetMonkHit];
 
-            self.totalTaps++;
+            DataManager.totalTaps++;
 
         } else {
-            self.resetCount++;
+            self.secretResetOptionCounter++;
 
-            if (_resetCount >= 30) {
+            if (_secretResetOptionCounter >= 30) {
                 [self.gameSceneDelegate showScoreResetOption];
             };
         }
@@ -629,19 +595,19 @@ static const uint32_t grassCategory = 0x1 << 2;
             if (self.creditsShowing == NO) {
 
                 //Set up for checking for buttons in menu node
-                SKNode *touchedElement = [self.myMenu nodeAtPoint:[touch locationInNode:self.myMenu]];
+                SKNode *touchedElement = [self.scoreboard nodeAtPoint:[touch locationInNode:self.scoreboard]];
                 name = touchedElement.name;
 
                 if ([name isEqual: @"replayButton"]) {
-                    [self.myMenu hideScore];
-                    self.playGame = YES;
+                    [self.scoreboard hideScore];
+                    self.gameActive = YES;
                     //Hide iAd
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"hidesBanner" object:self];
                     [self hideTip];
                     if (self.musicPlaying == NO) {
                         [self.musicPlayer play];
                         self.musicPlaying = YES;
-                        self.resetCount = 0;
+                        self.secretResetOptionCounter = 0;
                     }
                 }
 
@@ -660,7 +626,7 @@ static const uint32_t grassCategory = 0x1 << 2;
                         self.SLComposeVC = [[SLComposeViewController alloc] init];
                         self.SLComposeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
 
-                        NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %i! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", self.currentScore];
+                        NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %li! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", DataManager.currentScore];
 
                         [self.SLComposeVC setInitialText:shareText];
 
@@ -711,7 +677,7 @@ static const uint32_t grassCategory = 0x1 << 2;
                         self.SLComposeVC = [[SLComposeViewController alloc] init];
                         self.SLComposeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
-                        NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %i! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", self.currentScore];
+                        NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %li! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", DataManager.currentScore];
 
                         [self.SLComposeVC setInitialText:shareText];
 
@@ -758,7 +724,7 @@ static const uint32_t grassCategory = 0x1 << 2;
                     [self.sounds playButtonSound];
 
                     [self showCredits];
-                    _resetCount = 0;
+                    _secretResetOptionCounter = 0;
                 }
             }
 
@@ -789,7 +755,7 @@ static const uint32_t grassCategory = 0x1 << 2;
                         [self.sounds playButtonSound];
 
                         [self hideCredits];
-                        self.resetCount = 0;
+                        self.secretResetOptionCounter = 0;
                     }
 
                     if ([name isEqual:@"rate"]) {
@@ -814,20 +780,20 @@ static const uint32_t grassCategory = 0x1 << 2;
         if (self.gameStarted == NO) {
             // Allows dismissal of UI that appears when app is launched.
             self.gameStarted = YES;
-            self.playGame = YES;
+            self.gameActive = YES;
         }
     }
 }
 
-- (void) alertView:(UIAlertView *) alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
 
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
 
     if ([title isEqualToString:@"Yes"]){
-        [self resetHighScores];
-        self.resetCount = 0;
+        [DataManager resetHighScore];
+        self.secretResetOptionCounter = 0;
     } else if ([title isEqualToString:@"No"]) {
-        self.resetCount = 0;
+        self.secretResetOptionCounter = 0;
         NSLog(@"MyScene -alertView: Scores were not reset.");
     }
 }
@@ -864,431 +830,74 @@ static const uint32_t grassCategory = 0x1 << 2;
     }
 }
 
-- (void) touchedTree {
-    NSLog(@"Monk hit tree.");
+/// Handles all behavior related to the end of a game.
+- (void)endGame {
+    self.gameActive = NO;
 
-    //Show iAd
-    NSLog(@"Showing banner from contacting tree.");
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"showsBanner" object:self];
-
-    [self.monkNode runAction:self.openEyes];
-    self.playGame = NO;
+    // Stop touches for this scene. The scoreboard will be the only interactive element.
     [self stopTouches];
-    //Stop incrementScore method
-    [self removeActionForKey:@"timer"];
+
+    // Stop the timer.
+    [self removeActionForKey:updateScoreTimerKey];
     self.timerStarted = NO;
 
-    //Set the highscore
-    if (self.currentScore > self.highScore) {
-        self.highScore = self.currentScore;
-        self.myMenu.highScore = self.highScore;
-        [self.userDefaults setInteger:(int)self.highScore forKey:@"monkGameHighScore"];
-        [self.userDefaults synchronize];
-        [self reportScore:self.highScore forLeaderboardID:@"highScoreLB"];
-        [self.sounds playHighScoreSound];
-    }
-    else {
-        [self.sounds playGameOverSound];
-    }
+    [self.monkNode runAction:self.openEyes];
 
-    if (self.gameStarted == YES) {
-        NSLog(@"Showing scoreboard and hiding score counter.");
-        self.myMenu.score = self.currentScore;
-        [self.myMenu showScore:self.currentScore];
-        [self hideCurrentScore];
+    [self hideScoreLabel];
+
+    [self.scoreboard reloadData];
+    [self showScoreBoardAndHideScoreCounter];
+    [self updateSavedScores];
+
+    DataManager.combinedScores += DataManager.currentScore;
+
+    if (DataManager.currentScore >= 10) {
+        [self showEnlighteningThought];
     }
 
-    [self updateCombinedScores];
-    [self updateTotalTaps];
-
-    //Prevent simultaneous actions after game ends.
-    self.monkHitSomething = YES;
-    [self runAction:[SKAction sequence:@[[SKAction waitForDuration:1], [SKAction performSelector:@selector(resetMonkHit) onTarget:self]]]];
-
-    [self handleAchievements];
-
-    [self showTip];
-
+    // Handle musicupdateScoreTimerKey
     [self.musicPlayer stop];
     self.musicPlayer.currentTime = 0;
     self.musicPlaying = NO;
+
     self.firstHop = NO;
 }
 
-- (void) touchedGrass {
-
-    if (self.monkHitSomething == NO) {
-
-        NSLog(@"Monk hit the grass. Stopping game.");
-
-        [self.monkNode runAction:self.openEyes];
-
-        self.playGame = NO;
-
-        [self stopTouches];
-
-        self.timerStarted = NO;
-
-        if (self.gameStarted == YES) {
-
-            [self showiAd];
-            [self showTip];
-            [self determineHighScore];
-            [self stopMusic];
-            [self showScoreBoardAndHideScoreCounter];
-
-            self.firstHop = NO;
-        }
-
-        self.monkHitSomething = YES; // Prevent simultaneous actions after game ends.
-
-        //        [self runAction:[SKAction sequence:@[[SKAction waitForDuration:1], [SKAction performSelector:@selector(resetMonkHit) onTarget:self]]]];
-
-        [self handleAchievements];
-        [self updateCombinedScores];
-        [self updateTotalTaps];
-
+/// Updates the high score if necessary, and plays a sound based on score.
+- (void)updateSavedScores {
+    if (DataManager.currentScore > DataManager.highScore) {
+        DataManager.highScore = DataManager.currentScore;
+        [self.sounds playHighScoreSound];
     } else {
-        NSLog(@"Monk hit grass again. No actions necessary.");
+        [self.sounds playGameOverSound];
+    }
+}
+
+- (void)touchedTree {
+    [self endGame];
+}
+
+- (void)touchedGrass {
+    // Check if game is active, because the monk's bounce may
+    // cause this to be triggered multiple times.
+    if (self.gameActive) {
+        [self endGame];
     }
 }
 
 #pragma mark - Score
 
-- (void) incrementScore {
-    self.currentScore++;
-    self.currentScoreLabel.text = [NSString stringWithFormat:@"%d", self.currentScore];
-    self.currentScoreLabelDropShadow.text = [NSString stringWithFormat:@"%d", self.currentScore];
+- (void)incrementScore {
+    DataManager.currentScore++;
+    NSString *currentScoreString = [NSString stringWithFormat:@"%li", DataManager.currentScore];
+    self.scoreLabel.text = currentScoreString;
+    self.scoreLabelDropShadow.text = currentScoreString;
 }
 
-- (void) loadHighScore {
-    self.myMenu.highScore = [self.userDefaults integerForKey:@"monkGameHighScore"];
-    self.highScore = [self.userDefaults integerForKey:@"monkGameHighScore"];
-    GKLocalPlayer *player = [GKLocalPlayer localPlayer];
-    GKLeaderboard *leaderboardRequest = [[GKLeaderboard alloc] initWithPlayerIDs:@[player.playerID]];
-    leaderboardRequest.identifier = @"highScoreLB";
-    [leaderboardRequest loadScoresWithCompletionHandler:^(NSArray *scores, NSError *error) {
-        self.retrievedScore = scores.firstObject;
-        NSLog(@"RETRIEVED SCORE: %lld", self.retrievedScore.value);
-        if (self.retrievedScore != nil) {
-            NSLog(@"MyScene: Retrieved high score: %lld", self.retrievedScore.value);
-
-            //Check if Game Center score is higher, and if so, load it into the game's userDefaults
-            if (self.retrievedScore.value > [self.userDefaults integerForKey:@"monkGameHighScore"]) {
-
-                NSLog(@"MyScene: Updating scores to match Game Center scores. Initial scores - UserDefaults: %ld  self.highScore: %lld  self.myMenu.highScore: %lld",
-                      (long)[self.userDefaults integerForKey:@"monkGameHighScore"], self.highScore, self.myMenu.highScore);
-
-                self.myMenu.highScore = self.retrievedScore.value;
-                self.highScore = self.retrievedScore.value;
-                [self.userDefaults setInteger:(int)self.retrievedScore.value forKey:@"monkGameHighScore"];
-
-                NSLog(@"MyScene: Updated scores - UserDefaults: %ld  self.highScore: %lld  self.myMenu.highScore: %lld",
-                      (long)[self.userDefaults integerForKey:@"monkGameHighScore"], self.highScore, self.myMenu.highScore);
-
-                NSLog(@"Would have updated userDefaults high score to match Game Center high score, but did not.");
-            }
-            else {
-                NSLog(@"MyScene: Retrieved GC score is not higher than saved score. Loading saved userDefaults score.");
-                self.myMenu.highScore = [self.userDefaults integerForKey:@"monkGameHighScore"];
-                self.highScore = [self.userDefaults integerForKey:@"monkGameHighScore"];
-            }
-        }
-        else {
-            NSLog(@"MyScene: -loadHighScore failed to load high score from Game Center. self.retrievedScore == nil.");
-            //No score was found, continue using UserDefaults recorded score.
-        }
-
-        if (error != nil) {
-            NSLog(@"MyScene: Error while loading high score: %@", error);
-        }
-
-    }];
-}
-
-- (void) resetHighScores {
-    NSLog(@"resetHighScores called");
-    [self.userDefaults setInteger:0 forKey:@"monkGameHighScore"];
-    self.highScore = 0;
-    self.myMenu.score = 0;
-    self.myMenu.highScore = 0;
-    //    self.myMenu.currentScoreLabel = 0;
-    //    self.myMenu.highScoreNumberLabel = 0;
-    [self reportScore:1 forLeaderboardID:@"highScoreLB"]; //Cannot reset Game Center high score... so this won't work.
-}
-
-- (void) determineHighScore {
-    //Set the highscore
-    if (self.currentScore > self.highScore) {
-        self.highScore = self.currentScore;
-        self.myMenu.highScore = self.highScore;
-        [self.userDefaults setInteger:(int)self.highScore forKey:@"monkGameHighScore"];
-        [self.userDefaults synchronize];
-        [self reportScore:self.highScore forLeaderboardID:@"highScoreLB"];
-        [self.sounds playHighScoreSound];
-    }
-    else {
-        [self.sounds playGameOverSound];
-    }
-}
-
-- (void) showScoreBoardAndHideScoreCounter {
-    NSLog(@"Showing scoreboard and hiding score counter.");
-
-    [self removeActionForKey:@"timer"]; //Stop incrementScore method
-
-    self.myMenu.score = self.currentScore;
-    [self.myMenu showScore:self.currentScore];
-
-    [self hideCurrentScore];
-}
-
-#pragma mark - Game Center
-
-- (void)handleAchievements {
-
-    if (self.currentScore >= 10) {
-        NSString *achievementID = @"score10";
-        BOOL earned = NO;
-        BOOL ranThroughLoop = NO;
-        for (GKAchievement *achievement in self.loadedAchievements) {
-            if ([achievement.identifier  isEqual: achievementID]) {earned = YES;}
-            if (!earned){ NSLog(@"Score 10 achievement not earned yet.");
-                //report achievement for score10
-                GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:achievementID];
-                achievement.percentComplete = 100;
-                [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-                    if (!error) {NSLog(@"Achievement for %@ reported", achievementID);}
-                    else {NSLog(@"Error reporting achievement: %@", error);}
-                }];
-            }
-            ranThroughLoop = YES;
-        }
-
-        if (!ranThroughLoop) {
-            //Didn't run through loop because nothing is stored in achievements - report achievement for score10, placing the first object into achievements.
-            GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:achievementID];
-            achievement.percentComplete = 100;
-            [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-                if (!error) {NSLog(@"Achievement for %@ reported", achievementID);}
-                else {NSLog(@"Error reporting achievement: %@", error);}
-            }];
-            //reload self.achievements for safe measure, to make sure something is in there the next time around!
-            [GKAchievement loadAchievementsWithCompletionHandler:^(NSArray *achievements, NSError *error) {
-                if (error == nil) {self.loadedAchievements = achievements;}
-                else {NSLog(@"MyScene, -handleAchievements: There was an error while loading achievements: %@", error);}
-            }];
-        }
-    }
-
-    if (self.currentScore >= 25) {
-        NSString *achievementID = @"score25";
-        BOOL earned = NO;
-        for (GKAchievement *achievement in self.loadedAchievements) {
-            if ([achievement.identifier  isEqual: achievementID]) {earned = YES;}
-            if (!earned){
-                //report achievement for score10
-                GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:achievementID];
-                achievement.percentComplete = 100;
-                [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-                    if (!error) {NSLog(@"Achievement for %@ reported", achievementID);}
-                    else {NSLog(@"Error reporting achievement: %@", error);}
-                }];
-            }
-        }
-    }
-
-    if (self.currentScore >= 50) {
-
-        NSString *achievementID = @"score50";
-
-        BOOL earned = NO;
-
-        for (GKAchievement *achievement in self.loadedAchievements) {
-            if ([achievement.identifier  isEqual: achievementID]) {
-                earned = YES;
-            }
-
-            if (!earned) {
-
-                //Report achievement for score10
-                GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:achievementID];
-                achievement.percentComplete = 100;
-
-                [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-                    if (!error) {
-                        NSLog(@"Achievement for %@ reported", achievementID);
-                    } else {
-                        NSLog(@"Error reporting achievement: %@", error);
-                    }
-                }];
-            }
-        }
-    }
-
-    if (self.currentScore >= 100) {
-
-        NSString *achievementID = @"score100";
-
-        BOOL earned = NO;
-
-        for (GKAchievement *achievement in self.loadedAchievements) {
-
-            if ([achievement.identifier  isEqual: achievementID]) {
-                earned = YES;
-            }
-
-            if (!earned){
-
-                // Report achievement for score10
-                GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:achievementID];
-                achievement.percentComplete = 100;
-
-                [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-                    if (!error) {
-                        NSLog(@"Achievement for %@ reported", achievementID);
-                    }
-                    else {
-                        NSLog(@"Error reporting achievement: %@", error);
-                    }
-                }];
-            }
-        }
-    }
-
-    if (self.currentScore >= 150) {
-
-        NSString *achievementID = @"score150";
-
-        BOOL earned = NO;
-
-        for (GKAchievement *achievement in self.loadedAchievements) {
-            if ([achievement.identifier  isEqual: achievementID]) {
-                earned = YES;
-            }
-
-            if (!earned) {
-
-                // Report achievement for score10
-                GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:achievementID];
-                achievement.percentComplete = 100;
-
-                [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-
-                    if (!error) {
-                        NSLog(@"Achievement for %@ reported", achievementID);
-                    } else {
-                        NSLog(@"Error reporting achievement: %@", error);
-                    }
-                }];
-            }
-        }
-    }
-
-    if (self.currentScore >= 250) {
-
-        NSString *achievementID = @"score250";
-
-        BOOL earned = NO;
-
-        for (GKAchievement *achievement in self.loadedAchievements) {
-
-            if ([achievement.identifier  isEqual: achievementID]) {
-                earned = YES;
-            }
-
-            if (!earned){
-
-                // Report achievement for score10
-                GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:achievementID];
-                achievement.percentComplete = 100;
-
-                [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-
-                    if (!error) {
-                        NSLog(@"Achievement for %@ reported", achievementID);
-                    } else {
-                        NSLog(@"Error reporting achievement: %@", error);
-                    }
-                }];
-            }
-        }
-    }
-
-    if (self.currentScore >= 500) {
-
-        NSString *achievementID = @"score500";
-
-        BOOL earned = NO;
-
-        for (GKAchievement *achievement in self.loadedAchievements) {
-
-            if ([achievement.identifier  isEqual: achievementID]) {
-                earned = YES;
-            }
-
-            if (!earned){
-                GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier:achievementID];
-                achievement.percentComplete = 100;
-                [GKAchievement reportAchievements:@[achievement] withCompletionHandler:^(NSError *error) {
-                    if (!error) {NSLog(@"Achievement for %@ reported", achievementID);}
-                    else {NSLog(@"Error reporting achievement: %@", error);}
-                }];
-            }
-        }
-    }
-}
-
-- (void) reportScore: (int64_t)score forLeaderboardID: (NSString*) leaderboardID {
-    
-    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:leaderboardID];
-    scoreReporter.value = score;
-    scoreReporter.context = 0;
-    
-    [GKScore reportScores:@[scoreReporter] withCompletionHandler:^(NSError *error) {
-        if (error) {
-            NSLog(@"MyScene: An error occured while reporting score.");
-        }
-        else {
-            NSLog(@"Score reported as %lld", score);
-        }
-    }];
-}
-
-- (void)updateTotalTaps {
-    
-    [self.userDefaults setInteger:self.totalTaps forKey:@"totalTaps"];
-    
-    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"focusLB"];
-    score.value = self.totalTaps;
-    
-    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
-        if (!error) {
-            NSLog(@"MyScene, -updateTotalTaps: Updated total taps.");
-        }
-        else {
-            NSLog(@"MyScene, -updateTotalTaps: Error updating totalTaps: %@", error);
-        }
-    }];
-}
-
-- (void) updateCombinedScores {
-    
-    self.combinedScores = self.combinedScores + self.currentScore;
-    
-    [self.userDefaults setInteger:self.combinedScores forKey:@"combinedScores"];
-    
-    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"perseveranceLB"];
-    score.value = self.combinedScores;
-    
-    [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
-        
-        if (!error) {
-            NSLog(@"MyScene, -updateCombinedScores: update combined scores successful");
-        } else {
-            NSLog(@"MyScene, -updateCombinedScores: There was an error while updating combined scores: %@", error);
-        }
-    }];
+- (void)showScoreBoardAndHideScoreCounter {
+    [self removeActionForKey:updateScoreTimerKey];
+    [self.scoreboard reloadData];
+    [self hideScoreLabel];
 }
 
 @end

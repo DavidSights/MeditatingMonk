@@ -16,5 +16,6 @@
 - (id)init:(CGSize)size;
 - (void)showScore:(int)currentScore;
 - (void)hideScore;
+- (void)reloadData;
 
 @end
