@@ -22,7 +22,7 @@
 @property GKLocalPlayer *player;
 
 // Flags
-@property (nonatomic) BOOL gameActive, ignoreTouches, scoreShown, timerStarted, monkHitSomething, gameStarted, gameFinished, musicPlaying, creditsShowing, firstHop;
+@property (nonatomic) BOOL gameActive, scoreShown, timerStarted, monkHitSomething, gameStarted, gameFinished, musicPlaying, creditsShowing, firstHop;
 
 // Views
 @property SKSpriteNode *monkNode, *background, *grassAndTree, *clouds1, *clouds2, *tipBackground;
@@ -56,13 +56,11 @@ static const uint32_t monkCategory = 0x1;
 static const uint32_t treeCategroy = 0x1 << 1;
 static const uint32_t grassCategory = 0x1 << 2;
 
-@implementation GameScene {
-    NSString *updateScoreTimerKey;
-}
+static const NSString *updateScoreActionKey = @"updateScoreTimer";
+
+@implementation GameScene
 
 - (id)initWithSize:(CGSize)size {
-    updateScoreTimerKey = @"updateScoreTimer";
-
     if (self = [super initWithSize:size]) {
 
         [self initialFlagsSetup];
@@ -149,7 +147,6 @@ static const uint32_t grassCategory = 0x1 << 2;
     self.gameActive = NO;
     self.firstHop = NO;
     self.scoreShown = NO;
-    self.ignoreTouches = NO;
     self.monkHitSomething = NO;
 }
 
@@ -517,12 +514,12 @@ static const uint32_t grassCategory = 0x1 << 2;
 - (void)beginCountingScoreIfNecessary {
 
     // Prevent animating the current score/timer unnecessarily.
-    if ([self actionForKey:updateScoreTimerKey] != nil) { return; }
+    if ([self actionForKey:updateScoreActionKey] != nil) { return; }
 
     NSArray<SKAction*> *actions = @[[SKAction waitForDuration:1],
                                     [SKAction performSelector:@selector(incrementScore) onTarget:self]];
 
-    [self runAction: [SKAction repeatActionForever:[SKAction sequence:actions]] withKey:updateScoreTimerKey];
+    [self runAction: [SKAction repeatActionForever:[SKAction sequence:actions]] withKey:updateScoreActionKey];
 }
 
 #pragma mark - Interaction
@@ -716,6 +713,7 @@ static const uint32_t grassCategory = 0x1 << 2;
                 }
 
                 if ([creditsNode.name isEqual:@"rate"]) {
+                    // TODO: Use in app rating request.
 
                     [self.sounds playButtonSound];
 
@@ -754,16 +752,6 @@ static const uint32_t grassCategory = 0x1 << 2;
     }
 }
 
-- (void)stopTouches {
-    self.ignoreTouches = YES;
-    SKAction *wait = [SKAction sequence:@[[SKAction waitForDuration:.5],[SKAction performSelector:@selector(stopIgnoringTouches) onTarget:self]]];
-    [self runAction:wait];
-}
-
-- (void) stopIgnoringTouches {
-    self.ignoreTouches = NO;
-}
-
 #pragma mark - Collisions
 
 -(void)didBeginContact:(SKPhysicsContact*)contact {
@@ -790,11 +778,8 @@ static const uint32_t grassCategory = 0x1 << 2;
 - (void)endGame {
     self.gameActive = NO;
 
-    // Stop touches for this scene. The scoreboard will be the only interactive element.
-    [self stopTouches];
-
     // Stop the timer.
-    [self removeActionForKey:updateScoreTimerKey];
+    [self removeActionForKey:updateScoreActionKey];
     self.timerStarted = NO;
 
     [self.monkNode runAction:self.openEyes];
@@ -811,7 +796,7 @@ static const uint32_t grassCategory = 0x1 << 2;
         [self showEnlighteningThought];
     }
 
-    // Handle musicupdateScoreTimerKey
+    // Handle music
     [self.musicPlayer stop];
     self.musicPlayer.currentTime = 0;
     self.musicPlaying = NO;
@@ -851,7 +836,7 @@ static const uint32_t grassCategory = 0x1 << 2;
 }
 
 - (void)showScoreBoardAndHideScoreCounter {
-    [self removeActionForKey:updateScoreTimerKey];
+    [self removeActionForKey:updateScoreActionKey];
     [self.scoreboard reloadData];
     [self hideScoreLabel];
 
