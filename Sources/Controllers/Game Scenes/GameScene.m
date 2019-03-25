@@ -17,7 +17,16 @@
 #import "CreditsNode.h"
 #import "MeditatingMonk-Swift.h"
 
+enum GameState {
+    title,
+    newGame,
+    playing,
+    showingCredits
+};
+
 @interface GameScene () <SKPhysicsContactDelegate>
+
+@property enum GameState gameState;
 
 @property GKLocalPlayer *player;
 
@@ -63,10 +72,12 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
 
+        self.gameState = title;
+
         [self initialFlagsSetup];
 
         [self deviceSpecificSetupWithSize:size];
-        [self setUpScoreboardWithSize:size];
+        [self setUpScoreboard];
 
         [self setUpAndShowTitleViews];
 
@@ -115,9 +126,10 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     self.creditsShowing = NO;
 }
 
-- (void)setUpScoreboardWithSize:(CGSize)size {
+- (void)setUpScoreboard {
 
     int scoreLabelFontSize = DeviceManager.isTablet ? 60 : 30;
+    CGPoint scoreLabelPosition = CGPointMake(self.size.width / 2, self.size.height + 10);
 
     // Set up score label drop shadow. There has to be a better way to do this.
     self.scoreLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
@@ -125,7 +137,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     self.scoreLabelDropShadow.fontSize = scoreLabelFontSize;
     [self.scoreLabelDropShadow setFontColor:[SKColor blackColor]];
     self.scoreLabelDropShadow.name = @"currentScoreLabelDropShadow";
-    self.scoreLabelDropShadow.position = CGPointMake(self.scoreLabel.position.x, self.scoreLabel.position.y);
+    self.scoreLabelDropShadow.position = scoreLabelPosition;
     [self addChild:self.scoreLabelDropShadow];
 
     // Set up score label
@@ -134,12 +146,12 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     self.scoreLabel.fontSize = scoreLabelFontSize;
     [self.scoreLabel setFontColor:[SKColor whiteColor]];
     self.scoreLabel.name = @"currentScoreLabel";
-    self.scoreLabel.position = CGPointMake(size.width/2, (self.size.height/10) * 11);
+    self.scoreLabel.position = scoreLabelPosition;
     [self addChild:self.scoreLabel];
 
     // Set up scoreboard.
-    self.scoreboard = [[ScoreBoard alloc] init:size];
-    self.scoreboard.position = CGPointMake(size.width/2, size.height * 2);
+    self.scoreboard = [[ScoreBoard alloc] init:self.size];
+    self.scoreboard.position = CGPointMake(self.size.width/2, self.size.height * 2);
     [self addChild:self.scoreboard];
 }
 
@@ -318,7 +330,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 #pragma mark - Grpahics and Animations
 
-- (void)startLabelFadeAwayIfNecessary {
+- (void)hideTitleLabels {
 
     if (self.gameStarted == NO) {
 
@@ -538,24 +550,26 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
-    [self startLabelFadeAwayIfNecessary];
+    if (self.gameState == title) {
+        [self hideTitleLabels];
+        self.gameState = newGame;
+        return;
+    }
 
-    if (self.gameActive) {
+    if (self.gameState == playing || self.gameState == newGame) {
         [self triggerGameAction];
         return;
     }
 
     for (UITouch *touch in touches) {
 
-        // Only check for buttons pressed in menu node if the credits node isn't showing
-        if (self.creditsShowing == NO) {
+        if (self.gameState == showingCredits) {
 
             /// The node that was touched by the user.
             SKNode *scoreboardNode = [self.scoreboard nodeAtPoint:[touch locationInNode:self.scoreboard]];
 
             if ([scoreboardNode.name isEqual: @"replayButton"]) {
                 [self.scoreboard hideScore];
-                self.gameActive = YES;
                 //Hide iAd
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"hidesBanner" object:self];
                 [self hideTip];
@@ -776,7 +790,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 /// Handles all behavior related to the end of a game.
 - (void)endGame {
-    self.gameActive = NO;
 
     // Stop the timer.
     [self removeActionForKey:updateScoreActionKey];
@@ -839,9 +852,9 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self removeActionForKey:updateScoreActionKey];
     [self.scoreboard reloadData];
     [self hideScoreLabel];
-
     CGSize size = self.scene.view.frame.size;
     self.scoreboard.position = CGPointMake(size.width/2, size.height/2);
+    self.gameState = showingCredits;
 }
 
 @end
