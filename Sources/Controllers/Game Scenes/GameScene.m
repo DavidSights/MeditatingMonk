@@ -49,7 +49,9 @@ enum GameState {
 /// A controller for social features, like posting to Twitter and Facebook.
 @property (strong, nonatomic) SLComposeViewController *SLComposeVC;
 
-@property CGVector floatUp;
+/// The value that is used for the monk's jump impulse.
+/// This determines how strong that impulse is.
+@property CGVector monkJumpImpulse;
 
 @property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 
@@ -106,12 +108,12 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     if (!DeviceManager.isTablet) {
         float dAlt = 1.1;
         self.physicsWorld.gravity = CGVectorMake(0, -8);
-        self.floatUp = CGVectorMake(0, 1100 * floatAlt);
+        self.monkJumpImpulse = CGVectorMake(0, 1100 * floatAlt);
         self.monkNode.physicsBody.density = self.monkNode.physicsBody.density * dAlt;
     } else {
         NSLog(@"monk densitiy = %f", self.monkNode.physicsBody.density);
         self.physicsWorld.gravity = CGVectorMake(0, -15);
-        self.floatUp = CGVectorMake(0, 1200 * floatAlt);
+        self.monkJumpImpulse = CGVectorMake(0, 1200 * floatAlt);
         self.monkNode.physicsBody.density = .1;
     }
 }
@@ -492,7 +494,11 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 - (void)makeMonkJump {
 
-    CGVector OGFloatUp = self.floatUp;
+    if (self.gameState != newGame && self.gameState != playing) {
+        return;
+    }
+
+    self.gameState = playing;
 
     int weakChance = arc4random()%9;
 
@@ -500,27 +506,20 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
     if (weakChance == 10 || weakChance == 1) {
         float floatAlt = .8;
-        self.floatUp = CGVectorMake(0, self.floatUp.dy * floatAlt);
+        self.monkJumpImpulse = CGVectorMake(0, self.monkJumpImpulse.dy * floatAlt);
     } else if (weakChance == 5) {
 
         if (_firstHop == YES) {
             float floatAlt = 1.1;
-            self.floatUp = CGVectorMake(0, self.floatUp.dy * floatAlt);
+            self.monkJumpImpulse = CGVectorMake(0, self.monkJumpImpulse.dy * floatAlt);
         }
 
     } else if (weakChance == 2 || weakChance == 9) {
         float floatAlt = .9;
-        self.floatUp = CGVectorMake(0, self.floatUp.dy * floatAlt);
+        self.monkJumpImpulse = CGVectorMake(0, self.monkJumpImpulse.dy * floatAlt);
     }
 
-    [self.monkNode.physicsBody applyImpulse:self.floatUp];
-
-    self.floatUp = OGFloatUp;
-
-    if (self.firstHop == NO) {
-        self.firstHop = YES;
-    }
-
+    [self.monkNode.physicsBody applyImpulse:self.monkJumpImpulse];
 }
 
 - (void)beginCountingScoreIfNecessary {
@@ -568,28 +567,16 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
             /// The node that was touched by the user.
             SKNode *scoreboardNode = [self.scoreboard nodeAtPoint:[touch locationInNode:self.scoreboard]];
 
-            if ([scoreboardNode.name isEqual: @"replayButton"]) {
-                [self.scoreboard hideScore];
-                //Hide iAd
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"hidesBanner" object:self];
-                [self hideTip];
-                if (self.musicPlaying == NO) {
-                    [self.musicPlayer play];
-                    self.musicPlaying = YES;
-                    self.secretResetOptionCounter = 0;
-                }
-            }
+            if ([scoreboardNode.name isEqual: @"replayButton"]) { [self replayButtonPressed]; }
 
             if ([scoreboardNode.name isEqual:@"gameCenterButton"]) {
-                [[NSNotificationCenter defaultCenter]postNotificationName:@"showGameCenter" object:self];
+                // TODO: Remove game center functionality for now. The button should be removed first.
                 [self.sounds playButtonSound];
             }
 
             if ([scoreboardNode.name isEqual:@"twitterButton"] && self.creditsShowing == NO) {
 
                 [self.sounds playButtonSound];
-
-                NSLog(@"Twitter button pressed.");
 
                 if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
                     self.SLComposeVC = [[SLComposeViewController alloc] init];
@@ -599,13 +586,9 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
                     [self.SLComposeVC setInitialText:shareText];
 
-                    //Take a screenshot and set it equal to UIImage *scoreImage
-                    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
-                    [self.view drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
-                    UIImage *scoreImage = UIGraphicsGetImageFromCurrentImageContext();
-                    UIGraphicsEndImageContext();
+                    UIImage *screenshotImage = [ImageManager screenshotImageWithView:self.view];
 
-                    [self.SLComposeVC addImage:scoreImage];
+                    [self.SLComposeVC addImage:screenshotImage];
 
                     UIViewController *controller = self.view.window.rootViewController;
                     [controller presentViewController:self.SLComposeVC animated: YES completion:nil];
@@ -766,6 +749,19 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     }
 }
 
+- (void)replayButtonPressed {
+    [self.scoreboard hideScore];
+    [self hideTip];
+
+    if (self.musicPlaying == NO) {
+        [self.musicPlayer play];
+        self.musicPlaying = YES;
+        self.secretResetOptionCounter = 0;
+    }
+
+    self.gameState = newGame;
+}
+
 #pragma mark - Collisions
 
 -(void)didBeginContact:(SKPhysicsContact*)contact {
@@ -790,6 +786,8 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 /// Handles all behavior related to the end of a game.
 - (void)endGame {
+
+    if (self.gameState != playing) { return; }
 
     // Stop the timer.
     [self removeActionForKey:updateScoreActionKey];
@@ -832,11 +830,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 }
 
 - (void)touchedGrass {
-    // Check if game is active, because the monk's bounce may
-    // cause this to be triggered multiple times.
-    if (self.gameActive) {
-        [self endGame];
-    }
+    [self endGame];
 }
 
 #pragma mark - Score

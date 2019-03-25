@@ -82,6 +82,7 @@
 		9AD53159223FF5D8004DBEC1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AD53158223FF5D8004DBEC1 /* Main_iPhone.storyboard */; };
 		9AD5316122401125004DBEC1 /* EmailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316022401125004DBEC1 /* EmailManager.swift */; };
 		9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD53163224324C5004DBEC1 /* DataManager.swift */; };
+		9AD5316A22489A52004DBEC1 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316922489A52004DBEC1 /* ImageManager.swift */; };
 		9AFF510719B2DC5800751BEA /* creditsButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */; };
 		9AFF510819B2DC5800751BEA /* creditsButtonPressediPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */; };
 		9AFF510A19B3EBFF00751BEA /* creditsBackground02iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */; };
@@ -187,6 +188,7 @@
 		9AD53158223FF5D8004DBEC1 /* Main_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPhone.storyboard; path = Storyboards/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		9AD5316022401125004DBEC1 /* EmailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailManager.swift; sourceTree = "<group>"; };
 		9AD53163224324C5004DBEC1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		9AD5316922489A52004DBEC1 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtoniPhone@2x.png"; sourceTree = "<group>"; };
 		9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtonPressediPhone@2x.png"; sourceTree = "<group>"; };
 		9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBackground02iPhone@2x.png"; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */,
+				9AD5316922489A52004DBEC1 /* ImageManager.swift */,
 				9AD5316022401125004DBEC1 /* EmailManager.swift */,
 				9AD53163224324C5004DBEC1 /* DataManager.swift */,
 			);
@@ -631,6 +634,7 @@
 				9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */,
 				9AD5316122401125004DBEC1 /* EmailManager.swift in Sources */,
 				9A8F84E8197354EC0085296D /* main.m in Sources */,
+				9AD5316A22489A52004DBEC1 /* ImageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
