@@ -21,7 +21,8 @@ enum GameState {
     title,
     newGame,
     playing,
-    showingCredits
+    scoreboard,
+    credits
 };
 
 @interface GameScene () <SKPhysicsContactDelegate>
@@ -562,7 +563,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
     for (UITouch *touch in touches) {
 
-        if (self.gameState == showingCredits) {
+        if (self.gameState == scoreboard) {
 
             /// The node that was touched by the user.
             SKNode *scoreboardNode = [self.scoreboard nodeAtPoint:[touch locationInNode:self.scoreboard]];
@@ -848,7 +849,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self hideScoreLabel];
     CGSize size = self.scene.view.frame.size;
     self.scoreboard.position = CGPointMake(size.width/2, size.height/2);
-    self.gameState = showingCredits;
+    self.gameState = scoreboard;
 }
 
 @end

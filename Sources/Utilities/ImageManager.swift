@@ -10,8 +10,9 @@ import UIKit
 
 class ImageManager: NSObject {
 
-    /// Snaps a screenshot with the provided view.
+    /// Snaps a screenshot of the provided view.
     /// - parameter view: The view who's image should be captured.
+    /// - returns: A screenshot image.
     @objc static func screenshotImage(withView view: UIView) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0);
         view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
