@@ -6,10 +6,12 @@
 //  Copyright © 2019 DavidSights. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class DeviceManager: NSObject {
 
     /// Describes whether or not the user is using an iPad device.
-    @objc static var isTablet = false
+    @objc static var isTablet: Bool {
+        return UIDevice.current.userInterfaceIdiom == .pad
+    }
 }
