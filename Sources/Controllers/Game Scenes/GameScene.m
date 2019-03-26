@@ -478,7 +478,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
             return [self.monkNode.physicsBody applyImpulse:PhysicsManager.newGameJump];
 
         case playing:
-            return [self.monkNode.physicsBody applyImpulse:PhysicsManager.standardJump];
+            return [self.monkNode.physicsBody applyImpulse:PhysicsManager.jump];
 
         default:
             return;
