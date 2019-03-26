@@ -50,10 +50,6 @@ enum GameState {
 /// A controller for social features, like posting to Twitter and Facebook.
 @property (strong, nonatomic) SLComposeViewController *SLComposeVC;
 
-/// The value that is used for the monk's jump impulse.
-/// This determines how strong that impulse is.
-@property CGVector monkJumpImpulse;
-
 @property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 
 @property (nonatomic) ScoreBoard *scoreboard;
@@ -90,8 +86,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
         [self setupCredits];
 
-        [self setUpPhysics];
-
         self.sounds = [Sounds new];
         [self addChild:self.sounds];
 
@@ -99,24 +93,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     }
 
     return self;
-}
-
-- (void)setUpPhysics {
-
-    // World and monk physics
-    float floatAlt = 1;
-
-    if (!DeviceManager.isTablet) {
-        float dAlt = 1.1;
-        self.physicsWorld.gravity = CGVectorMake(0, -8);
-        self.monkJumpImpulse = CGVectorMake(0, 1100 * floatAlt);
-        self.monkNode.physicsBody.density = self.monkNode.physicsBody.density * dAlt;
-    } else {
-        NSLog(@"monk densitiy = %f", self.monkNode.physicsBody.density);
-        self.physicsWorld.gravity = CGVectorMake(0, -15);
-        self.monkJumpImpulse = CGVectorMake(0, 1200 * floatAlt);
-        self.monkNode.physicsBody.density = .1;
-    }
 }
 
 - (void)setupCredits {
@@ -495,32 +471,18 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 - (void)makeMonkJump {
 
-    if (self.gameState != newGame && self.gameState != playing) {
-        return;
+    switch (self.gameState) {
+
+        case newGame:
+            self.gameState = playing;
+            return [self.monkNode.physicsBody applyImpulse:PhysicsManager.newGameJump];
+
+        case playing:
+            return [self.monkNode.physicsBody applyImpulse:PhysicsManager.standardJump];
+
+        default:
+            return;
     }
-
-    self.gameState = playing;
-
-    int weakChance = arc4random()%9;
-
-    weakChance++;
-
-    if (weakChance == 10 || weakChance == 1) {
-        float floatAlt = .8;
-        self.monkJumpImpulse = CGVectorMake(0, self.monkJumpImpulse.dy * floatAlt);
-    } else if (weakChance == 5) {
-
-        if (_firstHop == YES) {
-            float floatAlt = 1.1;
-            self.monkJumpImpulse = CGVectorMake(0, self.monkJumpImpulse.dy * floatAlt);
-        }
-
-    } else if (weakChance == 2 || weakChance == 9) {
-        float floatAlt = .9;
-        self.monkJumpImpulse = CGVectorMake(0, self.monkJumpImpulse.dy * floatAlt);
-    }
-
-    [self.monkNode.physicsBody applyImpulse:self.monkJumpImpulse];
 }
 
 - (void)beginCountingScoreIfNecessary {
@@ -580,7 +542,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
                 [self.sounds playButtonSound];
 
                 if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-                    self.SLComposeVC = [[SLComposeViewController alloc] init];
+                    self.SLComposeVC = [SLComposeViewController new];
                     self.SLComposeVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
 
                     NSString *shareText = [[NSString alloc] initWithFormat:@"Just scored %li! Can you beat my score? #MonkGame https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8", DataManager.currentScore];

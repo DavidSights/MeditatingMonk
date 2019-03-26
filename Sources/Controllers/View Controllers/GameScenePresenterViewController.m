@@ -27,11 +27,6 @@
     SKView *skView = (SKView *)self.view;
     self.gameScene = [GameScene sceneWithSize:skView.bounds.size];
     [skView presentScene:self.gameScene];
-
-#if DEBUG
-    skView.showsFPS = true;
-    skView.showsNodeCount = true;
-#endif
 }
 
 // MARK: - Status bar

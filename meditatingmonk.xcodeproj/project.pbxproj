@@ -83,6 +83,7 @@
 		9AD5316122401125004DBEC1 /* EmailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316022401125004DBEC1 /* EmailManager.swift */; };
 		9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD53163224324C5004DBEC1 /* DataManager.swift */; };
 		9AD5316A22489A52004DBEC1 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316922489A52004DBEC1 /* ImageManager.swift */; };
+		9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316B2249ACB5004DBEC1 /* PhysicsManager.swift */; };
 		9AFF510719B2DC5800751BEA /* creditsButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */; };
 		9AFF510819B2DC5800751BEA /* creditsButtonPressediPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */; };
 		9AFF510A19B3EBFF00751BEA /* creditsBackground02iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */; };
@@ -189,6 +190,7 @@
 		9AD5316022401125004DBEC1 /* EmailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailManager.swift; sourceTree = "<group>"; };
 		9AD53163224324C5004DBEC1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		9AD5316922489A52004DBEC1 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		9AD5316B2249ACB5004DBEC1 /* PhysicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
 		9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtoniPhone@2x.png"; sourceTree = "<group>"; };
 		9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtonPressediPhone@2x.png"; sourceTree = "<group>"; };
 		9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBackground02iPhone@2x.png"; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				9AD5316922489A52004DBEC1 /* ImageManager.swift */,
 				9AD5316022401125004DBEC1 /* EmailManager.swift */,
 				9AD53163224324C5004DBEC1 /* DataManager.swift */,
+				9AD5316B2249ACB5004DBEC1 /* PhysicsManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				9A2634C91BD4721E00E3FCDE /* TipsArray.m in Sources */,
 				9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */,
 				9A8AF5B719B29434004002E9 /* GameScenePresenterViewController.m in Sources */,
+				9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */,
 				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
 				9A2634C61BD471DC00E3FCDE /* TipCloud.m in Sources */,
 				9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */,
