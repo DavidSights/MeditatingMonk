@@ -9,7 +9,6 @@
 #import <SpriteKit/SpriteKit.h>
 #import <GameKit/GameKit.h>
 #import <Social/Social.h>
-#import "GameScenePresenterViewController.h"
 #import "GameScene.h"
 #import "Sounds.h"
 #import "TipCloud.h"

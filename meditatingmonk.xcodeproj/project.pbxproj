@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A043EF9225002A0001A7F60 /* GameSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EF8225002A0001A7F60 /* GameSceneViewController.swift */; };
 		9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */; };
 		9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */; };
 		9A1892A219BBADD30016F95A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1892A119BBADD30016F95A /* icon@2x.png */; };
@@ -48,7 +49,6 @@
 		9A8AF5A719AD8D5F004002E9 /* tipCloudiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF5A619AD8D5F004002E9 /* tipCloudiPhone@2x.png */; };
 		9A8AF5A919B021B4004002E9 /* title@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF5A819B021B4004002E9 /* title@2x.png */; };
 		9A8AF5B119B291B9004002E9 /* creditsBackgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */; };
-		9A8AF5B719B29434004002E9 /* GameScenePresenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8AF5B619B29434004002E9 /* GameScenePresenterViewController.m */; };
 		9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8AF5BF19B2C064004002E9 /* CreditsNode.m */; };
 		9A8F84DA197354EC0085296D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84D9197354EC0085296D /* Foundation.framework */; };
 		9A8F84DC197354EC0085296D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84DB197354EC0085296D /* CoreGraphics.framework */; };
@@ -67,7 +67,6 @@
 		9AC0173A199C18E200C1C4ED /* grassAndTreeiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */; };
 		9AC0173B199C18E200C1C4ED /* monkEyesOpeniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */; };
 		9AC0173C199C18E200C1C4ED /* monkiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01737199C18E200C1C4ED /* monkiPad@2x.png */; };
-		9AC59196199C650F00C185E2 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AC59195199C650F00C185E2 /* Main_iPad.storyboard */; };
 		9AD3211919C1061700E38C83 /* creditsButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211719C1061700E38C83 /* creditsButtoniPad@2x.png */; };
 		9AD3211C19C107F800E38C83 /* titleiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211B19C107F800E38C83 /* titleiPad@2x.png */; };
 		9AD3212219C11F5900E38C83 /* clouds1iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211D19C11F5900E38C83 /* clouds1iPad@2x.png */; };
@@ -103,6 +102,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A043EF8225002A0001A7F60 /* GameSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneViewController.swift; sourceTree = "<group>"; };
 		9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPhone@2x.png"; sourceTree = "<group>"; };
 		9A1892A119BBADD30016F95A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -148,8 +148,6 @@
 		9A8AF5A619AD8D5F004002E9 /* tipCloudiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipCloudiPhone@2x.png"; sourceTree = "<group>"; };
 		9A8AF5A819B021B4004002E9 /* title@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title@2x.png"; sourceTree = "<group>"; };
 		9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBackgroundiPhone@2x.png"; sourceTree = "<group>"; };
-		9A8AF5B519B29434004002E9 /* GameScenePresenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScenePresenterViewController.h; sourceTree = "<group>"; };
-		9A8AF5B619B29434004002E9 /* GameScenePresenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScenePresenterViewController.m; sourceTree = "<group>"; };
 		9A8AF5BE19B2C064004002E9 /* CreditsNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsNode.h; sourceTree = "<group>"; };
 		9A8AF5BF19B2C064004002E9 /* CreditsNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsNode.m; sourceTree = "<group>"; };
 		9A8F84D6197354EC0085296D /* MeditatingMonk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeditatingMonk.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,7 +171,6 @@
 		9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPad@2x.png"; sourceTree = "<group>"; };
 		9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkEyesOpeniPad@2x.png"; sourceTree = "<group>"; };
 		9AC01737199C18E200C1C4ED /* monkiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkiPad@2x.png"; sourceTree = "<group>"; };
-		9AC59195199C650F00C185E2 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main_iPad.storyboard; path = Storyboards/Main_iPad.storyboard; sourceTree = "<group>"; };
 		9AD3211719C1061700E38C83 /* creditsButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtoniPad@2x.png"; sourceTree = "<group>"; };
 		9AD3211B19C107F800E38C83 /* titleiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titleiPad@2x.png"; sourceTree = "<group>"; };
 		9AD3211D19C11F5900E38C83 /* clouds1iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds1iPad@2x.png"; sourceTree = "<group>"; };
@@ -241,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				9AD53158223FF5D8004DBEC1 /* Main_iPhone.storyboard */,
-				9AC59195199C650F00C185E2 /* Main_iPad.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -458,8 +454,7 @@
 		9AD5316522434A10004DBEC1 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9A8AF5B519B29434004002E9 /* GameScenePresenterViewController.h */,
-				9A8AF5B619B29434004002E9 /* GameScenePresenterViewController.m */,
+				9A043EF8225002A0001A7F60 /* GameSceneViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -534,6 +529,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -588,7 +584,6 @@
 				9AD3211919C1061700E38C83 /* creditsButtoniPad@2x.png in Resources */,
 				9A6CCA8919A05205005538EF /* facebookButtoniPad@2x.png in Resources */,
 				9A2055AA19A7087F00F2E743 /* clouds4@2x.png in Resources */,
-				9AC59196199C650F00C185E2 /* Main_iPad.storyboard in Resources */,
 				9A8AF59B19AD147E004002E9 /* musicLoop.wav in Resources */,
 				9AD3212819C125FE00E38C83 /* creditsBackgroundiPad@2x.png in Resources */,
 				9A6CCA6D199F0EEA005538EF /* gameCenterIconiPhone@2x.png in Resources */,
@@ -631,7 +626,6 @@
 				9A2634C91BD4721E00E3FCDE /* TipsArray.m in Sources */,
 				9AD5316E2249CE8B004DBEC1 /* Colors.swift in Sources */,
 				9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */,
-				9A8AF5B719B29434004002E9 /* GameScenePresenterViewController.m in Sources */,
 				9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */,
 				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
 				9A2634C61BD471DC00E3FCDE /* TipCloud.m in Sources */,
@@ -643,6 +637,7 @@
 				9AD5316122401125004DBEC1 /* EmailManager.swift in Sources */,
 				9A8F84E8197354EC0085296D /* main.m in Sources */,
 				9AD5316A22489A52004DBEC1 /* ImageManager.swift in Sources */,
+				9A043EF9225002A0001A7F60 /* GameSceneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
