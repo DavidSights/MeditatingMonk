@@ -28,25 +28,20 @@ enum GameState {
 @interface GameScene () <SKPhysicsContactDelegate>
 
 @property enum GameState gameState;
-
 @property GKLocalPlayer *player;
-
-// Flags
-@property (nonatomic) BOOL gameActive, scoreShown, timerStarted, monkHitSomething, gameStarted, gameFinished, musicPlaying, creditsShowing, firstHop;
+@property BOOL musicPlaying;
 
 // Views
 @property SKSpriteNode *monkNode, *background, *grassAndTree, *clouds1, *clouds2, *tipBackground;
 @property SKLabelNode *scoreLabel, *scoreLabelDropShadow;
 
 // Actions
-@property SKAction *openEyes, *closeEyes;
-@property SKNode *grassEdge, *branchEdge;
+@property SKAction *openEyes;
+@property SKAction *closeEyes;
 
-@property (nonatomic) NSArray *loadedAchievements;
-@property (nonatomic) GKScore *retrievedScore;
-
-/// A controller for social features, like posting to Twitter and Facebook.
-@property (strong, nonatomic) SLComposeViewController *SLComposeVC;
+// Collision Edges
+@property SKNode *grassEdge;
+@property SKNode *branchEdge;
 
 @property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 
@@ -71,8 +66,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
         self.gameState = title;
 
-        [self initialFlagsSetup];
-
         [self deviceSpecificSetupWithSize:size];
         [self setUpScoreboard];
 
@@ -86,21 +79,16 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
         self.soundController = [Sounds new];
         [self addChild:self.soundController];
-
-        self.gameStarted = NO;
     }
 
     return self;
 }
 
 - (void)setupCredits {
-
     CGSize size = self.view.frame.size;
-
     self.credits = [[CreditsNode alloc] init:size];
     self.credits.position = CGPointMake(size.width/2, size.height/2);
     self.credits.name = @"credits node view";
-    self.creditsShowing = NO;
 }
 
 - (void)setUpScoreboard {
@@ -130,13 +118,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     self.scoreboard = [[ScoreBoard alloc] init:self.size];
     self.scoreboard.position = CGPointMake(self.size.width/2, self.size.height * 2);
     [self addChild:self.scoreboard];
-}
-
-- (void)initialFlagsSetup {
-    self.gameActive = NO;
-    self.firstHop = NO;
-    self.scoreShown = NO;
-    self.monkHitSomething = NO;
 }
 
 - (void) deviceSpecificSetupWithSize:(CGSize)size {
@@ -308,16 +289,12 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 #pragma mark - Grpahics and Animations
 
 - (void)hideTitleLabels {
-
-    if (self.gameStarted == NO) {
-
-        SKAction *fade = [SKAction fadeOutWithDuration:.25];
-        SKAction *remove  = [SKAction removeFromParent];
-
-        [self enumerateChildNodesWithName:@"startLabel" usingBlock:^(SKNode *node, BOOL *stop) {
-            [node runAction:[SKAction sequence:@[fade, remove]]];
-        }];
-    }
+    if (self.gameState != title) { return; }
+    SKAction *fade = [SKAction fadeOutWithDuration:.25];
+    SKAction *remove  = [SKAction removeFromParent];
+    [self enumerateChildNodesWithName:@"startLabel" usingBlock:^(SKNode *node, BOOL *stop) {
+        [node runAction:[SKAction sequence:@[fade, remove]]];
+    }];
 }
 
 - (void)setUpAndShowTitleViews {
@@ -398,13 +375,11 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self addChild:self.credits];
     [self.credits runAction:[SKAction fadeInWithDuration:.4]];
     [self.credits runAction:[SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2) duration:.3]];
-    self.creditsShowing = YES;
 }
 
 - (void)hideCredits {
     [self.credits runAction:[SKAction fadeOutWithDuration:.15] completion:^{
         [self.credits removeFromParent];
-        self.creditsShowing = NO;
     }];
 }
 
@@ -425,8 +400,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     // Show the score label with animation.
     [self.scoreLabel runAction:[SKAction moveTo:CGPointMake(self.size.width/2, scoreLabelYPosition) duration:.5]];
     [self.scoreLabelDropShadow runAction:[SKAction moveTo:CGPointMake(self.size.width/2 + dropShadowOffset, (scoreLabelYPosition - dropShadowOffset)) duration:.5]];
-
-    self.scoreShown = true;
 }
 
 - (void)hideScoreLabel {
@@ -438,7 +411,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self.scoreLabel runAction:[SKAction moveTo:CGPointMake(self.size.width/2, (self.size.height + 50)) duration:.5]];
     //set and run animation for dropshadow hide
     [self.scoreLabelDropShadow runAction:[SKAction moveTo:CGPointMake(self.size.width/2 + DS, self.size.height + (50 + DS)) duration:.5]];
-    self.scoreShown = NO;
 }
 
 - (void)showEnlighteningThought {
@@ -634,7 +606,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
     // Stop the timer.
     [self removeActionForKey:updateScoreActionKey];
-    self.timerStarted = NO;
 
     [self.monkNode runAction:self.openEyes];
 
@@ -654,8 +625,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self.musicPlayer stop];
     self.musicPlayer.currentTime = 0;
     self.musicPlaying = NO;
-
-    self.firstHop = NO;
 }
 
 /// Updates the high score if necessary, and plays a sound based on score.
