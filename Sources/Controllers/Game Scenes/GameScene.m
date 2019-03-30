@@ -15,6 +15,7 @@
 #import "ScoreBoard.h"
 #import "CreditsNode.h"
 #import "MeditatingMonk-Swift.h"
+#import <StoreKit/StoreKit.h>
 
 enum GameState {
     title,
@@ -40,8 +41,6 @@ enum GameState {
 // Actions
 @property SKAction *openEyes, *closeEyes;
 @property SKNode *grassEdge, *branchEdge;
-
-@property int secretResetOptionCounter;
 
 @property (nonatomic) NSArray *loadedAchievements;
 @property (nonatomic) GKScore *retrievedScore;
@@ -628,12 +627,9 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
                     [alert show];
                 }
             }
-            if ([scoreboardNode.name isEqual: @"creditsButton"] && self.creditsShowing == NO) {
 
-                [self.sounds playButtonSound];
-
-                [self showCredits];
-                _secretResetOptionCounter = 0;
+            if ([scoreboardNode.name isEqual: @"creditsButton"]) {
+                [self creditsButtonPressed];
             }
         }
 
@@ -659,19 +655,13 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
                 }
 
                 if ([creditsNode.name isEqual:@"goBack"]) {
-
                     [self.sounds playButtonSound];
-
                     [self hideCredits];
-                    self.secretResetOptionCounter = 0;
+                    self.gameState = scoreboard;
                 }
 
                 if ([creditsNode.name isEqual:@"rate"]) {
-                    // TODO: Use in app rating request.
-
-                    [self.sounds playButtonSound];
-
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/meditating-monk/id904463280?ls=1&mt=8"]];
+                    [self rateButtonPressed];
                 }
 
                 if ([creditsNode.name isEqual:@"davidEmail"]) {
@@ -699,12 +689,12 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
     if ([title isEqualToString:@"Yes"]){
         [DataManager resetHighScore];
-        self.secretResetOptionCounter = 0;
     } else if ([title isEqualToString:@"No"]) {
-        self.secretResetOptionCounter = 0;
         NSLog(@"MyScene -alertView: Scores were not reset.");
     }
 }
+
+// MARK: Scoreboard
 
 - (void)replayButtonPressed {
     [self.scoreboard hideScore];
@@ -713,7 +703,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     if (self.musicPlaying == NO) {
         [self.musicPlayer play];
         self.musicPlaying = YES;
-        self.secretResetOptionCounter = 0;
     }
 
     self.gameState = newGame;
@@ -723,6 +712,20 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self.gameSceneDelegate showAlertWithTitle:@"GameCenter Disabled"
                                        message:@"Sorry. GameCenter is temporarily disabled. This feature will be fixed or removed on future versions"];
 }
+
+- (void)creditsButtonPressed {
+    [self.sounds playButtonSound];
+    [self showCredits];
+    self.gameState = credits;
+}
+
+// MARK: Credits Screen
+
+- (void)rateButtonPressed {
+    [self.sounds playButtonSound];
+    [SKStoreReviewController requestReview];
+}
+
 
 #pragma mark - Collisions
 
