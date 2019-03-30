@@ -7,98 +7,49 @@
 //
 
 #import "CreditsNode.h"
+#import "MeditatingMonk-Swift.h"
 
-@interface CreditsNode()
-
-@property BOOL iPhone, iPhone35, iPad;
+@interface CreditsNode ()
 
 @end
 
 @implementation CreditsNode
 
--(id)init:(CGSize) size {
+- (id)init:(CGSize)size {
     self = [super init];
 
-    self.size = size;
+    self.name = @"CreditsNode";
 
-    self.iPhone = NO;
-    self.iPhone35 = NO;
-    self.iPad = NO;
+    [self addChild:[SKSpriteNode spriteNodeWithImageNamed:@"creditsBackground02iPhone"]];
 
-    if (size.height == 568 && size.width == 320) {
-        self.iPhone = YES;
-    }
+    SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    title.text = @"Meditating Monk was made by";
+    title.fontColor = Colors.creditsLightColor;
+    [self addChild:title];
 
-    if (size.width == 320 && size.height == 480) {
-        self.iPhone35 = YES;
-    }
+    SKLabelNode *nameDavid = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    nameDavid.fontColor = Colors.creditsDarkColor;
 
-    if (size.width == 768 && size.height == 1024) {
-        self.iPad = YES;
-    }
+    SKLabelNode *nameDavy = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    nameDavy.fontColor = Colors.creditsDarkColor;
 
-    self.name = @"CreditsNodes";
-
-    // Matching colors for menu.
-
-    SKColor *darkColor = [SKColor colorWithRed:(134.0/255.0)
-                                         green:(114.0/255.0)
-                                          blue:(58.0/255.0)
-                                         alpha:1.0];
-
-    SKColor *lightColor =[SKColor colorWithRed:(155.0/255.0)
-                                         green:(136.0/255.0)
-                                          blue:(72.0/255.0)
-                                         alpha:1.0];
-    NSString *backgroundImage;
-
-    if (self.iPhone || self.iPhone35) {
-        backgroundImage = @"creditsBackground02iPhone";
-    } else if (self.iPad) {
-        backgroundImage = @"creditsBackgroundiPad";
-    }
-
-    [self addChild:[SKSpriteNode spriteNodeWithImageNamed:backgroundImage]];
-
-#warning Maybe all of these should get a new instance from a method?
-
-    SKLabelNode *title =            [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
-    SKLabelNode *nameDavid =        [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
-    SKLabelNode *nameDavy =         [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
     SKLabelNode *descriptionDavid = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
-    SKLabelNode *descriptionDavy =  [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
-    SKLabelNode *returnToGame =     [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    descriptionDavid.fontColor = Colors.creditsLightColor;
 
-    title.fontColor = lightColor;
-    nameDavid.fontColor = darkColor;
-    nameDavy.fontColor = darkColor;
-    descriptionDavid.fontColor = lightColor;
-    descriptionDavy.fontColor = lightColor;
+    SKLabelNode *descriptionDavy = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    descriptionDavy.fontColor = Colors.creditsLightColor;
+
+    SKLabelNode *returnToGame = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
     returnToGame.fontColor = [SKColor whiteColor];
 
-    NSString *iconImage;
-
-    if (self.iPhone || self.iPhone35) {
-        iconImage = @"icon";
-    } else if (_iPad) {
-        iconImage = @"creditsIconiPad";
-    }
-
-    SKSpriteNode *icon = [SKSpriteNode spriteNodeWithImageNamed:iconImage];
-
-    title.text = @"Meditating Monk was made by";
+    SKSpriteNode *icon = [SKSpriteNode spriteNodeWithImageNamed:DeviceManager.isTablet ? @"creditsIconiPad" : @"icon"];
 
     //Title and icon position
-    if (self.iPhone) {
+    if (!DeviceManager.isTablet) {
         title.fontSize = 10;
         icon.position = CGPointMake(0, 220);
         title.position = CGPointMake(0, icon.position.y - 60);
-    } else if (self.iPhone35) {
-        title.fontSize = 10;
-        int adj = -30;
-        icon.position = CGPointMake(0, 220 + adj);
-        title.position = CGPointMake(0, icon.position.y - 53);
-    } else if (self.iPad) {
+    } else {
         title.fontSize = 20;
         int adj = 175;
         [icon setScale:.75];
@@ -107,7 +58,6 @@
     }
 
     [self addChild:icon];
-    [self addChild:title];
 
     nameDavid.text = @"David Seitz Jr";
     nameDavy.text = @"Davy Wolf";
@@ -118,10 +68,10 @@
     NSString *emailButtonImage = [[NSString alloc] init];
     NSString *twitterButtonImage = [[NSString alloc] init];
 
-    if (self.iPhone || self.iPhone35) {
+    if (!DeviceManager.isTablet) {
         emailButtonImage = @"emailButtoniPhone";
         twitterButtonImage = @"twitterButton2iPhone";
-    } else if (self.iPad) {
+    } else {
         emailButtonImage = @"emailButtoniPad";
         twitterButtonImage = @"twitterButton2iPad";
     }
@@ -139,9 +89,9 @@
     davidEmail.name = @"davidEmail";
 
     NSString *button;
-    if (self.iPhone || self.iPhone35) {
+    if (!DeviceManager.isTablet) {
         button = @"creditsButtonPressediPhone";
-    } else if (self.iPad) {
+    } else {
         button = @"creditsButtonPressediPad";
     }
 
@@ -150,20 +100,20 @@
     SKSpriteNode *rateButton = [SKSpriteNode spriteNodeWithImageNamed:button];
     SKLabelNode *rateLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
 
-    backLabel.fontColor = darkColor;
+    backLabel.fontColor = Colors.creditsDarkColor;
 
     backLabel.text = @"Go Back";
     backLabel.name = @"goBack";
 
     backButton.name = @"goBack";
 
-    rateLabel.fontColor = darkColor;
+    rateLabel.fontColor = Colors.creditsDarkColor;
 
     rateLabel.text = @"Rate";
     rateLabel.name = @"rate";
     rateButton.name = @"rate";
 
-    if (self.iPhone) {
+    if (!DeviceManager.isTablet) {
         nameDavid.fontSize = 20;
         nameDavy.fontSize = 20;
         descriptionDavy.fontSize = 12;
@@ -186,32 +136,7 @@
         backButton.position = CGPointMake(-70, -190);
         rateButton.position = CGPointMake(70, -190);
 
-    } else if (self.iPhone35) {
-        nameDavid.fontSize = 20;
-        nameDavy.fontSize = 20;
-        descriptionDavy.fontSize = 12;
-        descriptionDavid.fontSize = 12;
-        descriptionDavid.position = CGPointMake(-12, 80);
-        nameDavid.position = CGPointMake(-50, 100);
-
-        int adj = -13;
-
-        davyTwitter.position = CGPointMake(-110, -100 - adj);
-        davyEmail.position = CGPointMake(davyTwitter.position.x + 80, davyTwitter.position.y);
-        descriptionDavy.position = CGPointMake(-53, -60 -adj);
-        nameDavy.position = CGPointMake(-80, -40 - adj);
-        davidTwitter.position = CGPointMake(-110, 40);
-        davidEmail.position = CGPointMake(davidTwitter.position.x + 80, davidTwitter.position.y);
-
-        backLabel.fontSize = 12;
-        backLabel.position = CGPointMake(0, -7);
-        rateLabel.fontSize = 12;
-        rateLabel.position = CGPointMake(0, -7);
-
-        backButton.position = CGPointMake(-70, -155);
-        rateButton.position = CGPointMake(70, backButton.position.y);
-
-    } else if (self.iPad) {
+    } else {
 
         int nameFS = 40;
         int descFS = 25;

@@ -445,12 +445,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     self.scoreShown = NO;
 }
 
-- (void)showiAd {
-    //Show iAd
-    NSLog(@"Showing ad from contacting grass.");
-    [[NSNotificationCenter defaultCenter]postNotificationName:@"showsBanner" object:self];
-}
-
 - (void)showEnlighteningThought {
     TipCloud *tip = [TipCloud new];
     [tip positionWithFrame:self.frame];
@@ -535,6 +529,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
             if ([scoreboardNode.name isEqual:@"gameCenterButton"]) {
                 // TODO: Remove game center functionality for now. The button should be removed first.
                 [self.sounds playButtonSound];
+                [self gameCenterButtonPressed];
             }
 
             if ([scoreboardNode.name isEqual:@"twitterButton"] && self.creditsShowing == NO) {
@@ -723,6 +718,11 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     }
 
     self.gameState = newGame;
+}
+
+- (void)gameCenterButtonPressed {
+    [self.gameSceneDelegate showAlertWithTitle:@"GameCenter Disabled"
+                                       message:@"Sorry. GameCenter is temporarily disabled. This feature will be fixed or removed on future versions"];
 }
 
 #pragma mark - Collisions

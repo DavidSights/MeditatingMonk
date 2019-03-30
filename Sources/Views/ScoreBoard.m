@@ -50,7 +50,7 @@
     
     //Colors to be used for menu
     SKColor *darkColor = [SKColor colorWithRed:(134.0/255.0) green:(114.0/255.0) blue:(58.0/255.0) alpha:1.0];
-    SKColor *lightColor =[SKColor colorWithRed:(155.0/255.0) green:(136.0/255.0) blue:(72.0/255.0) alpha:1.0];
+    SKColor *lightColor = [SKColor colorWithRed:(155.0/255.0) green:(136.0/255.0) blue:(72.0/255.0) alpha:1.0];
     
     self.currentScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
     self.currentScoreLabel.fontSize = 30;

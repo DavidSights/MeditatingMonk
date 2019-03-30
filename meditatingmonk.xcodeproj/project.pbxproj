@@ -84,6 +84,7 @@
 		9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD53163224324C5004DBEC1 /* DataManager.swift */; };
 		9AD5316A22489A52004DBEC1 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316922489A52004DBEC1 /* ImageManager.swift */; };
 		9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316B2249ACB5004DBEC1 /* PhysicsManager.swift */; };
+		9AD5316E2249CE8B004DBEC1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5316D2249CE8B004DBEC1 /* Colors.swift */; };
 		9AFF510719B2DC5800751BEA /* creditsButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */; };
 		9AFF510819B2DC5800751BEA /* creditsButtonPressediPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */; };
 		9AFF510A19B3EBFF00751BEA /* creditsBackground02iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */; };
@@ -191,6 +192,7 @@
 		9AD53163224324C5004DBEC1 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		9AD5316922489A52004DBEC1 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		9AD5316B2249ACB5004DBEC1 /* PhysicsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsManager.swift; sourceTree = "<group>"; };
+		9AD5316D2249CE8B004DBEC1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtoniPhone@2x.png"; sourceTree = "<group>"; };
 		9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtonPressediPhone@2x.png"; sourceTree = "<group>"; };
 		9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBackground02iPhone@2x.png"; sourceTree = "<group>"; };
@@ -374,23 +376,23 @@
 		9AD5315C223FF783004DBEC1 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				9A6CCA67199F0EEA005538EF /* playIconiPhone@2x.png */,
-				9A6CCA68199F0EEA005538EF /* scoreboardiPhone@2x.png */,
-				9A6CCA69199F0EEA005538EF /* twitterButtoniPhone@2x.png */,
+				9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */,
 				9A6CCA63199F0EEA005538EF /* buttoniPhone@2x.png */,
-				9AFF510B19B4E50600751BEA /* emailButtoniPhone@2x.png */,
-				9AFF510C19B4E50600751BEA /* twitterButton2iPhone@2x.png */,
+				9A6CCA64199F0EEA005538EF /* buttonPressediPhone@2x.png */,
+				9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */,
 				9AFF510919B3EBFF00751BEA /* creditsBackground02iPhone@2x.png */,
 				9AFF510519B2DC5800751BEA /* creditsButtoniPhone@2x.png */,
 				9AFF510619B2DC5800751BEA /* creditsButtonPressediPhone@2x.png */,
-				9A8AF5B019B291B9004002E9 /* creditsBackgroundiPhone@2x.png */,
-				9A6CCA64199F0EEA005538EF /* buttonPressediPhone@2x.png */,
+				9AFF510B19B4E50600751BEA /* emailButtoniPhone@2x.png */,
 				9A6CCA65199F0EEA005538EF /* facebookButtoniPhone@2x.png */,
 				9A6CCA66199F0EEA005538EF /* gameCenterIconiPhone@2x.png */,
-				9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */,
 				9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */,
+				9A6CCA67199F0EEA005538EF /* playIconiPhone@2x.png */,
+				9A6CCA68199F0EEA005538EF /* scoreboardiPhone@2x.png */,
 				9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */,
 				9A8AF5A619AD8D5F004002E9 /* tipCloudiPhone@2x.png */,
+				9A6CCA69199F0EEA005538EF /* twitterButtoniPhone@2x.png */,
+				9AFF510C19B4E50600751BEA /* twitterButton2iPhone@2x.png */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -443,11 +445,12 @@
 		9AD5316222432497004DBEC1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */,
-				9AD5316922489A52004DBEC1 /* ImageManager.swift */,
-				9AD5316022401125004DBEC1 /* EmailManager.swift */,
 				9AD53163224324C5004DBEC1 /* DataManager.swift */,
+				9AD53153223F0AAB004DBEC1 /* DeviceManager.swift */,
+				9AD5316022401125004DBEC1 /* EmailManager.swift */,
+				9AD5316922489A52004DBEC1 /* ImageManager.swift */,
 				9AD5316B2249ACB5004DBEC1 /* PhysicsManager.swift */,
+				9AD5316D2249CE8B004DBEC1 /* Colors.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A2634C91BD4721E00E3FCDE /* TipsArray.m in Sources */,
+				9AD5316E2249CE8B004DBEC1 /* Colors.swift in Sources */,
 				9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */,
 				9A8AF5B719B29434004002E9 /* GameScenePresenterViewController.m in Sources */,
 				9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */,

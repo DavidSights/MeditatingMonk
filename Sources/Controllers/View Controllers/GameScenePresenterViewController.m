@@ -8,11 +8,9 @@
 
 #import "GameScenePresenterViewController.h"
 #import <SpriteKit/SpriteKit.h>
-#import <GameKit/GameKit.h>
 #import "GameScene.h"
-#import "MeditatingMonk-Swift.h"
 
-@interface GameScenePresenterViewController ()
+@interface GameScenePresenterViewController () <GameSceneDelegate>
 @property GameScene *gameScene;
 @end
 
@@ -26,6 +24,7 @@
     // Set up and show the game scene.
     SKView *skView = (SKView *)self.view;
     self.gameScene = [GameScene sceneWithSize:skView.bounds.size];
+    self.gameScene.gameSceneDelegate = self;
     [skView presentScene:self.gameScene];
 }
 
@@ -33,6 +32,22 @@
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message {
+
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+
+    [alert addAction:okAction];
+    [self presentViewController:alert
+                       animated:true
+                     completion:nil];
 }
 
 @end
