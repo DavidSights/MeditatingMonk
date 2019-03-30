@@ -12,57 +12,57 @@
 
 + (NSString *)tip {
 
-    NSArray *tips = @[@"Take a step towards your goal today.",
+    NSArray *tips = @[@"Take a step towards a life goal today.",
 
-                      @"An end is also a beginning.",
+                      @"Every end is a new beginning.",
 
-                      @"Use simple thoughts to clear your mind.",
+                      @"Think of puppies. And kitties. And feel good.",
 
-                      @"Fill your life with what inspires you.",
+                      @"What inspires you? Fit more of that into your life.",
 
                       @"Knowledge is power.",
 
-                      @"When communication exists, distance does not.",
+                      @"Reach out to an old connection.",
 
-                      @"Pruning leads to beauty.",
+                      @"Prune your plant to keep it beautiful.",
 
-                      @"Helping others may help yourself.",
+                      @"Help yourself by helping others.",
 
-                      @"There is beauty in harmony.",
+                      @"Find harmony wherever possible.",
 
-                      @"Not all temptations must be satisfied.",
+                      @"You are not your temptations. Feed the good ones only.",
 
                       @"If at first you don’t succeed, try again.",
 
-                      @"Why do you want what you want?",
+                      @"What are you chasing, and why?",
 
-                      @"Happiness is a choice.",
+                      @"Happiness is a moving target. Pick a still one and happiness will follow.",
 
-                      @"Failure is the first step to success.",
+                      @"Success is the peak of a mountain called failure. Climb it.",
 
-                      @"Perspective helps one to see clearly.",
+                      @"Consider a new perspective.",
 
-                      @"Forgiveness is a path to peace.",
+                      @"Forgiving others will do more for you than them.",
 
                       @"How do others see you?",
                       
-                      @"Brains, like muscles, should be exercised.",
+                      @"Your brain is a muscle. It needs exercise.",
                       
-                      @"Explore more to learn more.",
+                      @"Life is a journey. Not a destination.",
                       
-                      @"Life will take new forms over time.",
+                      @"Are you the same person you were a year ago? A decade ago?",
                       
-                      @"Limits can be broken.",
+                      @"What artificial limits are holding you back?",
                       
                       @"The past is a story we tell ourselves.",
                       
-                      @"Ideas are seeds that want to grow.",
+                      @"Ideas are fragile. Nuture them. Help them grow.",
                       
-                      @"Strength exists within us all.",
+                      @"Everyone has strengths. Learn and take advantage of yours.",
                       
-                      @"What attachments are holding you back?"];
+                      @"The sun will always shine again."];
 
-    float index = arc4random_uniform(tips.count - 1.0);
+    float index = arc4random_uniform(tips.count);
     return [tips objectAtIndex:index];
 }
 

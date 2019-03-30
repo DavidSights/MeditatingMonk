@@ -189,17 +189,11 @@
                                               positionY:0];
 }
 
-- (void)showScore:(int)currentScore {
-    
-    // Move the scoreboard into its viewable position.
+- (void)showScore {
     CGSize size = self.scene.view.frame.size;
     int xPosition = size.width / 2;
     int yPosition = (DeviceManager.isTablet ? ((size.height/2) + 15) : size.height/2);
     [self runAction:[SKAction moveTo:CGPointMake(xPosition, yPosition) duration:.5]];
-
-    // Update the scoreboard's content.
-    self.currentScoreLabel.text = [NSString stringWithFormat:@"%i", currentScore];
-    self.highScoreValueLabel.text = [NSString stringWithFormat:@"%lli", self.highScore];
 }
 
 - (void) hideScore {

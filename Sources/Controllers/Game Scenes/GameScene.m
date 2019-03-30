@@ -344,7 +344,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [tapToStartLabel setFontColor:SKColor.whiteColor];
     tapToStartLabel.fontSize = taptoStartFontSize;
     tapToStartLabel.position = CGPointMake(self.size.width/2, (DeviceManager.isTablet ? 100 : 90));
-    [self addChild:tapToStartLabel];
 
     SKLabelNode *tapToStartLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
     tapToStartLabelDropShadow.text = tapToStartLabel.text;
@@ -353,6 +352,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     tapToStartLabelDropShadow.fontSize = taptoStartFontSize;
     tapToStartLabelDropShadow.position = CGPointMake(tapToStartLabel.position.x + dropShadowDistance, tapToStartLabel.position.y - dropShadowDistance);
     [self addChild:tapToStartLabelDropShadow];
+    [self addChild:tapToStartLabel];
 
     SKLabelNode *directionsLabel = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
     directionsLabel.text = @"don't hit the tree or ground";
@@ -360,7 +360,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [directionsLabel setFontColor:SKColor.whiteColor];
     directionsLabel.fontSize = directionsFontSize;
     directionsLabel.position = CGPointMake(self.size.width/2, tapToStartLabel.position.y - (DeviceManager.isTablet ? 50 : 20));
-    [self addChild:directionsLabel];
 
     SKLabelNode *directionsLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
     directionsLabelDropShadow.text = directionsLabel.text;
@@ -369,6 +368,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     directionsLabelDropShadow.fontSize = directionsFontSize;
     directionsLabelDropShadow.position = CGPointMake(directionsLabel.position.x + dropShadowDistance2, directionsLabel.position.y - dropShadowDistance2);
     [self addChild:directionsLabelDropShadow];
+    [self addChild:directionsLabel];
 
     SKAction *hideAction = [SKAction fadeOutWithDuration:0];
     SKAction *waitAction = [SKAction waitForDuration:.35];
@@ -401,8 +401,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     self.creditsShowing = YES;
 }
 
-- (void) hideCredits {
-
+- (void)hideCredits {
     [self.credits runAction:[SKAction fadeOutWithDuration:.15] completion:^{
         [self.credits removeFromParent];
         self.creditsShowing = NO;
@@ -435,7 +434,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     float DS = 3.7;
     if (self.size.height == 1024 && self.size.width == 768) { DS = DS + 10; }
 
-
     //set and run animation for actual label to hide
     [self.scoreLabel runAction:[SKAction moveTo:CGPointMake(self.size.width/2, (self.size.height + 50)) duration:.5]];
     //set and run animation for dropshadow hide
@@ -450,8 +448,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 }
 
 - (void)hideTip {
-
-    // Is it possible to make this an instance method and call it without using a property?
     [self enumerateChildNodesWithName:@"tip" usingBlock:^(SKNode *node, BOOL *stop) {
         SKAction *fade = [SKAction fadeOutWithDuration:.25];
         SKAction *remove  = [SKAction removeFromParent];
@@ -693,8 +689,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self removeActionForKey:updateScoreActionKey];
     [self.scoreboard reloadData];
     [self hideScoreLabel];
-    CGSize size = self.scene.view.frame.size;
-    self.scoreboard.position = CGPointMake(size.width/2, size.height/2);
+    [self.scoreboard showScore];
     self.gameState = scoreboard;
 }
 

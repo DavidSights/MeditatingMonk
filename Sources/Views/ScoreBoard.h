@@ -14,7 +14,7 @@
 @property (nonatomic) long long highScore;
 
 - (id)init:(CGSize)size;
-- (void)showScore:(int)currentScore;
+- (void)showScore;
 - (void)hideScore;
 - (void)reloadData;
 
