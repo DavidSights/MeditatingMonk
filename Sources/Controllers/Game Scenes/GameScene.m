@@ -88,7 +88,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     CGPoint scoreLabelPosition = CGPointMake(self.size.width / 2, self.size.height + 10);
 
     // Set up score label drop shadow. There has to be a better way to do this.
-    self.scoreLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    self.scoreLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     self.scoreLabelDropShadow.text = @"0";
     self.scoreLabelDropShadow.fontSize = scoreLabelFontSize;
     [self.scoreLabelDropShadow setFontColor:[SKColor blackColor]];
@@ -97,7 +97,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self addChild:self.scoreLabelDropShadow];
 
     // Set up score label
-    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     self.scoreLabel.text = @"0";
     self.scoreLabel.fontSize = scoreLabelFontSize;
     [self.scoreLabel setFontColor:[SKColor whiteColor]];
@@ -280,14 +280,17 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
     // Set up labels.
 
-    SKLabelNode *tapToStartLabel = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
+    SKLabelNode *tapToStartLabel = [SKLabelNode new];
+    tapToStartLabel.fontName = FontManager.appFontName;
     tapToStartLabel.text = @"tap to float";
     tapToStartLabel.name = @"startLabel";
     [tapToStartLabel setFontColor:SKColor.whiteColor];
     tapToStartLabel.fontSize = taptoStartFontSize;
     tapToStartLabel.position = CGPointMake(self.size.width/2, (DeviceManager.isTablet ? 100 : 90));
 
-    SKLabelNode *tapToStartLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
+    SKLabelNode *tapToStartLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia Regular"];
+//    SKLabelNode *tapToStartLabelDropShadow = [SKLabelNode new];
+//    tapToStartLabelDropShadow.fontName = FontManager.appFontName;
     tapToStartLabelDropShadow.text = tapToStartLabel.text;
     tapToStartLabelDropShadow.name = @"startLabel";
     [tapToStartLabelDropShadow setFontColor:SKColor.blackColor];
@@ -296,14 +299,16 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self addChild:tapToStartLabelDropShadow];
     [self addChild:tapToStartLabel];
 
-    SKLabelNode *directionsLabel = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
+    SKLabelNode *directionsLabel = [SKLabelNode new];
+    directionsLabel.fontName = FontManager.appFontName;
     directionsLabel.text = @"don't hit the tree or ground";
     directionsLabel.name = @"startLabel";
     [directionsLabel setFontColor:SKColor.whiteColor];
     directionsLabel.fontSize = directionsFontSize;
     directionsLabel.position = CGPointMake(self.size.width/2, tapToStartLabel.position.y - (DeviceManager.isTablet ? 50 : 20));
 
-    SKLabelNode *directionsLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia"];
+    SKLabelNode *directionsLabelDropShadow = [SKLabelNode new];
+    directionsLabelDropShadow.fontName = FontManager.appFontName;
     directionsLabelDropShadow.text = directionsLabel.text;
     directionsLabelDropShadow.name = @"startLabel";
     [directionsLabelDropShadow setFontColor:SKColor.blackColor];

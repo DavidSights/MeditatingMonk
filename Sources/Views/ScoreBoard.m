@@ -52,7 +52,7 @@
     SKColor *darkColor = [SKColor colorWithRed:(134.0/255.0) green:(114.0/255.0) blue:(58.0/255.0) alpha:1.0];
     SKColor *lightColor = [SKColor colorWithRed:(155.0/255.0) green:(136.0/255.0) blue:(72.0/255.0) alpha:1.0];
     
-    self.currentScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    self.currentScoreLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     self.currentScoreLabel.fontSize = 30;
     //lesson learned for color - the .0 matters, RGB needs to be divided by 255 to have a value between 0 and 1.
     self.currentScoreLabel.fontColor = darkColor;
@@ -63,7 +63,7 @@
     }
     [self.scoreBoardView addChild:self.currentScoreLabel];
     
-    SKLabelNode *yourScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *yourScoreLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     yourScoreLabel.fontColor = lightColor;
     yourScoreLabel.fontSize = 15;
     yourScoreLabel.position = CGPointMake(-70, 65);
@@ -74,7 +74,7 @@
     }
     [self.scoreBoardView addChild:yourScoreLabel];
     
-    self.highScoreValueLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    self.highScoreValueLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     self.highScoreValueLabel.fontSize = 30;
     self.highScoreValueLabel.fontColor = lightColor;
     self.highScoreValueLabel.position = CGPointMake(70, 25);
@@ -87,7 +87,7 @@
 
     [self.scoreBoardView addChild:self.highScoreValueLabel];
     
-    SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *highScoreLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     highScoreLabel.fontColor = lightColor;
     highScoreLabel.fontSize = 15;
     highScoreLabel.position = CGPointMake(70, 65);
@@ -100,7 +100,7 @@
     
     [self.scoreBoardView addChild:highScoreLabel];
     
-    SKLabelNode *shareLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *shareLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     shareLabel.text = @"share your score";
     shareLabel.fontSize = 12;
     shareLabel.fontColor = lightColor;
@@ -122,7 +122,7 @@
     }
 
     creditsButton.name = @"creditsButton";
-    SKLabelNode *creditsButtonText = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *creditsButtonText = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     
     creditsButtonText.fontColor = lightColor;
     creditsButtonText.text = @"Credits";

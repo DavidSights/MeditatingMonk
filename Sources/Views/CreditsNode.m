@@ -22,24 +22,24 @@
 
     [self addChild:[SKSpriteNode spriteNodeWithImageNamed:@"creditsBackground02iPhone"]];
 
-    SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     title.text = @"Meditating Monk was made by";
     title.fontColor = Colors.creditsLightColor;
     [self addChild:title];
 
-    SKLabelNode *nameDavid = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *nameDavid = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     nameDavid.fontColor = Colors.creditsDarkColor;
 
-    SKLabelNode *nameDavy = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *nameDavy = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     nameDavy.fontColor = Colors.creditsDarkColor;
 
-    SKLabelNode *descriptionDavid = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *descriptionDavid = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     descriptionDavid.fontColor = Colors.creditsLightColor;
 
-    SKLabelNode *descriptionDavy = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *descriptionDavy = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     descriptionDavy.fontColor = Colors.creditsLightColor;
 
-    SKLabelNode *returnToGame = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *returnToGame = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     returnToGame.fontColor = [SKColor whiteColor];
 
     SKSpriteNode *icon = [SKSpriteNode spriteNodeWithImageNamed:DeviceManager.isTablet ? @"creditsIconiPad" : @"icon"];
@@ -96,9 +96,9 @@
     }
 
     SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:button];
-    SKLabelNode *backLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *backLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     SKSpriteNode *rateButton = [SKSpriteNode spriteNodeWithImageNamed:button];
-    SKLabelNode *rateLabel = [SKLabelNode labelNodeWithFontNamed:@"minecraftia"];
+    SKLabelNode *rateLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
 
     backLabel.fontColor = Colors.creditsDarkColor;
 

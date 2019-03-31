@@ -8,6 +8,7 @@
 
 #import "TipCloud.h"
 #import "TipsArray.h"
+#import "MeditatingMonk-Swift.h"
 
 @implementation TipCloud
 
@@ -42,7 +43,7 @@
     SKLabelNode *tipLabel = [[SKLabelNode alloc] init];
     tipLabel.fontColor = [SKColor colorWithRed:111.0/255.0 green:158.0/255.0 blue:183.0/255.0 alpha:1.0];
     tipLabel.position = CGPointMake(0, -5);
-    tipLabel.fontName = @"minecraftia";
+    tipLabel.fontName = FontManager.appFontName;
     tipLabel.text = [TipsArray tip];
     tipLabel.fontSize = fontSize;
 
