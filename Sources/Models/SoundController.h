@@ -11,16 +11,11 @@
 
 @interface SoundController : SKNode
 
-+ (SKAction *)gameOver;
-+ (SKAction *)highScore;
-+ (SKAction *)jump;
-+ (SKAction *)button;
-
 // Sound effects
+- (void)playJumpSound;
 - (void)playButtonSound;
 - (void)playGameOverSound;
 - (void)playHighScoreSound;
-- (void)playJumpSound;
 
 // Music
 - (void)playMusic;

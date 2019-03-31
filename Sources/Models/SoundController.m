@@ -9,12 +9,6 @@
 #import "SoundController.h"
 #import <AVFoundation/AVFoundation.h>
 
-//@interface SoundController ()
-//
-//@property (nonatomic)
-//
-//@end
-
 @implementation SoundController {
     AVAudioPlayer *musicPlayer;
 }
@@ -27,38 +21,38 @@
     return self;
 }
 
-+ (SKAction *)gameOver {
++ (SKAction *)gameOverSoundAction {
     return [SKAction playSoundFileNamed:@"gameOverSound.mp3" waitForCompletion:YES];
 }
 
-+ (SKAction *)highScore {
++ (SKAction *)highScoreSoundAction {
     return [SKAction playSoundFileNamed:@"highScoreSound.mp3" waitForCompletion:YES];
 }
 
-+ (SKAction *)jump {
++ (SKAction *)jumpSoundAction {
     return [SKAction playSoundFileNamed:@"jumpSound.mp3" waitForCompletion:YES];
 }
 
-+ (SKAction *)button {
++ (SKAction *)buttonSoundAction {
     return [SKAction playSoundFileNamed:@"buttonSound.wav" waitForCompletion:YES];
 }
 
 // MARK: - Sound Effects
 
 - (void)playButtonSound {
-    [self runAction:SoundController.button];
+    [self runAction:SoundController.buttonSoundAction];
 }
 
 - (void)playGameOverSound {
-    [self runAction:SoundController.gameOver];
+    [self runAction:SoundController.gameOverSoundAction];
 }
 
 - (void)playHighScoreSound {
-    [self runAction:SoundController.highScore];
+    [self runAction:SoundController.highScoreSoundAction];
 }
 
 - (void)playJumpSound {
-    [self runAction:SoundController.jump];
+    [self runAction:SoundController.jumpSoundAction];
 }
 
 // MARK: - Music
