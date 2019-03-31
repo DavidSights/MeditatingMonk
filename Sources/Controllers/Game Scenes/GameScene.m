@@ -479,6 +479,9 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
     } else if ([name isEqual: @"creditsButton"]) {
         [self creditsButtonPressed];
+
+    } else if ([name isEqualToString:facebookNodeId] || [name isEqualToString:twitterNodeId]) {
+        [self shareButtonPressed];
     }
 }
 
@@ -496,6 +499,12 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self.soundController playButtonSound];
     [self showCredits];
     self.gameState = credits;
+}
+
+- (void)shareButtonPressed {
+    [self.soundController playButtonSound];
+    NSString *currentScoreString = [NSString stringWithFormat:@"%li", DataManager.currentScore];
+    [self.gameSceneDelegate shareScore:currentScoreString];
 }
 
 // MARK: Credits Screen

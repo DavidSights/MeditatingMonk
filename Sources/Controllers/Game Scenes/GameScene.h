@@ -11,6 +11,7 @@
 @protocol GameSceneDelegate <NSObject>
 
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
+- (void)shareScore:(NSString *)score;
 
 @end
 

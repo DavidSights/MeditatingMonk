@@ -8,6 +8,9 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+extern NSString * const facebookNodeId;
+extern NSString * const twitterNodeId;
+
 @interface ScoreBoard : SKNode
 
 @property (nonatomic) int score;

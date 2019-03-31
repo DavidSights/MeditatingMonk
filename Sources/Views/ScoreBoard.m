@@ -9,6 +9,9 @@
 #import "ScoreBoard.h"
 #import "MeditatingMonk-Swift.h"
 
+NSString * const facebookNodeId = @"facebookButton";
+NSString * const twitterNodeId = @"twitterButton";
+
 @interface ScoreBoard()
 
 /// The container view for everything displayed in this scoreboard.
@@ -168,12 +171,12 @@
                                                 positionY:self.replayButton.position.y];
 
     self.twitterButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"twitterButtoniPad" : @"twitterButtoniPhone")
-                                        identifierName:@"twitterButton"
+                                        identifierName:twitterNodeId
                                              positionX:-70
                                              positionY:(DeviceManager.isTablet ? -140 : -60)];
 
     self.facebookButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"facebookButtoniPad" : @"facebookButtoniPhone")
-                                         identifierName:@"facebookButton"
+                                         identifierName:facebookNodeId
                                               positionX:70
                                               positionY:self.twitterButton.position.y];
     // Set up the icons.

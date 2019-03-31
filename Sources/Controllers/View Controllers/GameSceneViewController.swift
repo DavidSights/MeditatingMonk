@@ -38,4 +38,19 @@ extension GameSceneViewController: GameSceneDelegate {
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
     }
+
+    func shareScore(_ score: String) {
+
+        // Create the content.
+        guard let screenShotImage = ImageManager.screenshotImage(withView: view) else { return }
+        let appStoreUrlString = "https://itunes.apple.com/us/app/meditating-monk/id904463280"
+        let shareMessage = "I scored \(score) while playing Meditating Monk. Can you beat my score?\n\(appStoreUrlString)"
+
+        // Create the share sheet.
+        let activityViewController = UIActivityViewController(activityItems: [screenShotImage, shareMessage], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = view
+
+        // Show the share sheet.
+        present(activityViewController, animated: true, completion: nil)
+    }
 }
