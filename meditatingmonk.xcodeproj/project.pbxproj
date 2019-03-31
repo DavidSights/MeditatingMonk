@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A043EF9225002A0001A7F60 /* GameSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EF8225002A0001A7F60 /* GameSceneViewController.swift */; };
+		9A043EFB225126CA001A7F60 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EFA225126CA001A7F60 /* SoundController.swift */; };
 		9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */; };
 		9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */; };
 		9A1892A219BBADD30016F95A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1892A119BBADD30016F95A /* icon@2x.png */; };
@@ -39,7 +40,6 @@
 		9A6CCA8C19A05205005538EF /* scoreboardiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8519A05205005538EF /* scoreboardiPad@2x.png */; };
 		9A6CCA8D19A05205005538EF /* twitterButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8619A05205005538EF /* twitterButtoniPad@2x.png */; };
 		9A711DCE19C2C35A003066B5 /* buttonSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9A711DCD19C2C35A003066B5 /* buttonSound.wav */; };
-		9A877B141BCB505700297A74 /* SoundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A877B131BCB505700297A74 /* SoundController.m */; };
 		9A8AF59119A92F1A004002E9 /* tipBackgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */; };
 		9A8AF59919AC2EDB004002E9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8AF59819AC2EDB004002E9 /* AVFoundation.framework */; };
 		9A8AF59B19AD147E004002E9 /* musicLoop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF59A19AD147E004002E9 /* musicLoop.wav */; };
@@ -103,6 +103,7 @@
 
 /* Begin PBXFileReference section */
 		9A043EF8225002A0001A7F60 /* GameSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneViewController.swift; sourceTree = "<group>"; };
+		9A043EFA225126CA001A7F60 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPhone@2x.png"; sourceTree = "<group>"; };
 		9A1892A119BBADD30016F95A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -137,8 +138,6 @@
 		9A6CCA8519A05205005538EF /* scoreboardiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scoreboardiPad@2x.png"; sourceTree = "<group>"; };
 		9A6CCA8619A05205005538EF /* twitterButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitterButtoniPad@2x.png"; sourceTree = "<group>"; };
 		9A711DCD19C2C35A003066B5 /* buttonSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonSound.wav; sourceTree = "<group>"; };
-		9A877B121BCB505700297A74 /* SoundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundController.h; path = Sources/Controllers/SoundController.h; sourceTree = SOURCE_ROOT; };
-		9A877B131BCB505700297A74 /* SoundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundController.m; path = Sources/Controllers/SoundController.m; sourceTree = SOURCE_ROOT; };
 		9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipBackgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A8AF59819AC2EDB004002E9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9A8AF59A19AD147E004002E9 /* musicLoop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = musicLoop.wav; sourceTree = "<group>"; };
@@ -228,8 +227,7 @@
 		9A2634C11BD4701400E3FCDE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9A877B121BCB505700297A74 /* SoundController.h */,
-				9A877B131BCB505700297A74 /* SoundController.m */,
+				9A043EFA225126CA001A7F60 /* SoundController.swift */,
 				9AD5316522434A10004DBEC1 /* View Controllers */,
 				9AD5316622434A1D004DBEC1 /* Game Scenes */,
 			);
@@ -630,12 +628,12 @@
 				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
 				9A2634C61BD471DC00E3FCDE /* TipCloud.m in Sources */,
 				9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */,
-				9A877B141BCB505700297A74 /* SoundController.m in Sources */,
 				9A8F84F5197354EC0085296D /* GameScene.m in Sources */,
 				9A8F84EC197354EC0085296D /* AppDelegate.m in Sources */,
 				9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */,
 				9AD5316122401125004DBEC1 /* EmailManager.swift in Sources */,
 				9A8F84E8197354EC0085296D /* main.m in Sources */,
+				9A043EFB225126CA001A7F60 /* SoundController.swift in Sources */,
 				9AD5316A22489A52004DBEC1 /* ImageManager.swift in Sources */,
 				9A043EF9225002A0001A7F60 /* GameSceneViewController.swift in Sources */,
 			);

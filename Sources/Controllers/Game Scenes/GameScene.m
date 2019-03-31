@@ -10,7 +10,6 @@
 #import <GameKit/GameKit.h>
 #import <Social/Social.h>
 #import "GameScene.h"
-#import "SoundController.h"
 #import "TipCloud.h"
 #import "ScoreBoard.h"
 #import "CreditsNode.h"
@@ -67,8 +66,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
         [self setupCredits];
 
         // Set up sound controller
-        self.soundController = [SoundController new];
-        [self addChild:self.soundController];
+        self.soundController = [[SoundController alloc] initForScene:self];
 
         self.gameState = title;
         [self.soundController playMusic];
