@@ -10,7 +10,7 @@
 #import <GameKit/GameKit.h>
 #import <Social/Social.h>
 #import "GameScene.h"
-#import "TipCloud.h"
+#import "TipCloudNode.h"
 #import "ScoreBoard.h"
 #import "CreditsNode.h"
 #import "MeditatingMonk-Swift.h"
@@ -31,6 +31,7 @@ enum GameState {
 // Views
 @property SKSpriteNode *monkNode, *background, *grassAndTree, *clouds1, *clouds2, *tipBackground;
 @property SKLabelNode *scoreLabel, *scoreLabelDropShadow;
+@property TipCloudNode *tipCloudNode;
 
 // Actions
 @property SKAction *openEyes;
@@ -384,9 +385,10 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 }
 
 - (void)showEnlighteningThought {
-    TipCloud *tip = [TipCloud new];
-    [tip positionWithFrame:self.frame];
-    [self addChild:tip];
+    TipCloudNode *tipCloudView = [TipCloudNode new];
+    [tipCloudView positionWithFrame:self.frame];
+    self.tipCloudNode = tipCloudView;
+    [self addChild:tipCloudView];
 }
 
 - (void)hideTip {
@@ -483,6 +485,11 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     } else if ([name isEqualToString:facebookNodeId] || [name isEqualToString:twitterNodeId]) {
         [self shareButtonPressed];
     }
+
+#if DEBUG
+    [self.tipCloudNode reloadTip];
+#endif
+
 }
 
 - (void)replayButtonPressed {
@@ -529,11 +536,11 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
     } else if ([name isEqual:@"davidEmail"]) {
         [self.soundController playButtonSound];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"emailDavid" object:self];
+        [EmailManager sendEmailToName:EmailManager.david message:@""];
 
     } else if ([name isEqual:@"davyEmail"]) {
         [self.soundController playButtonSound];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"emailDavy" object:self];
+        [EmailManager sendEmailToName:EmailManager.wolf message:@""];
     }
 }
 

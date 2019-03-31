@@ -15,6 +15,10 @@ import MessageUI
 
 class EmailManager: NSObject {
 
+    // TODO: Remove these as soon as the enum below can be utilized by @objc.
+    @objc static let david = "David"
+    @objc static let wolf = "Wolf"
+
     // MARK: - Recipients
 
     enum EmailRecipient {
@@ -56,18 +60,33 @@ class EmailManager: NSObject {
 
     // MARK: - Properties
 
-    var delegate: EmailManagerDelegate?
-    var shared = EmailManager()
+    private var delegate: EmailManagerDelegate?
+    private static var shared = EmailManager()
 
     // MARK: - Convenience Methods
 
-    func sendEmail(to recipients: [EmailRecipient], message: String) {
+    class func sendEmail(to recipients: [EmailRecipient], message: String) {
         let mailComposeViewController = MFMailComposeViewController()
-        mailComposeViewController.mailComposeDelegate = self
-        mailComposeViewController.setSubject("Meditating Monk Contact")
+        mailComposeViewController.mailComposeDelegate = EmailManager.shared
+        mailComposeViewController.setSubject("Meditating Monk Feedback")
         mailComposeViewController.setMessageBody(message, isHTML: false)
         mailComposeViewController.setToRecipients(recipients.map { $0.address })
-        self.delegate?.showEmailViewController(mailComposeViewController)
+        EmailManager.shared.delegate?.showEmailViewController(mailComposeViewController)
+    }
+
+    @objc class func sendEmail(toName name: String, message: String) {
+        switch name {
+        case EmailManager.david:
+            sendEmail(to: [.david], message: message)
+        case EmailManager.wolf:
+            sendEmail(to: [.davey], message: message)
+        default:
+            return
+        }
+    }
+
+    class func registerDelegate(delegate: EmailManagerDelegate) {
+        EmailManager.shared.delegate = delegate;
     }
 }
 

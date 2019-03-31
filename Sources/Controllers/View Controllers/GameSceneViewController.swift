@@ -23,6 +23,8 @@ class GameSceneViewController: UIViewController {
         if let skView = self.view as? SKView {
             skView.presentScene(gameScene)
         }
+
+        EmailManager.registerDelegate(delegate: self)
     }
 }
 
@@ -52,5 +54,18 @@ extension GameSceneViewController: GameSceneDelegate {
 
         // Show the share sheet.
         present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Email Manager Delegate
+
+extension GameSceneViewController: EmailManagerDelegate {
+
+    func showEmailViewController(_ emailViewController: UIViewController) {
+        present(emailViewController, animated: true, completion: nil)
+    }
+
+    func dismissEmailViewController(_ emailViewController: UIViewController) {
+        emailViewController.dismiss(animated: true, completion: nil)
     }
 }

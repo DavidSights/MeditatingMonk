@@ -8,8 +8,9 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface TipCloud : SKNode
+@interface TipCloudNode : SKNode
 
 - (void)positionWithFrame:(CGRect)frame;
+- (void)reloadTip;
 
 @end

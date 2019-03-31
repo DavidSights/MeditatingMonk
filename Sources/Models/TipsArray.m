@@ -18,7 +18,7 @@
 
                       @"Think of puppies. And kitties. And feel good.",
 
-                      @"What inspires you? Fit more of that into your life.",
+                      @"Inspiration is powerful. Find yours.",
 
                       @"Knowledge is power.",
 
@@ -30,19 +30,17 @@
 
                       @"Find harmony wherever possible.",
 
-                      @"You are not your temptations. Feed the good ones only.",
+                      @"You are not your temptations.\nFeed the good ones only.",
 
                       @"If at first you don’t succeed, try again.",
 
                       @"What are you chasing, and why?",
 
-                      @"Happiness is a moving target. Pick a still one and happiness will follow.",
-
-                      @"Success is the peak of a mountain called failure. Climb it.",
+                      @"Hike the mountain of failure\nto reach success.",
 
                       @"Consider a new perspective.",
 
-                      @"Forgiving others will do more for you than them.",
+                      @"Forgive not for others, but for yourself.",
 
                       @"How do others see you?",
                       
@@ -50,15 +48,15 @@
                       
                       @"Life is a journey. Not a destination.",
                       
-                      @"Are you the same person you were a year ago? A decade ago?",
+                      @"Change is constant.\nIntention leads it.",
                       
                       @"What artificial limits are holding you back?",
                       
                       @"The past is a story we tell ourselves.",
                       
-                      @"Ideas are fragile. Nuture them. Help them grow.",
+                      @"Ideas are fragile.\nNuture them. Help them grow.",
                       
-                      @"Everyone has strengths. Learn and take advantage of yours.",
+                      @"Everyone has strengths.\nLearn and take advantage of yours.",
                       
                       @"The sun will always shine again."];
 
