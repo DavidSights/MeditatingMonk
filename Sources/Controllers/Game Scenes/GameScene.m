@@ -10,7 +10,7 @@
 #import <GameKit/GameKit.h>
 #import <Social/Social.h>
 #import "GameScene.h"
-#import "Sounds.h"
+#import "SoundController.h"
 #import "TipCloud.h"
 #import "ScoreBoard.h"
 #import "CreditsNode.h"
@@ -28,8 +28,6 @@ enum GameState {
 @interface GameScene () <SKPhysicsContactDelegate>
 
 @property enum GameState gameState;
-@property GKLocalPlayer *player;
-@property BOOL musicPlaying;
 
 // Views
 @property SKSpriteNode *monkNode, *background, *grassAndTree, *clouds1, *clouds2, *tipBackground;
@@ -43,12 +41,10 @@ enum GameState {
 @property SKNode *grassEdge;
 @property SKNode *branchEdge;
 
-@property (strong, nonatomic) AVAudioPlayer *musicPlayer;
-
 @property (nonatomic) ScoreBoard *scoreboard;
 @property CreditsNode *credits;
 
-@property Sounds *soundController;
+@property SoundController *soundController;
 
 @end
 
@@ -64,21 +60,18 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
 
-        self.gameState = title;
-
         [self deviceSpecificSetupWithSize:size];
         [self setUpScoreboard];
-
         [self setUpAndShowTitleViews];
-
         [self addClouds];
-
-        [self setUpMusic];
-
         [self setupCredits];
 
-        self.soundController = [Sounds new];
+        // Set up sound controller
+        self.soundController = [SoundController new];
         [self addChild:self.soundController];
+
+        self.gameState = title;
+        [self.soundController playMusic];
     }
 
     return self;
@@ -143,32 +136,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
         self.openEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monkEyesOpeniPad@2x" ofType:@"png" ]]];
         self.closeEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monkiPad@2x" ofType:@"png"]]];
     }
-}
-
-# pragma mark - Audio
-
-- (void)setUpMusic {
-
-    NSURL *musicURL = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"musicLoop" ofType:@"wav"]];
-    NSError *error;
-
-    self.musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:&error];
-
-    if (error) {
-        NSLog(@"There was an error loading music: %@", error);
-    } else {
-        self.musicPlayer.numberOfLoops = -1;
-        [self.musicPlayer prepareToPlay];
-        [self.musicPlayer play];
-    }
-
-    self.musicPlaying = YES;
-}
-
-- (void)stopMusic {
-    [self.musicPlayer stop];
-    self.musicPlayer.currentTime = 0;
-    self.musicPlaying = NO;
 }
 
 #pragma mark - Set Up Scene
@@ -513,15 +480,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 }
 
 - (void)replayButtonPressed {
-    [self.scoreboard hideScore];
-    [self hideTip];
-
-    if (self.musicPlaying == NO) {
-        [self.musicPlayer play];
-        self.musicPlaying = YES;
-    }
-
-    self.gameState = newGame;
+    [self startNewGame];
 }
 
 - (void)gameCenterButtonPressed {
@@ -579,24 +538,19 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 #pragma mark - Collisions
 
--(void)didBeginContact:(SKPhysicsContact*)contact {
-
-    SKPhysicsBody *notTheMonk;
-
-    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask) {
-        notTheMonk = contact.bodyB;
-    }
-    else {
-        notTheMonk = contact.bodyA;
-    }
-
-    if (notTheMonk.categoryBitMask == treeCategroy) {
+- (void)didBeginContact:(SKPhysicsContact*)contact {
+    if (contact.bodyA.categoryBitMask == treeCategroy || contact.bodyB.categoryBitMask == treeCategroy) {
         [self touchedTree];
-    }
-
-    if (notTheMonk.categoryBitMask == grassCategory) {
+    } else if (contact.bodyA.categoryBitMask == grassCategory || contact.bodyB.categoryBitMask == grassCategory){
         [self touchedGrass];
     }
+}
+
+- (void)startNewGame {
+    self.gameState = newGame;
+    [self.scoreboard hideScore];
+    [self hideTip];
+    [self.soundController playMusic];
 }
 
 /// Handles all behavior related to the end of a game.
@@ -621,10 +575,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
         [self showEnlighteningThought];
     }
 
-    // Handle music
-    [self.musicPlayer stop];
-    self.musicPlayer.currentTime = 0;
-    self.musicPlaying = NO;
+    [self.soundController stopMusic];
 }
 
 /// Updates the high score if necessary, and plays a sound based on score.

@@ -9,16 +9,21 @@
 #import <SpriteKit/SpriteKit.h>
 #import <Foundation/Foundation.h>
 
-@interface Sounds : SKNode
+@interface SoundController : SKNode
 
 + (SKAction *)gameOver;
 + (SKAction *)highScore;
 + (SKAction *)jump;
 + (SKAction *)button;
 
+// Sound effects
 - (void)playButtonSound;
 - (void)playGameOverSound;
 - (void)playHighScoreSound;
 - (void)playJumpSound;
+
+// Music
+- (void)playMusic;
+- (void)stopMusic;
 
 @end

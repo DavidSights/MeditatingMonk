@@ -39,7 +39,7 @@
 		9A6CCA8C19A05205005538EF /* scoreboardiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8519A05205005538EF /* scoreboardiPad@2x.png */; };
 		9A6CCA8D19A05205005538EF /* twitterButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CCA8619A05205005538EF /* twitterButtoniPad@2x.png */; };
 		9A711DCE19C2C35A003066B5 /* buttonSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9A711DCD19C2C35A003066B5 /* buttonSound.wav */; };
-		9A877B141BCB505700297A74 /* Sounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A877B131BCB505700297A74 /* Sounds.m */; };
+		9A877B141BCB505700297A74 /* SoundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A877B131BCB505700297A74 /* SoundController.m */; };
 		9A8AF59119A92F1A004002E9 /* tipBackgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */; };
 		9A8AF59919AC2EDB004002E9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8AF59819AC2EDB004002E9 /* AVFoundation.framework */; };
 		9A8AF59B19AD147E004002E9 /* musicLoop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9A8AF59A19AD147E004002E9 /* musicLoop.wav */; };
@@ -137,8 +137,8 @@
 		9A6CCA8519A05205005538EF /* scoreboardiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scoreboardiPad@2x.png"; sourceTree = "<group>"; };
 		9A6CCA8619A05205005538EF /* twitterButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitterButtoniPad@2x.png"; sourceTree = "<group>"; };
 		9A711DCD19C2C35A003066B5 /* buttonSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonSound.wav; sourceTree = "<group>"; };
-		9A877B121BCB505700297A74 /* Sounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sounds.h; path = Sources/Models/Sounds.h; sourceTree = SOURCE_ROOT; };
-		9A877B131BCB505700297A74 /* Sounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sounds.m; path = Sources/Models/Sounds.m; sourceTree = SOURCE_ROOT; };
+		9A877B121BCB505700297A74 /* SoundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundController.h; path = Sources/Models/SoundController.h; sourceTree = SOURCE_ROOT; };
+		9A877B131BCB505700297A74 /* SoundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundController.m; path = Sources/Models/SoundController.m; sourceTree = SOURCE_ROOT; };
 		9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipBackgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A8AF59819AC2EDB004002E9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9A8AF59A19AD147E004002E9 /* musicLoop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = musicLoop.wav; sourceTree = "<group>"; };
@@ -331,8 +331,8 @@
 			children = (
 				9A2634C71BD4721E00E3FCDE /* TipsArray.h */,
 				9A2634C81BD4721E00E3FCDE /* TipsArray.m */,
-				9A877B121BCB505700297A74 /* Sounds.h */,
-				9A877B131BCB505700297A74 /* Sounds.m */,
+				9A877B121BCB505700297A74 /* SoundController.h */,
+				9A877B131BCB505700297A74 /* SoundController.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -630,7 +630,7 @@
 				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
 				9A2634C61BD471DC00E3FCDE /* TipCloud.m in Sources */,
 				9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */,
-				9A877B141BCB505700297A74 /* Sounds.m in Sources */,
+				9A877B141BCB505700297A74 /* SoundController.m in Sources */,
 				9A8F84F5197354EC0085296D /* GameScene.m in Sources */,
 				9A8F84EC197354EC0085296D /* AppDelegate.m in Sources */,
 				9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */,
