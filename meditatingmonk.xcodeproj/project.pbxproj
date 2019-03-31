@@ -137,7 +137,7 @@
 		9A6CCA8519A05205005538EF /* scoreboardiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scoreboardiPad@2x.png"; sourceTree = "<group>"; };
 		9A6CCA8619A05205005538EF /* twitterButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitterButtoniPad@2x.png"; sourceTree = "<group>"; };
 		9A711DCD19C2C35A003066B5 /* buttonSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buttonSound.wav; sourceTree = "<group>"; };
-		9A877B121BCB505700297A74 /* SoundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundController.h; path = Sources/Models/SoundController.h; sourceTree = SOURCE_ROOT; };
+		9A877B121BCB505700297A74 /* SoundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundController.h; path = Sources/Controllers/SoundController.h; sourceTree = SOURCE_ROOT; };
 		9A877B131BCB505700297A74 /* SoundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundController.m; path = Sources/Controllers/SoundController.m; sourceTree = SOURCE_ROOT; };
 		9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tipBackgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A8AF59819AC2EDB004002E9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -228,6 +228,7 @@
 		9A2634C11BD4701400E3FCDE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9A877B121BCB505700297A74 /* SoundController.h */,
 				9A877B131BCB505700297A74 /* SoundController.m */,
 				9AD5316522434A10004DBEC1 /* View Controllers */,
 				9AD5316622434A1D004DBEC1 /* Game Scenes */,
@@ -332,7 +333,6 @@
 			children = (
 				9A2634C71BD4721E00E3FCDE /* TipsArray.h */,
 				9A2634C81BD4721E00E3FCDE /* TipsArray.m */,
-				9A877B121BCB505700297A74 /* SoundController.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
