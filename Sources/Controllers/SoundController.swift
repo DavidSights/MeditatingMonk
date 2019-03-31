@@ -12,30 +12,6 @@ import AVKit
 
 @objc class SoundController: NSObject {
 
-    private enum SoundEffect {
-        case jump
-        case button
-        case gameOver
-        case highScore
-
-        var fileName: String {
-            switch self {
-            case .jump:
-                return "jumpSound.mp3"
-            case .button:
-                return "buttonSound.wav"
-            case .gameOver:
-                return "gameOverSound.mp3"
-            case .highScore:
-                return "highScoreSound.mp3"
-            }
-        }
-
-        var action: SKAction {
-            return SKAction.playSoundFileNamed(fileName, waitForCompletion: true)
-        }
-    }
-
     // MARK: - Properties
 
     /// A sound effects node. This is a node because it makes

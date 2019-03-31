@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9A043EF9225002A0001A7F60 /* GameSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EF8225002A0001A7F60 /* GameSceneViewController.swift */; };
 		9A043EFB225126CA001A7F60 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EFA225126CA001A7F60 /* SoundController.swift */; };
+		9A043EFD2251329B001A7F60 /* SoundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EFC2251329B001A7F60 /* SoundEffect.swift */; };
 		9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */; };
 		9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */; };
 		9A1892A219BBADD30016F95A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1892A119BBADD30016F95A /* icon@2x.png */; };
@@ -104,6 +105,7 @@
 /* Begin PBXFileReference section */
 		9A043EF8225002A0001A7F60 /* GameSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneViewController.swift; sourceTree = "<group>"; };
 		9A043EFA225126CA001A7F60 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
+		9A043EFC2251329B001A7F60 /* SoundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffect.swift; sourceTree = "<group>"; };
 		9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPhone@2x.png"; sourceTree = "<group>"; };
 		9A1892A119BBADD30016F95A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 			children = (
 				9A2634C71BD4721E00E3FCDE /* TipsArray.h */,
 				9A2634C81BD4721E00E3FCDE /* TipsArray.m */,
+				9A043EFC2251329B001A7F60 /* SoundEffect.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 			files = (
 				9A2634C91BD4721E00E3FCDE /* TipsArray.m in Sources */,
 				9AD5316E2249CE8B004DBEC1 /* Colors.swift in Sources */,
+				9A043EFD2251329B001A7F60 /* SoundEffect.swift in Sources */,
 				9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */,
 				9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */,
 				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
