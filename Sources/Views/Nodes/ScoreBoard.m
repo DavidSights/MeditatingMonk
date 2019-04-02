@@ -213,7 +213,7 @@ NSString * const twitterNodeId = @"twitterButton";
 
 - (void)reloadData {
     self.highScoreValueLabel.text = [NSString stringWithFormat:@"%li", (long)DataManager.highScore];
-    self.currentScoreLabel.text = [NSString stringWithFormat:@"%i", DataManager.currentScore];
+    self.currentScoreLabel.text = [NSString stringWithFormat:@"%li", (long)DataManager.currentScore];
 }
 
 @end

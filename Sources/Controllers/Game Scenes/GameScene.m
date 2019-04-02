@@ -7,13 +7,11 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import <GameKit/GameKit.h>
-#import <Social/Social.h>
+#import <StoreKit/StoreKit.h>
+#import "MeditatingMonk-Swift.h"
 #import "GameScene.h"
 #import "ScoreBoard.h"
 #import "CreditsNode.h"
-#import "MeditatingMonk-Swift.h"
-#import <StoreKit/StoreKit.h>
 
 enum GameState {
     title,
@@ -73,6 +71,16 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     return self;
 }
 
+- (void) deviceSpecificSetupWithSize:(CGSize)size {
+    [self addBackground:size];
+    [self addMonk:size];
+    [self addGrassEdge:size];
+    [self addBranchEdge:size];
+    self.physicsWorld.contactDelegate = self;
+}
+
+#pragma mark - Set Up Scene
+
 /// Set up and add the cloud node to this scene.
 /// @param size This size must be provided to correctly position this node.
 - (void)setUpTipCloudWithSize:(CGSize)size {
@@ -86,7 +94,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     CGSize size = self.view.frame.size;
     self.creditsNode = [[CreditsNode alloc] init:size];
     self.creditsNode.position = CGPointMake(size.width/2, size.height/2);
-    self.creditsNode.name = @"credits node view";
 }
 
 - (void)setUpScoreboard {
@@ -117,21 +124,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     self.scoreboard.position = CGPointMake(self.size.width/2, self.size.height * 2);
     [self addChild:self.scoreboard];
 }
-
-- (void) deviceSpecificSetupWithSize:(CGSize)size {
-
-    self.backgroundColor = [SKColor colorWithRed:0.15
-                                           green:0.15
-                                            blue:0.3
-                                           alpha:1.0];
-    [self addBackground:size];
-    [self addMonk:size];
-    [self addGrassEdge:size];
-    [self addBranchEdge:size];
-    self.physicsWorld.contactDelegate = self;
-}
-
-#pragma mark - Set Up Scene
 
 - (void)addMonk:(CGSize)size {
     self.monkNode = [MonkNode new];
@@ -445,7 +437,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     }
 }
 
-// MARK: Scoreboard
+// MARK: - Scoreboard
 
 - (void)handleScoreboardInteractionForName:(NSString *)name {
 
@@ -464,7 +456,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 }
 
 - (void)replayButtonPressed {
-    [self startNewGame];
+    [self startGame];
 }
 
 - (void)gameCenterButtonPressed {
@@ -485,7 +477,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self.gameSceneDelegate shareScore:currentScoreString];
 }
 
-// MARK: Credits Screen
+// MARK: - Credits Screen
 
 - (void)handleCreditsScreenInteractionForName:(NSString *)name {
 
@@ -536,7 +528,17 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     }
 }
 
-- (void)startNewGame {
+- (void)touchedTree {
+    [self endGame];
+}
+
+- (void)touchedGrass {
+    [self endGame];
+}
+
+// MARK: - Game Management
+
+- (void)startGame {
     self.gameState = newGame;
     [self.scoreboard hideScore];
     [self hideTipCloud];
@@ -557,7 +559,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
     [self.scoreboard reloadData];
     [self showScoreBoardAndHideScoreCounter];
-    [self updateSavedScores];
+    [self handleHighScore];
 
     DataManager.combinedScores += DataManager.currentScore;
 
@@ -566,24 +568,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     }
 
     [self.soundController stopMusic];
-}
-
-/// Updates the high score if necessary, and plays a sound based on score.
-- (void)updateSavedScores {
-    if (DataManager.currentScore > DataManager.highScore) {
-        DataManager.highScore = DataManager.currentScore;
-        [self.soundController playHighScoreSound];
-    } else {
-        [self.soundController playGameOverSound];
-    }
-}
-
-- (void)touchedTree {
-    [self endGame];
-}
-
-- (void)touchedGrass {
-    [self endGame];
 }
 
 #pragma mark - Score
@@ -601,6 +585,16 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self hideScoreLabel];
     [self.scoreboard showScore];
     self.gameState = scoreboard;
+}
+
+/// Updates the high score if necessary, and plays a sound based on score.
+- (void)handleHighScore {
+    if (DataManager.currentScore > DataManager.highScore) {
+        DataManager.highScore = DataManager.currentScore;
+        [self.soundController playHighScoreSound];
+    } else {
+        [self.soundController playGameOverSound];
+    }
 }
 
 @end

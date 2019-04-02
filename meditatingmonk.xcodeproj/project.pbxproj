@@ -62,8 +62,6 @@
 		9A8F84EC197354EC0085296D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F84EB197354EC0085296D /* AppDelegate.m */; };
 		9A8F84F5197354EC0085296D /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F84F4197354EC0085296D /* GameScene.m */; };
 		9A8F84F9197354EC0085296D /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F84F8197354EC0085296D /* images.xcassets */; };
-		9A8F8501197354EC0085296D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84D9197354EC0085296D /* Foundation.framework */; };
-		9A8F8502197354EC0085296D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84DD197354EC0085296D /* UIKit.framework */; };
 		9A8F85191973571B0085296D /* monkEyesClosediPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F85161973571B0085296D /* monkEyesClosediPhone@2x.png */; };
 		9A8F851A1973571B0085296D /* monkEyesOpeniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F85171973571B0085296D /* monkEyesOpeniPhone@2x.png */; };
 		9A8F851F197484380085296D /* backgroundDay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F851E197484380085296D /* backgroundDay@2x.png */; };
@@ -94,16 +92,6 @@
 		9AFF510D19B4E50600751BEA /* emailButtoniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510B19B4E50600751BEA /* emailButtoniPhone@2x.png */; };
 		9AFF510E19B4E50600751BEA /* twitterButton2iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFF510C19B4E50600751BEA /* twitterButton2iPhone@2x.png */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9A8F8503197354EC0085296D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9A8F84CE197354EC0085296D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9A8F84D5197354EC0085296D;
-			remoteInfo = MeditatingMonk;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9A043EF8225002A0001A7F60 /* GameSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneViewController.swift; sourceTree = "<group>"; };
@@ -168,7 +156,6 @@
 		9A8F84F3197354EC0085296D /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		9A8F84F4197354EC0085296D /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		9A8F84F8197354EC0085296D /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = images.xcassets; path = Media/images.xcassets; sourceTree = "<group>"; };
-		9A8F84FE197354EC0085296D /* MeditatingMonkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeditatingMonkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A8F85161973571B0085296D /* monkEyesClosediPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkEyesClosediPhone@2x.png"; sourceTree = "<group>"; };
 		9A8F85171973571B0085296D /* monkEyesOpeniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkEyesOpeniPhone@2x.png"; sourceTree = "<group>"; };
 		9A8F851E197484380085296D /* backgroundDay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundDay@2x.png"; sourceTree = "<group>"; };
@@ -215,15 +202,6 @@
 				9A8F84DE197354EC0085296D /* UIKit.framework in Frameworks */,
 				9A8F84E0197354EC0085296D /* SpriteKit.framework in Frameworks */,
 				9A8F84DA197354EC0085296D /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9A8F84FB197354EC0085296D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9A8F8502197354EC0085296D /* UIKit.framework in Frameworks */,
-				9A8F8501197354EC0085296D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				9A8F84D6197354EC0085296D /* MeditatingMonk.app */,
-				9A8F84FE197354EC0085296D /* MeditatingMonkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -502,48 +479,26 @@
 			productReference = 9A8F84D6197354EC0085296D /* MeditatingMonk.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9A8F84FD197354EC0085296D /* MeditatingMonkTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9A8F8512197354EC0085296D /* Build configuration list for PBXNativeTarget "MeditatingMonkTests" */;
-			buildPhases = (
-				9A8F84FA197354EC0085296D /* Sources */,
-				9A8F84FB197354EC0085296D /* Frameworks */,
-				9A8F84FC197354EC0085296D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9A8F8504197354EC0085296D /* PBXTargetDependency */,
-			);
-			name = MeditatingMonkTests;
-			productName = MeditatingMonkTests;
-			productReference = 9A8F84FE197354EC0085296D /* MeditatingMonkTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		9A8F84CE197354EC0085296D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = DavidSights;
 				TargetAttributes = {
 					9A8F84D5197354EC0085296D = {
 						DevelopmentTeam = N2SGMRCH23;
-						LastSwiftMigration = 1010;
-					};
-					9A8F84FD197354EC0085296D = {
-						TestTargetID = 9A8F84D5197354EC0085296D;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
 			buildConfigurationList = 9A8F84D1197354EC0085296D /* Build configuration list for PBXProject "meditatingmonk" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -553,7 +508,6 @@
 			projectRoot = "";
 			targets = (
 				9A8F84D5197354EC0085296D /* MeditatingMonk */,
-				9A8F84FD197354EC0085296D /* MeditatingMonkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -624,13 +578,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9A8F84FC197354EC0085296D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -659,28 +606,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9A8F84FA197354EC0085296D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9A8F8504197354EC0085296D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9A8F84D5197354EC0085296D /* MeditatingMonk */;
-			targetProxy = 9A8F8503197354EC0085296D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		9A8F850D197354EC0085296D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -733,6 +666,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -770,6 +704,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -793,7 +728,7 @@
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Sources/Supporting Files/MeditatingMonk-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -817,53 +752,9 @@
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Sources/Supporting Files/MeditatingMonk-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		9A8F8513197354EC0085296D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MeditatingMonk.app/MeditatingMonk";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MeditatingMonk/MeditatingMonk-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "MeditatingMonkTests/MeditatingMonkTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.davidsights.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		9A8F8514197354EC0085296D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MeditatingMonk.app/MeditatingMonk";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MeditatingMonk/MeditatingMonk-Prefix.pch";
-				INFOPLIST_FILE = "MeditatingMonkTests/MeditatingMonkTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.davidsights.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -884,15 +775,6 @@
 			buildConfigurations = (
 				9A8F8510197354EC0085296D /* Debug */,
 				9A8F8511197354EC0085296D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9A8F8512197354EC0085296D /* Build configuration list for PBXNativeTarget "MeditatingMonkTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9A8F8513197354EC0085296D /* Debug */,
-				9A8F8514197354EC0085296D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
