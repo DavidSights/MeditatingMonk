@@ -6,9 +6,6 @@
 //  Copyright © 2019 DavidSights. All rights reserved.
 //
 
-import UIKit
-import SpriteKit
-
 class GameSceneViewController: UIViewController {
 
     var gameScene: GameScene?

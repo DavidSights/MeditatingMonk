@@ -28,13 +28,10 @@ enum GameState {
 @property enum GameState gameState;
 
 // Views
-@property SKSpriteNode *monkNode, *background, *grassAndTree, *clouds1, *clouds2, *tipBackground;
+@property MonkNode *monkNode;
+@property SKSpriteNode *background, *grassAndTree, *clouds1, *clouds2;
 @property SKLabelNode *scoreLabel, *scoreLabelDropShadow;
 @property TipCloudNode *tipCloudNode;
-
-// Actions
-@property SKAction *openEyes;
-@property SKAction *closeEyes;
 
 // Collision Edges
 @property SKNode *grassEdge;
@@ -131,42 +128,16 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self addMonk:size];
     [self addGrassEdge:size];
     [self addBranchEdge:size];
-
     self.physicsWorld.contactDelegate = self;
-
-    if (!DeviceManager.isTablet) {
-        // Set up for iPhone
-        self.openEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monkAwake@2x" ofType:@"png" ]]];
-        self.closeEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monk@2x" ofType:@"png"]]];
-
-    } else {
-        // Set up for iPad
-        self.openEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monkEyesOpeniPad@2x" ofType:@"png" ]]];
-        self.closeEyes = [SKAction setTexture:[SKTexture textureWithImageNamed:[[NSBundle mainBundle] pathForResource:@"monkiPad@2x" ofType:@"png"]]];
-    }
 }
 
 #pragma mark - Set Up Scene
 
 - (void)addMonk:(CGSize)size {
-
-    BOOL deviceIsPad = size.width == 768 && size.height == 1024;
-    
-    if (!deviceIsPad) {
-        // Set up for iPhone
-        self.monkNode = [SKSpriteNode spriteNodeWithImageNamed:@"monk"];
-        
-    } else {
-        // Set up for iPad
-        self.monkNode = [SKSpriteNode spriteNodeWithImageNamed:@"monkiPad"];
-        self.monkNode.physicsBody.mass = 2.1; // Monk is too heavy on ipad without changing mass.
-    }
-
-    self.monkNode.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.monkNode.size];
+    self.monkNode = [MonkNode new];
     self.monkNode.position = CGPointMake(size.width/2, size.height/2);
     self.monkNode.physicsBody.categoryBitMask = monkCategory;
     self.monkNode.physicsBody.contactTestBitMask = treeCategroy | grassCategory;
-
     [self addChild:self.monkNode];
 }
 
@@ -444,7 +415,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     // Monk actions
     [self makeMonkJump];
     [self.soundController playJumpSound];
-    [self.monkNode runAction:self.closeEyes];
+    [self.monkNode closeEyes];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -580,7 +551,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     // Stop the timer.
     [self removeActionForKey:updateScoreActionKey];
 
-    [self.monkNode runAction:self.openEyes];
+    [self.monkNode openEyes];
 
     [self hideScoreLabel];
 

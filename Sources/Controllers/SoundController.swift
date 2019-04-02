@@ -6,9 +6,7 @@
 //  Copyright © 2019 DavidSights. All rights reserved.
 //
 
-import Foundation
-import SpriteKit
-import AVKit
+import AVFoundation
 
 @objc class SoundController: NSObject {
 

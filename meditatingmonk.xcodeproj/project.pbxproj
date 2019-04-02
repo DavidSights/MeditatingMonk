@@ -13,6 +13,7 @@
 		9A043EFF22514A25001A7F60 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EFE22514A25001A7F60 /* FontManager.swift */; };
 		9A043F032251502B001A7F60 /* Minecraftia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AD53157223FF20F004DBEC1 /* Minecraftia.ttf */; };
 		9A043F052252D5A7001A7F60 /* TipCloudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F042252D5A7001A7F60 /* TipCloudNode.swift */; };
+		9A043F082252EFB7001A7F60 /* MonkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F072252EFB7001A7F60 /* MonkNode.swift */; };
 		9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */; };
 		9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */; };
 		9A1892A219BBADD30016F95A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1892A119BBADD30016F95A /* icon@2x.png */; };
@@ -63,13 +64,13 @@
 		9A8F84F9197354EC0085296D /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F84F8197354EC0085296D /* images.xcassets */; };
 		9A8F8501197354EC0085296D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84D9197354EC0085296D /* Foundation.framework */; };
 		9A8F8502197354EC0085296D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A8F84DD197354EC0085296D /* UIKit.framework */; };
-		9A8F85191973571B0085296D /* monk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F85161973571B0085296D /* monk@2x.png */; };
-		9A8F851A1973571B0085296D /* monkAwake@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F85171973571B0085296D /* monkAwake@2x.png */; };
+		9A8F85191973571B0085296D /* monkEyesClosediPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F85161973571B0085296D /* monkEyesClosediPhone@2x.png */; };
+		9A8F851A1973571B0085296D /* monkEyesOpeniPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F85171973571B0085296D /* monkEyesOpeniPhone@2x.png */; };
 		9A8F851F197484380085296D /* backgroundDay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F851E197484380085296D /* backgroundDay@2x.png */; };
 		9AC01738199C18E200C1C4ED /* backgroundiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01733199C18E200C1C4ED /* backgroundiPad@2x.png */; };
 		9AC0173A199C18E200C1C4ED /* grassAndTreeiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */; };
 		9AC0173B199C18E200C1C4ED /* monkEyesOpeniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */; };
-		9AC0173C199C18E200C1C4ED /* monkiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01737199C18E200C1C4ED /* monkiPad@2x.png */; };
+		9AC0173C199C18E200C1C4ED /* monkiPadEyesClosediPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AC01737199C18E200C1C4ED /* monkiPadEyesClosediPad@2x.png */; };
 		9AD3211919C1061700E38C83 /* creditsButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211719C1061700E38C83 /* creditsButtoniPad@2x.png */; };
 		9AD3211C19C107F800E38C83 /* titleiPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211B19C107F800E38C83 /* titleiPad@2x.png */; };
 		9AD3212219C11F5900E38C83 /* clouds1iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD3211D19C11F5900E38C83 /* clouds1iPad@2x.png */; };
@@ -110,6 +111,7 @@
 		9A043EFC2251329B001A7F60 /* SoundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffect.swift; sourceTree = "<group>"; };
 		9A043EFE22514A25001A7F60 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		9A043F042252D5A7001A7F60 /* TipCloudNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCloudNode.swift; sourceTree = "<group>"; };
+		9A043F072252EFB7001A7F60 /* MonkNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkNode.swift; sourceTree = "<group>"; };
 		9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPhone@2x.png"; sourceTree = "<group>"; };
 		9A1892A119BBADD30016F95A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -167,13 +169,13 @@
 		9A8F84F4197354EC0085296D /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		9A8F84F8197354EC0085296D /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = images.xcassets; path = Media/images.xcassets; sourceTree = "<group>"; };
 		9A8F84FE197354EC0085296D /* MeditatingMonkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeditatingMonkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A8F85161973571B0085296D /* monk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monk@2x.png"; sourceTree = "<group>"; };
-		9A8F85171973571B0085296D /* monkAwake@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkAwake@2x.png"; sourceTree = "<group>"; };
+		9A8F85161973571B0085296D /* monkEyesClosediPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkEyesClosediPhone@2x.png"; sourceTree = "<group>"; };
+		9A8F85171973571B0085296D /* monkEyesOpeniPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkEyesOpeniPhone@2x.png"; sourceTree = "<group>"; };
 		9A8F851E197484380085296D /* backgroundDay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundDay@2x.png"; sourceTree = "<group>"; };
 		9AC01733199C18E200C1C4ED /* backgroundiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPad@2x.png"; sourceTree = "<group>"; };
 		9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPad@2x.png"; sourceTree = "<group>"; };
 		9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkEyesOpeniPad@2x.png"; sourceTree = "<group>"; };
-		9AC01737199C18E200C1C4ED /* monkiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkiPad@2x.png"; sourceTree = "<group>"; };
+		9AC01737199C18E200C1C4ED /* monkiPadEyesClosediPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "monkiPadEyesClosediPad@2x.png"; sourceTree = "<group>"; };
 		9AD3211719C1061700E38C83 /* creditsButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsButtoniPad@2x.png"; sourceTree = "<group>"; };
 		9AD3211B19C107F800E38C83 /* titleiPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titleiPad@2x.png"; sourceTree = "<group>"; };
 		9AD3211D19C11F5900E38C83 /* clouds1iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds1iPad@2x.png"; sourceTree = "<group>"; };
@@ -228,6 +230,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9A043F062252EEC1001A7F60 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				9A49D6C9197F48590078C2D6 /* ScoreBoard.h */,
+				9A49D6CA197F48590078C2D6 /* ScoreBoard.m */,
+				9A8AF5BE19B2C064004002E9 /* CreditsNode.h */,
+				9A8AF5BF19B2C064004002E9 /* CreditsNode.m */,
+				9A043F042252D5A7001A7F60 /* TipCloudNode.swift */,
+				9A043F072252EFB7001A7F60 /* MonkNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
 		9A2634C11BD4701400E3FCDE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,11 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				9A877B0E1BCB4FE800297A74 /* Storyboards */,
-				9A49D6C9197F48590078C2D6 /* ScoreBoard.h */,
-				9A49D6CA197F48590078C2D6 /* ScoreBoard.m */,
-				9A8AF5BE19B2C064004002E9 /* CreditsNode.h */,
-				9A8AF5BF19B2C064004002E9 /* CreditsNode.m */,
-				9A043F042252D5A7001A7F60 /* TipCloudNode.swift */,
+				9A043F062252EEC1001A7F60 /* Nodes */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -363,8 +374,6 @@
 				9A49D6CC197F48740078C2D6 /* buttonBackground@2x.png */,
 				9A49D6CD197F48740078C2D6 /* scoreInfoBackground@2x.png */,
 				9A8F851E197484380085296D /* backgroundDay@2x.png */,
-				9A8F85161973571B0085296D /* monk@2x.png */,
-				9A8F85171973571B0085296D /* monkAwake@2x.png */,
 				9AD5315D223FF78C004DBEC1 /* iPad */,
 				9AD5315C223FF783004DBEC1 /* iPhone */,
 			);
@@ -385,6 +394,8 @@
 				9A6CCA65199F0EEA005538EF /* facebookButtoniPhone@2x.png */,
 				9A6CCA66199F0EEA005538EF /* gameCenterIconiPhone@2x.png */,
 				9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */,
+				9A8F85161973571B0085296D /* monkEyesClosediPhone@2x.png */,
+				9A8F85171973571B0085296D /* monkEyesOpeniPhone@2x.png */,
 				9A6CCA67199F0EEA005538EF /* playIconiPhone@2x.png */,
 				9A6CCA68199F0EEA005538EF /* scoreboardiPhone@2x.png */,
 				9A8AF59019A92F1A004002E9 /* tipBackgroundiPhone@2x.png */,
@@ -401,7 +412,7 @@
 				9AC01733199C18E200C1C4ED /* backgroundiPad@2x.png */,
 				9AC01735199C18E200C1C4ED /* grassAndTreeiPad@2x.png */,
 				9AC01736199C18E200C1C4ED /* monkEyesOpeniPad@2x.png */,
-				9AC01737199C18E200C1C4ED /* monkiPad@2x.png */,
+				9AC01737199C18E200C1C4ED /* monkiPadEyesClosediPad@2x.png */,
 				9A6CCA8019A05205005538EF /* buttoniPad@2x.png */,
 				9A6CCA8119A05205005538EF /* buttonPressediPad@2x.png */,
 				9A6CCA8219A05205005538EF /* facebookButtoniPad@2x.png */,
@@ -557,7 +568,7 @@
 				9AFF510A19B3EBFF00751BEA /* creditsBackground02iPhone@2x.png in Resources */,
 				9AD3212619C11F5900E38C83 /* twitterButton2iPad@2x.png in Resources */,
 				9A8AF5A919B021B4004002E9 /* title@2x.png in Resources */,
-				9A8F851A1973571B0085296D /* monkAwake@2x.png in Resources */,
+				9A8F851A1973571B0085296D /* monkEyesOpeniPhone@2x.png in Resources */,
 				9A6CCA6A199F0EEA005538EF /* buttoniPhone@2x.png in Resources */,
 				9AFF510E19B4E50600751BEA /* twitterButton2iPhone@2x.png in Resources */,
 				9A6CCA6B199F0EEA005538EF /* buttonPressediPhone@2x.png in Resources */,
@@ -566,10 +577,10 @@
 				9A2055A719A7087F00F2E743 /* clouds1@2x.png in Resources */,
 				9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */,
 				9A8AF5A719AD8D5F004002E9 /* tipCloudiPhone@2x.png in Resources */,
-				9A8F85191973571B0085296D /* monk@2x.png in Resources */,
+				9A8F85191973571B0085296D /* monkEyesClosediPhone@2x.png in Resources */,
 				9AFF510719B2DC5800751BEA /* creditsButtoniPhone@2x.png in Resources */,
 				9A711DCE19C2C35A003066B5 /* buttonSound.wav in Resources */,
-				9AC0173C199C18E200C1C4ED /* monkiPad@2x.png in Resources */,
+				9AC0173C199C18E200C1C4ED /* monkiPadEyesClosediPad@2x.png in Resources */,
 				9A2055A819A7087F00F2E743 /* clouds2@2x.png in Resources */,
 				9AFF510819B2DC5800751BEA /* creditsButtonPressediPhone@2x.png in Resources */,
 				9A6CCA8C19A05205005538EF /* scoreboardiPad@2x.png in Resources */,
@@ -643,6 +654,7 @@
 				9A8F84E8197354EC0085296D /* main.m in Sources */,
 				9A043EFB225126CA001A7F60 /* SoundController.swift in Sources */,
 				9AD5316A22489A52004DBEC1 /* ImageManager.swift in Sources */,
+				9A043F082252EFB7001A7F60 /* MonkNode.swift in Sources */,
 				9A043EF9225002A0001A7F60 /* GameSceneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
