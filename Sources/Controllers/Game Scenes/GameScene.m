@@ -591,7 +591,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     DataManager.combinedScores += DataManager.currentScore;
 
     if (DataManager.currentScore >= 10) {
-        [self showEnlighteningThought];
+        [self showTipCloud];
     }
 
     [self.soundController stopMusic];
