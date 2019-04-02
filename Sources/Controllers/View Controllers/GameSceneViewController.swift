@@ -28,6 +28,8 @@ class GameSceneViewController: UIViewController {
     }
 }
 
+// MARK: - Game Scene Delegate
+
 extension GameSceneViewController: GameSceneDelegate {
 
     func showAlert(withTitle title: String, message: String) {

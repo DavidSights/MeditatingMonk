@@ -3,3 +3,4 @@
 //
 
 #import "GameScene.h"
+#import "TipsArray.h"

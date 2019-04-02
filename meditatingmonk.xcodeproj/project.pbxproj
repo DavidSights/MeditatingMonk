@@ -12,6 +12,7 @@
 		9A043EFD2251329B001A7F60 /* SoundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EFC2251329B001A7F60 /* SoundEffect.swift */; };
 		9A043EFF22514A25001A7F60 /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043EFE22514A25001A7F60 /* FontManager.swift */; };
 		9A043F032251502B001A7F60 /* Minecraftia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AD53157223FF20F004DBEC1 /* Minecraftia.ttf */; };
+		9A043F052252D5A7001A7F60 /* TipCloudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F042252D5A7001A7F60 /* TipCloudNode.swift */; };
 		9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */; };
 		9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */; };
 		9A1892A219BBADD30016F95A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1892A119BBADD30016F95A /* icon@2x.png */; };
@@ -21,7 +22,6 @@
 		9A2055A919A7087F00F2E743 /* clouds3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2055A419A7087F00F2E743 /* clouds3@2x.png */; };
 		9A2055AA19A7087F00F2E743 /* clouds4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2055A519A7087F00F2E743 /* clouds4@2x.png */; };
 		9A2055AB19A7087F00F2E743 /* clouds5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A2055A619A7087F00F2E743 /* clouds5@2x.png */; };
-		9A2634C61BD471DC00E3FCDE /* TipCloudNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2634C51BD471DC00E3FCDE /* TipCloudNode.m */; };
 		9A2634C91BD4721E00E3FCDE /* TipsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2634C81BD4721E00E3FCDE /* TipsArray.m */; };
 		9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A49D6CA197F48590078C2D6 /* ScoreBoard.m */; };
 		9A49D6CE197F48740078C2D6 /* buttonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A49D6CC197F48740078C2D6 /* buttonBackground@2x.png */; };
@@ -109,6 +109,7 @@
 		9A043EFA225126CA001A7F60 /* SoundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9A043EFC2251329B001A7F60 /* SoundEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEffect.swift; sourceTree = "<group>"; };
 		9A043EFE22514A25001A7F60 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		9A043F042252D5A7001A7F60 /* TipCloudNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCloudNode.swift; sourceTree = "<group>"; };
 		9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPhone@2x.png"; sourceTree = "<group>"; };
 		9A1892A119BBADD30016F95A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -118,8 +119,6 @@
 		9A2055A419A7087F00F2E743 /* clouds3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds3@2x.png"; sourceTree = "<group>"; };
 		9A2055A519A7087F00F2E743 /* clouds4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds4@2x.png"; sourceTree = "<group>"; };
 		9A2055A619A7087F00F2E743 /* clouds5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clouds5@2x.png"; sourceTree = "<group>"; };
-		9A2634C41BD471DC00E3FCDE /* TipCloudNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TipCloudNode.h; path = Sources/Views/TipCloudNode.h; sourceTree = SOURCE_ROOT; };
-		9A2634C51BD471DC00E3FCDE /* TipCloudNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TipCloudNode.m; path = Sources/Views/TipCloudNode.m; sourceTree = SOURCE_ROOT; };
 		9A2634C71BD4721E00E3FCDE /* TipsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TipsArray.h; path = Sources/Models/TipsArray.h; sourceTree = SOURCE_ROOT; };
 		9A2634C81BD4721E00E3FCDE /* TipsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TipsArray.m; path = Sources/Models/TipsArray.m; sourceTree = SOURCE_ROOT; };
 		9A49D6C9197F48590078C2D6 /* ScoreBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreBoard.h; sourceTree = "<group>"; };
@@ -315,8 +314,7 @@
 				9A49D6CA197F48590078C2D6 /* ScoreBoard.m */,
 				9A8AF5BE19B2C064004002E9 /* CreditsNode.h */,
 				9A8AF5BF19B2C064004002E9 /* CreditsNode.m */,
-				9A2634C41BD471DC00E3FCDE /* TipCloudNode.h */,
-				9A2634C51BD471DC00E3FCDE /* TipCloudNode.m */,
+				9A043F042252D5A7001A7F60 /* TipCloudNode.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -636,8 +634,8 @@
 				9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */,
 				9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */,
 				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
-				9A2634C61BD471DC00E3FCDE /* TipCloudNode.m in Sources */,
 				9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */,
+				9A043F052252D5A7001A7F60 /* TipCloudNode.swift in Sources */,
 				9A8F84F5197354EC0085296D /* GameScene.m in Sources */,
 				9A8F84EC197354EC0085296D /* AppDelegate.m in Sources */,
 				9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */,

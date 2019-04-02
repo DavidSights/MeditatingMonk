@@ -12,7 +12,7 @@
 NSString * const facebookNodeId = @"facebookButton";
 NSString * const twitterNodeId = @"twitterButton";
 
-@interface ScoreBoard()
+@interface ScoreBoard ()
 
 /// The container view for everything displayed in this scoreboard.
 @property SKSpriteNode *scoreBoardView;

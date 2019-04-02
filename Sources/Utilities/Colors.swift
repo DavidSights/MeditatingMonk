@@ -13,18 +13,22 @@ class Colors: NSObject {
     @objc static var creditsDarkColor: UIColor {
         return rgbColor(r: 134,
                         g: 114,
-                        b: 58,
-                        a: 1)
+                        b: 58)
     }
 
     @objc static var creditsLightColor: UIColor {
         return rgbColor(r: 155,
                         g: 136,
-                        b: 72,
-                        a: 1)
+                        b: 72)
     }
 
-    private static func rgbColor(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) -> UIColor {
+    static var tipLabelColor: UIColor {
+        return rgbColor(r: 111,
+                        g: 158,
+                        b: 183)
+    }
+
+    private static func rgbColor(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat = 1) -> UIColor {
         return UIColor(red: r/255,
                        green: g/255,
                        blue: b/255,

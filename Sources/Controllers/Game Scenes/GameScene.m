@@ -10,7 +10,6 @@
 #import <GameKit/GameKit.h>
 #import <Social/Social.h>
 #import "GameScene.h"
-#import "TipCloudNode.h"
 #import "ScoreBoard.h"
 #import "CreditsNode.h"
 #import "MeditatingMonk-Swift.h"
@@ -42,7 +41,7 @@ enum GameState {
 @property SKNode *branchEdge;
 
 @property (nonatomic) ScoreBoard *scoreboard;
-@property CreditsNode *credits;
+@property CreditsNode *creditsNode;
 
 @property SoundController *soundController;
 
@@ -64,7 +63,8 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
         [self setUpScoreboard];
         [self setUpAndShowTitleViews];
         [self addClouds];
-        [self setupCredits];
+        [self setUpCreditsNode];
+        [self setUpTipCloudWithSize:size];
 
         // Set up sound controller
         self.soundController = [[SoundController alloc] initForScene:self];
@@ -76,11 +76,20 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     return self;
 }
 
-- (void)setupCredits {
+/// Set up and add the cloud node to this scene.
+/// @param size This size must be provided to correctly position this node.
+- (void)setUpTipCloudWithSize:(CGSize)size {
+    TipCloudNode *tipCloudNode = [TipCloudNode new];
+    self.tipCloudNode = tipCloudNode;
+    self.tipCloudNode.position = CGPointMake(size.width/2, size.height + 45);
+    [self addChild:tipCloudNode];
+}
+
+- (void)setUpCreditsNode {
     CGSize size = self.view.frame.size;
-    self.credits = [[CreditsNode alloc] init:size];
-    self.credits.position = CGPointMake(size.width/2, size.height/2);
-    self.credits.name = @"credits node view";
+    self.creditsNode = [[CreditsNode alloc] init:size];
+    self.creditsNode.position = CGPointMake(size.width/2, size.height/2);
+    self.creditsNode.name = @"credits node view";
 }
 
 - (void)setUpScoreboard {
@@ -336,21 +345,21 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 - (void) showCredits {
 
-    if (self.credits == nil) {
+    if (self.creditsNode == nil) {
         NSLog(@"CREDITS IS NIL");
     }
 
-    self.credits.position = CGPointMake(self.size.width/2, self.size.height *2);
-    self.credits.alpha = 0;
+    self.creditsNode.position = CGPointMake(self.size.width/2, self.size.height *2);
+    self.creditsNode.alpha = 0;
 
-    [self addChild:self.credits];
-    [self.credits runAction:[SKAction fadeInWithDuration:.4]];
-    [self.credits runAction:[SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2) duration:.3]];
+    [self addChild:self.creditsNode];
+    [self.creditsNode runAction:[SKAction fadeInWithDuration:.4]];
+    [self.creditsNode runAction:[SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2) duration:.3]];
 }
 
 - (void)hideCredits {
-    [self.credits runAction:[SKAction fadeOutWithDuration:.15] completion:^{
-        [self.credits removeFromParent];
+    [self.creditsNode runAction:[SKAction fadeOutWithDuration:.15] completion:^{
+        [self.creditsNode removeFromParent];
     }];
 }
 
@@ -384,19 +393,15 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     [self.scoreLabelDropShadow runAction:[SKAction moveTo:CGPointMake(self.size.width/2 + DS, self.size.height + (50 + DS)) duration:.5]];
 }
 
-- (void)showEnlighteningThought {
-    TipCloudNode *tipCloudView = [TipCloudNode new];
-    [tipCloudView positionWithFrame:self.frame];
-    self.tipCloudNode = tipCloudView;
-    [self addChild:tipCloudView];
+- (void)showTipCloud {
+    SKAction *showAction = [SKAction moveTo:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 50) duration:0.25];
+    [self.tipCloudNode runAction:showAction];
+    [self.tipCloudNode reloadTip];
 }
 
-- (void)hideTip {
-    [self enumerateChildNodesWithName:@"tip" usingBlock:^(SKNode *node, BOOL *stop) {
-        SKAction *fade = [SKAction fadeOutWithDuration:.25];
-        SKAction *remove  = [SKAction removeFromParent];
-        [node runAction:[SKAction sequence:@[fade, remove]]];
-    }];
+- (void)hideTipCloud {
+    SKAction *hideAction = [SKAction moveTo:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height + 45) duration:0.25];
+    [self.tipCloudNode runAction:hideAction];
 }
 
 #pragma mark - Physics
@@ -462,7 +467,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
             return;
 
         } else if (self.gameState == credits) {
-            NSString *name = [[self.credits nodeAtPoint:[touch locationInNode:self.credits]] name];
+            NSString *name = [[self.creditsNode nodeAtPoint:[touch locationInNode:self.creditsNode]] name];
             [self handleCreditsScreenInteractionForName:name];
             return;
         }
@@ -485,11 +490,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     } else if ([name isEqualToString:facebookNodeId] || [name isEqualToString:twitterNodeId]) {
         [self shareButtonPressed];
     }
-
-#if DEBUG
-    [self.tipCloudNode reloadTip];
-#endif
-
 }
 
 - (void)replayButtonPressed {
@@ -568,7 +568,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 - (void)startNewGame {
     self.gameState = newGame;
     [self.scoreboard hideScore];
-    [self hideTip];
+    [self hideTipCloud];
     [self.soundController playMusic];
 }
 
