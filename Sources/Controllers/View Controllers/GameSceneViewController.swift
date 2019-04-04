@@ -18,7 +18,7 @@ class GameSceneViewController: UIViewController {
     private func setUpAndShowGameScene() {
         gameScene = GameScene(size: view.bounds.size)
         gameScene.gameSceneDelegate = self
-        gameScene.stage = Stage(withStageType: .mountains)
+        gameScene.stage = Stage(withDescription: .mountains)
 
         if let skView = self.view as? SKView {
             skView.presentScene(gameScene)

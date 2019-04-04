@@ -13,7 +13,7 @@ class Stage: NSObject {
 
     // MARK: Propeties
 
-    private let stageType: StageDescription
+    private let stageDescription: StageDescription
     private let stageNode = SKNode()
 
     // The upper and lower boundaries for physics interactions.
@@ -24,14 +24,14 @@ class Stage: NSObject {
 
     // The standard init is hidden and should never be called.
     private override init() {
-        stageType = .mountains
+        stageDescription = .mountains
         super.init()
     }
 
     // TODO: Is there a way to overried and hide the SKNode initializers?
 
-    init(withStageType type: StageDescription) {
-        stageType = type
+    init(withDescription description: StageDescription) {
+        self.stageDescription = description
         super.init()
         setUpBoundaries()
     }
@@ -51,7 +51,7 @@ class Stage: NSObject {
 extension Stage: StageType {
 
     var name: String {
-        return stageType.name
+        return stageDescription.name
     }
 
     var node: SKNode {
