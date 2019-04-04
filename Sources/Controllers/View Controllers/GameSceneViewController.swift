@@ -8,20 +8,21 @@
 
 class GameSceneViewController: UIViewController {
 
-    var gameScene: GameScene?
+    var gameScene: GameScene!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        EmailManager.registerDelegate(delegate: self)
+    }
 
-        let gameScene = GameScene(size: view.bounds.size)
+    private func setUpAndShowGameScene() {
+        gameScene = GameScene(size: view.bounds.size)
         gameScene.gameSceneDelegate = self
-        self.gameScene = gameScene
+        gameScene.stage = Stage(withStageType: .mountains)
 
         if let skView = self.view as? SKView {
             skView.presentScene(gameScene)
         }
-
-        EmailManager.registerDelegate(delegate: self)
     }
 }
 

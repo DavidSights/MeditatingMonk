@@ -27,13 +27,18 @@ enum GameState {
 
 // Views
 @property MonkNode *monkNode;
-@property SKSpriteNode *background, *grassAndTree, *clouds1, *clouds2;
+@property SKSpriteNode *background, *clouds1, *clouds2;
 @property SKLabelNode *scoreLabel, *scoreLabelDropShadow;
 @property TipCloudNode *tipCloudNode;
 
+/// The node that visually indicates the ceiling and floor boundaries to the user.
+/// Note that this is only for visual purposes. It does not interact with
+/// anything related to collisions.
+@property SKSpriteNode *bondaryGraphicNode;
+
 // Collision Edges
-@property SKNode *grassEdge;
-@property SKNode *branchEdge;
+@property SKNode *ceilingEdge;
+@property SKNode *floorEdge;
 
 @property (nonatomic) ScoreBoard *scoreboard;
 @property CreditsNode *creditsNode;
@@ -135,72 +140,72 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 - (void)addBackground:(CGSize)size {
 
-    if (self.background != nil && self.grassAndTree != nil) {
+    if (self.background != nil && self.bondaryGraphicNode != nil) {
         // Prevent setting up objects again.
         return;
     }
 
     // Set up background objects.
     self.background = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"backgroundiPad" : @"backgroundiPhone")];
-    self.grassAndTree = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"grassAndTreeiPad" : @"grassAndTreeiPhone")];
+    self.bondaryGraphicNode = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"grassAndTreeiPad" : @"grassAndTreeiPhone")];
     self.background.position = CGPointMake(size.width/2, size.height/2);
-    self.grassAndTree.position = CGPointMake(size.width/2, size.height/2);
+    self.bondaryGraphicNode.position = CGPointMake(size.width/2, size.height/2);
 
     // Show background elements.
     [self addChild:self.background];
-    [self addChild:self.grassAndTree];
+    [self addChild:self.bondaryGraphicNode];
 }
 
 - (void)addGrassEdge:(CGSize)size {
 
-    self.grassEdge = [SKNode node];
+    self.ceilingEdge = [SKNode node];
 
     //Prepare image for 4 inch screen
     if (size.height == 568 && size.width == 320) {
-        self.grassEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 126) toPoint:CGPointMake(size.width, 126)];
+        self.ceilingEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 126) toPoint:CGPointMake(size.width, 126)];
     }
 
     //Prepare edge for 3.5 inch screen
     if (size.width == 320 && size.height == 480) {
         float grassEdge = 49;
-        self.grassEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, grassEdge) toPoint:CGPointMake(size.width, grassEdge)];
+        self.ceilingEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, grassEdge) toPoint:CGPointMake(size.width, grassEdge)];
     }
 
     //Prepare for iPad
     if (size.width == 768 && size.height == 1024) {
         int grassEdgeLocation = 38;
-        self.grassEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, grassEdgeLocation) toPoint:CGPointMake(size.width, grassEdgeLocation)];
+        self.ceilingEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, grassEdgeLocation) toPoint:CGPointMake(size.width, grassEdgeLocation)];
     }
 
-    self.grassEdge.physicsBody.dynamic = NO;
-    self.grassEdge.physicsBody.categoryBitMask = grassCategory;
+    self.ceilingEdge.physicsBody.dynamic = NO;
+    self.ceilingEdge.physicsBody.categoryBitMask = grassCategory;
 
-    [self addChild:self.grassEdge];
+    [self addChild:self.ceilingEdge];
 }
 
 - (void) addBranchEdge:(CGSize) size {
 
-    self.branchEdge = [SKNode node];
+    self.floorEdge = [SKNode node];
 
     //Prepare image for 4 inch screen
     if (size.height == 568 && size.width == 320) {
-        self.branchEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, (size.height/20)*17) toPoint:CGPointMake(size.width, (size.height/20)*17)];
+        self.floorEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, (size.height/20)*17) toPoint:CGPointMake(size.width, (size.height/20)*17)];
     }
 
     if (size.width == 320 && size.height == 480) {
         float branchEdge = 410;
-        self.branchEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, branchEdge) toPoint:CGPointMake(size.width, branchEdge)];
+        self.floorEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, branchEdge) toPoint:CGPointMake(size.width, branchEdge)];
     }
 
     //Prepare for iPad
     if (size.width == 768 && size.height == 1024) {
-        self.branchEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, ((size.height/20) * 17)) toPoint:CGPointMake(size.width, (size.height/20)*17)];
+        self.floorEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, ((size.height/20) * 17)) toPoint:CGPointMake(size.width, (size.height/20)*17)];
     }
 
-    self.branchEdge.physicsBody.dynamic = NO;
-    self.branchEdge.physicsBody.categoryBitMask = treeCategroy;
+    self.floorEdge.physicsBody.dynamic = NO;
+    self.floorEdge.physicsBody.categoryBitMask = treeCategroy;
 
-    [self addChild:self.branchEdge];
+    [self addChild:self.floorEdge];
 }
 
 - (void)setUpClouds {

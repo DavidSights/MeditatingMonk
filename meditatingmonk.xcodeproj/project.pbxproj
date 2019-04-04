@@ -14,6 +14,10 @@
 		9A043F032251502B001A7F60 /* Minecraftia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AD53157223FF20F004DBEC1 /* Minecraftia.ttf */; };
 		9A043F052252D5A7001A7F60 /* TipCloudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F042252D5A7001A7F60 /* TipCloudNode.swift */; };
 		9A043F082252EFB7001A7F60 /* MonkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F072252EFB7001A7F60 /* MonkNode.swift */; };
+		9A043F0A22541C25001A7F60 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F0922541C25001A7F60 /* Stage.swift */; };
+		9A043F0C22541E85001A7F60 /* BitMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F0B22541E85001A7F60 /* BitMask.swift */; };
+		9A043F0E2255B1FF001A7F60 /* StageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F0D2255B1FF001A7F60 /* StageType.swift */; };
+		9A043F112255B234001A7F60 /* StageDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F102255B234001A7F60 /* StageDescription.swift */; };
 		9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */; };
 		9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */; };
 		9A1892A219BBADD30016F95A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1892A119BBADD30016F95A /* icon@2x.png */; };
@@ -100,6 +104,10 @@
 		9A043EFE22514A25001A7F60 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		9A043F042252D5A7001A7F60 /* TipCloudNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipCloudNode.swift; sourceTree = "<group>"; };
 		9A043F072252EFB7001A7F60 /* MonkNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonkNode.swift; sourceTree = "<group>"; };
+		9A043F0922541C25001A7F60 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
+		9A043F0B22541E85001A7F60 /* BitMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMask.swift; sourceTree = "<group>"; };
+		9A043F0D2255B1FF001A7F60 /* StageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageType.swift; sourceTree = "<group>"; };
+		9A043F102255B234001A7F60 /* StageDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageDescription.swift; sourceTree = "<group>"; };
 		9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPhone@2x.png"; sourceTree = "<group>"; };
 		9A1892A119BBADD30016F95A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -221,12 +229,20 @@
 			path = Nodes;
 			sourceTree = "<group>";
 		};
+		9A043F0F2255B210001A7F60 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9A043F0D2255B1FF001A7F60 /* StageType.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		9A2634C11BD4701400E3FCDE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				9A043EFA225126CA001A7F60 /* SoundController.swift */,
 				9AD5316522434A10004DBEC1 /* View Controllers */,
-				9AD5316622434A1D004DBEC1 /* Game Scenes */,
+				9AD5316622434A1D004DBEC1 /* Scenes */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -320,9 +336,12 @@
 		9AD53156223FF0DB004DBEC1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9A043F0F2255B210001A7F60 /* Protocols */,
 				9A2634C71BD4721E00E3FCDE /* TipsArray.h */,
 				9A2634C81BD4721E00E3FCDE /* TipsArray.m */,
 				9A043EFC2251329B001A7F60 /* SoundEffect.swift */,
+				9A043F0922541C25001A7F60 /* Stage.swift */,
+				9A043F102255B234001A7F60 /* StageDescription.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -438,6 +457,7 @@
 				9AD5316B2249ACB5004DBEC1 /* PhysicsManager.swift */,
 				9AD5316D2249CE8B004DBEC1 /* Colors.swift */,
 				9A043EFE22514A25001A7F60 /* FontManager.swift */,
+				9A043F0B22541E85001A7F60 /* BitMask.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -450,13 +470,13 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		9AD5316622434A1D004DBEC1 /* Game Scenes */ = {
+		9AD5316622434A1D004DBEC1 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				9A8F84F3197354EC0085296D /* GameScene.h */,
 				9A8F84F4197354EC0085296D /* GameScene.m */,
 			);
-			path = "Game Scenes";
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,15 +610,19 @@
 				9AD5316E2249CE8B004DBEC1 /* Colors.swift in Sources */,
 				9A043EFD2251329B001A7F60 /* SoundEffect.swift in Sources */,
 				9AD53164224324C5004DBEC1 /* DataManager.swift in Sources */,
+				9A043F0E2255B1FF001A7F60 /* StageType.swift in Sources */,
 				9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */,
 				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
 				9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */,
 				9A043F052252D5A7001A7F60 /* TipCloudNode.swift in Sources */,
 				9A8F84F5197354EC0085296D /* GameScene.m in Sources */,
+				9A043F112255B234001A7F60 /* StageDescription.swift in Sources */,
 				9A8F84EC197354EC0085296D /* AppDelegate.m in Sources */,
 				9A8AF5C019B2C064004002E9 /* CreditsNode.m in Sources */,
 				9AD5316122401125004DBEC1 /* EmailManager.swift in Sources */,
+				9A043F0A22541C25001A7F60 /* Stage.swift in Sources */,
 				9A8F84E8197354EC0085296D /* main.m in Sources */,
+				9A043F0C22541E85001A7F60 /* BitMask.swift in Sources */,
 				9A043EFB225126CA001A7F60 /* SoundController.swift in Sources */,
 				9AD5316A22489A52004DBEC1 /* ImageManager.swift in Sources */,
 				9A043F082252EFB7001A7F60 /* MonkNode.swift in Sources */,

@@ -8,6 +8,8 @@
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 
+@protocol StageType;
+
 @protocol GameSceneDelegate <NSObject>
 
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
@@ -18,5 +20,6 @@
 @interface GameScene : SKScene
 
 @property (weak, nonatomic) id<GameSceneDelegate> gameSceneDelegate;
+@property id<StageType> stage;
 
 @end
