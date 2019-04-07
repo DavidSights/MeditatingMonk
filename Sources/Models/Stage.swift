@@ -55,8 +55,8 @@ class Stage: NSObject {
             return physicsBody
         }
 
-        upperBoundaryNode.physicsBody = boundaryPhysicsBody(upperBoundaryPositionY, categoryBitMask: BitMask.upperBoundary)
-        lowerBoundaryNode.physicsBody = boundaryPhysicsBody(lowerBoundaryPositionY, categoryBitMask: BitMask.lowerBoundary)
+        upperBoundaryNode.physicsBody = boundaryPhysicsBody(upperBoundaryPositionY, categoryBitMask: BitMask.upperBoundary.value)
+        lowerBoundaryNode.physicsBody = boundaryPhysicsBody(lowerBoundaryPositionY, categoryBitMask: BitMask.lowerBoundary.value)
     }
 
     private func setUpNodes() {
