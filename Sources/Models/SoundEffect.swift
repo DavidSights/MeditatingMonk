@@ -30,6 +30,6 @@ enum SoundEffect {
 
     /// An action to be ran by an `SKNode` instance.
     var action: SKAction {
-        return SKAction.playSoundFileNamed(fileName, waitForCompletion: true)
+        return .playSoundFileNamed(fileName, waitForCompletion: true)
     }
 }

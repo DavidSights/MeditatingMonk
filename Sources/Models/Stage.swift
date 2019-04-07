@@ -16,10 +16,6 @@ class Stage: NSObject {
     private let stageDescription: StageDescription
     private let stageNode = SKNode()
 
-    // The upper and lower boundaries for physics interactions.
-    private var upperBoundaryNode = SKNode()
-    private var lowerBoundaryNode = SKNode()
-
     private var size: CGSize {
         return UIScreen.main.bounds.size
     }
@@ -32,40 +28,34 @@ class Stage: NSObject {
         super.init()
     }
 
-    // TODO: Is there a way to overried and hide the SKNode initializers?
-
     init(withDescription description: StageDescription) {
-        self.stageDescription = description
+        stageDescription = description
         super.init()
         setUpNodes()
-        setUpBoundaries()
     }
 
     // MARK: - Convenience Methods
 
-    private func setUpBoundaries() {
-
-        let upperBoundaryPositionY: CGFloat = 126
-        let lowerBoundaryPositionY: CGFloat = (size.height/20)*17
-
-        func boundaryPhysicsBody(_ yPosition: CGFloat, categoryBitMask: UInt32) -> SKPhysicsBody {
-            let physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: 0, y: yPosition), to: CGPoint(x: size.width, y: yPosition))
-            physicsBody.isDynamic = false
-            physicsBody.categoryBitMask = categoryBitMask
-            return physicsBody
-        }
-
-        upperBoundaryNode.physicsBody = boundaryPhysicsBody(upperBoundaryPositionY, categoryBitMask: BitMask.upperBoundary.value)
-        lowerBoundaryNode.physicsBody = boundaryPhysicsBody(lowerBoundaryPositionY, categoryBitMask: BitMask.lowerBoundary.value)
-    }
-
     private func setUpNodes() {
-        let stageSpriteNode = SKSpriteNode(imageNamed: stageDescription.imageName)
-        let backgroundSpriteNode = SKSpriteNode(imageNamed: stageDescription.backgroundImageName)
-        let size = UIScreen.main.bounds.size
+
         let center = CGPoint(x: size.width/2, y: size.height/2)
-        stageSpriteNode.position = center
+
+        let middlegroundSpriteNode = SKSpriteNode(imageNamed: stageDescription.middlegroundImageName)
+        middlegroundSpriteNode.position = center
+
+        let backgroundSpriteNode = SKSpriteNode(imageNamed: stageDescription.backgroundImageName)
         backgroundSpriteNode.position = center
+
+        let upperBoundaryNode = SKNode()
+        upperBoundaryNode.physicsBody = stageDescription.upperBoundaryPhysicsBody
+
+        let lowerBoundaryNode = SKNode()
+        lowerBoundaryNode.physicsBody = stageDescription.lowerBoundaryPhysicsBody
+
+        stageNode.addChild(middlegroundSpriteNode)
+        stageNode.addChild(backgroundSpriteNode)
+        stageNode.addChild(upperBoundaryNode)
+        stageNode.addChild(lowerBoundaryNode)
     }
 
     // TODO: Add stage images, including background
@@ -80,6 +70,6 @@ extension Stage: StageType {
     }
 
     var node: SKNode {
-        return self.stageNode
+        return stageNode
     }
 }

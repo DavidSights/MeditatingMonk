@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// This describes each specific stage and its resources.
+/// Contains description, and construction in some cases, of the varying pieces of each stage.
 enum StageDescription {
     case mountains
 
@@ -19,7 +19,9 @@ enum StageDescription {
         }
     }
 
-    var imageName: String {
+    // MARK: - Images
+
+    var middlegroundImageName: String {
         switch self {
         case .mountains:
             return DeviceManager.isTablet ? "grassAndTreeiPad" : "grassAndTreeiPhone"
@@ -32,6 +34,8 @@ enum StageDescription {
             return DeviceManager.isTablet ? "backgroundiPad" : "backgroundiPhone"
         }
     }
+
+    // MARK: - Boundaries
 
     var upperBoundaryPhysicsBody: SKPhysicsBody {
         switch self {
@@ -46,6 +50,8 @@ enum StageDescription {
             return boundaryLine(height: -126, categoryBitMask: .lowerBoundary)
         }
     }
+
+    // MARK: - Music
 
     // TODO: Add stage music
 
