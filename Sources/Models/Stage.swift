@@ -38,24 +38,49 @@ class Stage: NSObject {
 
     private func setUpNodes() {
 
+        var nodes = [SKNode]()
+
         let center = CGPoint(x: size.width/2, y: size.height/2)
 
-        let middlegroundSpriteNode = SKSpriteNode(imageNamed: stageDescription.middlegroundImageName)
-        middlegroundSpriteNode.position = center
+        // Note: The order that these nodes are appended to the nodes array mattters because
+        // it affects their place in the view hierarchy. For example, if the background is appended
+        // after the middleground, it will appear on top of the middleground (hiding the middleground completely).
 
         let backgroundSpriteNode = SKSpriteNode(imageNamed: stageDescription.backgroundImageName)
         backgroundSpriteNode.position = center
+        nodes.append(backgroundSpriteNode)
+
+        let middlegroundSpriteNode = SKSpriteNode(imageNamed: stageDescription.middlegroundImageName)
+        middlegroundSpriteNode.position = center
+        nodes.append(middlegroundSpriteNode)
 
         let upperBoundaryNode = SKNode()
         upperBoundaryNode.physicsBody = stageDescription.upperBoundaryPhysicsBody
+        nodes.append(upperBoundaryNode)
 
         let lowerBoundaryNode = SKNode()
         lowerBoundaryNode.physicsBody = stageDescription.lowerBoundaryPhysicsBody
+        nodes.append(lowerBoundaryNode)
 
-        stageNode.addChild(middlegroundSpriteNode)
-        stageNode.addChild(backgroundSpriteNode)
-        stageNode.addChild(upperBoundaryNode)
-        stageNode.addChild(lowerBoundaryNode)
+        for node in nodes { stageNode.addChild(node) }
+
+        // For debug purposes only.
+        visualizeBoundaries()
+    }
+
+    /// This is a simple way to visualize this stage's boundaries.
+    /// Use this when testing new physics interactions or stage design.
+    private func visualizeBoundaries() {
+
+        let visualizerSize = CGSize(width: size.width, height: 5)
+
+        let upperBoundaryNodeVisualizer = SKSpriteNode(color: .red, size: visualizerSize)
+        upperBoundaryNodeVisualizer.position = CGPoint(x: size.width/2, y: stageDescription.upperBoundaryPositionY)
+        stageNode.addChild(upperBoundaryNodeVisualizer)
+
+        let lowerBoundaryNodeVisualizer = SKSpriteNode(color: .red, size: visualizerSize)
+        lowerBoundaryNodeVisualizer.position = CGPoint(x: size.width/2, y: stageDescription.lowerBoundaryPositionY)
+        stageNode.addChild(lowerBoundaryNodeVisualizer)
     }
 
     // TODO: Add stage images, including background

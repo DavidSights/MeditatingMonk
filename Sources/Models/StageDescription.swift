@@ -37,17 +37,31 @@ enum StageDescription {
 
     // MARK: - Boundaries
 
+    var upperBoundaryPositionY: CGFloat {
+        switch self {
+        case .mountains:
+            return centerBasedPosition(195)
+        }
+    }
+
+    var lowerBoundaryPositionY: CGFloat {
+        switch self {
+        case .mountains:
+            return centerBasedPosition(-145)
+        }
+    }
+
     var upperBoundaryPhysicsBody: SKPhysicsBody {
         switch self {
         case .mountains:
-            return boundaryLine(height: 126, categoryBitMask: .upperBoundary)
+            return boundaryLine(positionY: upperBoundaryPositionY, categoryBitMask: .upperBoundary)
         }
     }
 
     var lowerBoundaryPhysicsBody: SKPhysicsBody {
         switch self {
         case .mountains:
-            return boundaryLine(height: -126, categoryBitMask: .lowerBoundary)
+            return boundaryLine(positionY: lowerBoundaryPositionY, categoryBitMask: .lowerBoundary)
         }
     }
 
@@ -58,10 +72,9 @@ enum StageDescription {
     // MARK: - Convenience Methods
 
     /// Creates a physics body, for use as a boundary, that is full width and can varry in height.
-    private func boundaryLine(height: CGFloat, categoryBitMask: BitMask) -> SKPhysicsBody {
+    private func boundaryLine(positionY: CGFloat, categoryBitMask: BitMask) -> SKPhysicsBody {
         let size = UIScreen.main.bounds.size
-        let yPosition = centerBasedPosition(height)
-        let physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: 0, y: yPosition), to: CGPoint(x: size.width, y: yPosition))
+        let physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: 0, y: positionY), to: CGPoint(x: size.width, y: positionY))
         physicsBody.isDynamic = false
         physicsBody.categoryBitMask = categoryBitMask.value
         return physicsBody

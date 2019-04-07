@@ -12,7 +12,7 @@ class PhysicsManager: NSObject {
 
     /// This provides the player with a consistent first jump
     /// at the beginning of every game.
-    @objc static let newGameJump = CGVector(dx: 0, dy: 1150)
+    @objc static let newGameJump = CGVector(dx: 0, dy: 1000)
 
     /// A jump value that varies between 3 options for increased difficulty.
     @objc class func jump() -> CGVector {
