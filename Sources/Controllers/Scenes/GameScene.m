@@ -27,14 +27,9 @@ enum GameState {
 
 // Views
 @property MonkNode *monkNode;
-@property SKSpriteNode *background, *clouds1, *clouds2;
+@property SKSpriteNode *clouds1, *clouds2;
 @property SKLabelNode *scoreLabel, *scoreLabelDropShadow;
 @property TipCloudNode *tipCloudNode;
-
-/// The node that visually indicates the ceiling and floor boundaries to the user.
-/// Note that this is only for visual purposes. It does not interact with
-/// anything related to collisions.
-@property SKSpriteNode *bondaryGraphicNode;
 
 // Collision Edges
 @property SKNode *ceilingEdge;
@@ -77,7 +72,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 }
 
 - (void) deviceSpecificSetupWithSize:(CGSize)size {
-    [self addBackground:size];
     [self addMonk:size];
     [self addGrassEdge:size];
     [self addBranchEdge:size];
@@ -136,24 +130,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     self.monkNode.physicsBody.categoryBitMask = monkCategory;
     self.monkNode.physicsBody.contactTestBitMask = treeCategroy | grassCategory;
     [self addChild:self.monkNode];
-}
-
-- (void)addBackground:(CGSize)size {
-
-    if (self.background != nil && self.bondaryGraphicNode != nil) {
-        // Prevent setting up objects again.
-        return;
-    }
-
-    // Set up background objects.
-    self.background = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"backgroundiPad" : @"backgroundiPhone")];
-    self.bondaryGraphicNode = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"grassAndTreeiPad" : @"grassAndTreeiPhone")];
-    self.background.position = CGPointMake(size.width/2, size.height/2);
-    self.bondaryGraphicNode.position = CGPointMake(size.width/2, size.height/2);
-
-    // Show background elements.
-    [self addChild:self.background];
-    [self addChild:self.bondaryGraphicNode];
 }
 
 - (void)addGrassEdge:(CGSize)size {
@@ -223,8 +199,8 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     CGPoint cloudStart = CGPointMake(self.size.width, 100);
     SKAction *moveClouds = [SKAction moveTo:cloudDestination duration:20];
     SKAction *returnClouds = [SKAction moveTo:cloudStart duration:0];
-    [self.background addChild:self.clouds1];
-    [self.background addChild:self.clouds2];
+//    [self.background addChild:self.clouds1];
+//    [self.background addChild:self.clouds2];
     [self.clouds1 runAction:[SKAction repeatActionForever:[SKAction sequence:@[moveClouds, returnClouds]]]];
     [self.clouds2 runAction:[SKAction sequence:@[[SKAction waitForDuration:10],[SKAction repeatActionForever:[SKAction sequence:@[moveClouds, returnClouds]]]]]];
 }

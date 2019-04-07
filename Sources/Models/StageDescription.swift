@@ -26,5 +26,12 @@ enum StageDescription {
         }
     }
 
+    var backgroundImageName: String {
+        switch self {
+        case .mountains:
+            return DeviceManager.isTablet ? "backgroundiPad" : "backgroundiPhone"
+        }
+    }
+
     // TODO: Add stage music
 }
