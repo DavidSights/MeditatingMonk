@@ -28,7 +28,7 @@ class Stage: NSObject {
         super.init()
     }
 
-    init(withDescription description: StageDescription) {
+    init(_ description: StageDescription) {
         stageDescription = description
         super.init()
         setUpNodes()

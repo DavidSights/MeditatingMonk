@@ -13,12 +13,13 @@ class GameSceneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         EmailManager.registerDelegate(delegate: self)
+        setUpAndShowGameScene()
     }
 
     private func setUpAndShowGameScene() {
-        gameScene = GameScene(size: view.bounds.size)
+        gameScene = GameScene(size: view.bounds.size);
         gameScene.gameSceneDelegate = self
-        gameScene.stage = Stage(withDescription: .mountains)
+        gameScene.setUpWith(Stage(.mountains))
 
         if let skView = self.view as? SKView {
             skView.presentScene(gameScene)

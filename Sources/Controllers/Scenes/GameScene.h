@@ -20,6 +20,6 @@
 @interface GameScene : SKScene
 
 @property (weak, nonatomic) id<GameSceneDelegate> gameSceneDelegate;
-@property id<StageType> stage;
+- (void)setUpWithStage:(id<StageType>)stage;
 
 @end

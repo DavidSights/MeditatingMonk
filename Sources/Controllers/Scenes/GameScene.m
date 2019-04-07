@@ -24,6 +24,7 @@ enum GameState {
 @interface GameScene () <SKPhysicsContactDelegate>
 
 @property enum GameState gameState;
+@property id<StageType> stage;
 @property MonkNode *monkNode;
 @property TipCloudNode *tipCloudNode;
 @property ScoreBoard *scoreboard;
@@ -49,25 +50,29 @@ enum GameState {
 
         updateScoreActionKey = @"updateScoreTimer";
 
-        [self addMonk:size];
-        [self setUpScoreboard];
-        [self setUpAndShowTitleViews];
-        [self setUpCreditsNode];
-        [self setUpTipCloudWithSize:size];
+//        [self setUpScoreboard];
+//        [self setUpAndShowTitleViews];
+//        [self setUpCreditsNode];
+//        [self setUpTipCloudWithSize:size];
 
         // Set up sound controller
         self.soundController = [[SoundController alloc] initForScene:self];
-
-        self.gameState = title;
         [self.soundController playMusic];
 
         self.physicsWorld.contactDelegate = self;
+        self.gameState = title;
     }
 
     return self;
 }
 
 #pragma mark - Set Up Scene
+
+- (void)setUpWithStage:(id<StageType>)stage {
+    self.stage = stage;
+    [self addChild:self.stage.node];
+    [self addMonk:UIScreen.mainScreen.bounds.size];
+}
 
 /// Set up and add the cloud node to this scene.
 /// @param size This size must be provided to correctly position this node.
