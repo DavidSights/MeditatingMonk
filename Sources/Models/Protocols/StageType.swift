@@ -10,6 +10,10 @@ import Foundation
 
 /// This describes only essential stage data for a scene.
 @objc protocol StageType {
+
     var name: String { get }
     var node: SKNode { get }
+
+    func beginEnvironmentAnimations()
+    func stopAndClearEnvironmentAnimations()
 }

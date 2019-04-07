@@ -72,4 +72,12 @@ extension Stage: StageType {
     var node: SKNode {
         return stageNode
     }
+
+    func beginEnvironmentAnimations() {
+        // TODO
+    }
+
+    func stopAndClearEnvironmentAnimations() {
+        // TODO
+    }
 }

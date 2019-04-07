@@ -22,3 +22,10 @@ enum BitMask {
         }
     }
 }
+
+/// A simple and temporary access for Swift BitMask models.
+@objc class BitMaskAccessor: NSObject {
+    @objc static let playerBoundary = BitMask.playerBody.value
+    @objc static let upperBoundary = BitMask.upperBoundary.value
+    @objc static let lowerBoundary = BitMask.upperBoundary.value
+}

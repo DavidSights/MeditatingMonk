@@ -24,40 +24,34 @@ enum GameState {
 @interface GameScene () <SKPhysicsContactDelegate>
 
 @property enum GameState gameState;
-
-// Views
 @property MonkNode *monkNode;
-@property SKSpriteNode *clouds1, *clouds2;
-@property SKLabelNode *scoreLabel, *scoreLabelDropShadow;
 @property TipCloudNode *tipCloudNode;
-
-// Collision Edges
-@property SKNode *ceilingEdge;
-@property SKNode *floorEdge;
-
-@property (nonatomic) ScoreBoard *scoreboard;
+@property ScoreBoard *scoreboard;
 @property CreditsNode *creditsNode;
-
 @property SoundController *soundController;
+
+// Animated Clouds
+@property SKSpriteNode *clouds1;
+@property SKSpriteNode *clouds2;
+
+// The incrementing score label.
+@property SKLabelNode *scoreLabel;
+@property SKLabelNode *scoreLabelDropShadow;
 
 @end
 
-// Category bitmasks - used for edges and collision detection
-static const uint32_t monkCategory = 0x1;
-static const uint32_t treeCategroy = 0x1 << 1;
-static const uint32_t grassCategory = 0x1 << 2;
-
-static const NSString *updateScoreActionKey = @"updateScoreTimer";
-
-@implementation GameScene
+@implementation GameScene {
+    NSString *updateScoreActionKey;
+}
 
 - (id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
 
-        [self deviceSpecificSetupWithSize:size];
+        updateScoreActionKey = @"updateScoreTimer";
+
+        [self addMonk:size];
         [self setUpScoreboard];
         [self setUpAndShowTitleViews];
-        [self addClouds];
         [self setUpCreditsNode];
         [self setUpTipCloudWithSize:size];
 
@@ -66,16 +60,11 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
         self.gameState = title;
         [self.soundController playMusic];
+
+        self.physicsWorld.contactDelegate = self;
     }
 
     return self;
-}
-
-- (void) deviceSpecificSetupWithSize:(CGSize)size {
-    [self addMonk:size];
-    [self addGrassEdge:size];
-    [self addBranchEdge:size];
-    self.physicsWorld.contactDelegate = self;
 }
 
 #pragma mark - Set Up Scene
@@ -127,82 +116,9 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 - (void)addMonk:(CGSize)size {
     self.monkNode = [MonkNode new];
     self.monkNode.position = CGPointMake(size.width/2, size.height/2);
-    self.monkNode.physicsBody.categoryBitMask = monkCategory;
-    self.monkNode.physicsBody.contactTestBitMask = treeCategroy | grassCategory;
+    self.monkNode.physicsBody.categoryBitMask = BitMaskAccessor.playerBoundary;
+    self.monkNode.physicsBody.contactTestBitMask = BitMaskAccessor.upperBoundary | BitMaskAccessor.lowerBoundary;
     [self addChild:self.monkNode];
-}
-
-- (void)addGrassEdge:(CGSize)size {
-
-    self.ceilingEdge = [SKNode node];
-
-    //Prepare image for 4 inch screen
-    if (size.height == 568 && size.width == 320) {
-        self.ceilingEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, 126) toPoint:CGPointMake(size.width, 126)];
-    }
-
-    //Prepare edge for 3.5 inch screen
-    if (size.width == 320 && size.height == 480) {
-        float grassEdge = 49;
-        self.ceilingEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, grassEdge) toPoint:CGPointMake(size.width, grassEdge)];
-    }
-
-    //Prepare for iPad
-    if (size.width == 768 && size.height == 1024) {
-        int grassEdgeLocation = 38;
-        self.ceilingEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, grassEdgeLocation) toPoint:CGPointMake(size.width, grassEdgeLocation)];
-    }
-
-    self.ceilingEdge.physicsBody.dynamic = NO;
-    self.ceilingEdge.physicsBody.categoryBitMask = grassCategory;
-
-    [self addChild:self.ceilingEdge];
-}
-
-- (void) addBranchEdge:(CGSize) size {
-
-    self.floorEdge = [SKNode node];
-
-    //Prepare image for 4 inch screen
-    if (size.height == 568 && size.width == 320) {
-        self.floorEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, (size.height/20)*17) toPoint:CGPointMake(size.width, (size.height/20)*17)];
-    }
-
-    if (size.width == 320 && size.height == 480) {
-        float branchEdge = 410;
-        self.floorEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, branchEdge) toPoint:CGPointMake(size.width, branchEdge)];
-    }
-
-    //Prepare for iPad
-    if (size.width == 768 && size.height == 1024) {
-        self.floorEdge.physicsBody = [SKPhysicsBody bodyWithEdgeFromPoint:CGPointMake(0, ((size.height/20) * 17)) toPoint:CGPointMake(size.width, (size.height/20)*17)];
-    }
-
-    self.floorEdge.physicsBody.dynamic = NO;
-    self.floorEdge.physicsBody.categoryBitMask = treeCategroy;
-
-    [self addChild:self.floorEdge];
-}
-
-- (void)setUpClouds {
-    self.clouds1 = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"clouds1iPad" : @"clouds1")];
-    self.clouds2 = [SKSpriteNode spriteNodeWithImageNamed:( DeviceManager.isTablet ? @"clouds2iPad" : @"clouds2")];
-    self.clouds1.anchorPoint = CGPointMake(0, 0.5);
-    self.clouds2.anchorPoint = CGPointMake(0, 0.5);
-    self.clouds1.position = CGPointMake(self.size.width, 80);
-    self.clouds2.position = CGPointMake(self.size.width, 80);
-}
-
-- (void) addClouds {
-    [self setUpClouds];
-    CGPoint cloudDestination = CGPointMake((0 -(self.size.width/2)) - (self.clouds1.size.width),100);
-    CGPoint cloudStart = CGPointMake(self.size.width, 100);
-    SKAction *moveClouds = [SKAction moveTo:cloudDestination duration:20];
-    SKAction *returnClouds = [SKAction moveTo:cloudStart duration:0];
-//    [self.background addChild:self.clouds1];
-//    [self.background addChild:self.clouds2];
-    [self.clouds1 runAction:[SKAction repeatActionForever:[SKAction sequence:@[moveClouds, returnClouds]]]];
-    [self.clouds2 runAction:[SKAction sequence:@[[SKAction waitForDuration:10],[SKAction repeatActionForever:[SKAction sequence:@[moveClouds, returnClouds]]]]]];
 }
 
 #pragma mark - Grpahics and Animations
@@ -243,8 +159,6 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     tapToStartLabel.position = CGPointMake(self.size.width/2, (DeviceManager.isTablet ? 100 : 90));
 
     SKLabelNode *tapToStartLabelDropShadow = [SKLabelNode labelNodeWithFontNamed:@"Minecraftia Regular"];
-//    SKLabelNode *tapToStartLabelDropShadow = [SKLabelNode new];
-//    tapToStartLabelDropShadow.fontName = FontManager.appFontName;
     tapToStartLabelDropShadow.text = tapToStartLabel.text;
     tapToStartLabelDropShadow.name = @"startLabel";
     [tapToStartLabelDropShadow setFontColor:SKColor.blackColor];
@@ -287,7 +201,7 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
     }
 }
 
-- (void) showCredits {
+- (void)showCredits {
 
     if (self.creditsNode == nil) {
         NSLog(@"CREDITS IS NIL");
@@ -501,20 +415,12 @@ static const NSString *updateScoreActionKey = @"updateScoreTimer";
 
 #pragma mark - Collisions
 
-- (void)didBeginContact:(SKPhysicsContact*)contact {
-    if (contact.bodyA.categoryBitMask == treeCategroy || contact.bodyB.categoryBitMask == treeCategroy) {
-        [self touchedTree];
-    } else if (contact.bodyA.categoryBitMask == grassCategory || contact.bodyB.categoryBitMask == grassCategory){
-        [self touchedGrass];
+- (void)didBeginContact:(SKPhysicsContact *)contact {
+    if (contact.bodyA.categoryBitMask == BitMaskAccessor.upperBoundary || contact.bodyB.categoryBitMask == BitMaskAccessor.upperBoundary) {
+        [self endGame];
+    } else if (contact.bodyA.categoryBitMask == BitMaskAccessor.lowerBoundary || contact.bodyB.categoryBitMask == BitMaskAccessor.lowerBoundary) {
+        [self endGame];
     }
-}
-
-- (void)touchedTree {
-    [self endGame];
-}
-
-- (void)touchedGrass {
-    [self endGame];
 }
 
 // MARK: - Game Management
