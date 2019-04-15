@@ -192,18 +192,6 @@ NSString * const twitterNodeId = @"twitterButton";
                                               positionY:0];
 }
 
-- (void)showScore {
-    CGSize size = self.scene.view.frame.size;
-    int xPosition = size.width / 2;
-    int yPosition = (DeviceManager.isTablet ? ((size.height/2) + 15) : size.height/2);
-    [self runAction:[SKAction moveTo:CGPointMake(xPosition, yPosition) duration:.5]];
-}
-
-- (void) hideScore {
-    CGSize size = self.scene.view.frame.size;
-    [self runAction:[SKAction moveTo:CGPointMake(size.width/2, size.height * 2) duration:.5]];
-}
-
 - (SKSpriteNode *)imageSpriteWithFileName:(NSString *)fileName identifierName:(NSString *)identifierName positionX:(int)x positionY:(int)y {
     SKSpriteNode *image = [SKSpriteNode spriteNodeWithImageNamed:fileName];
     image.position = CGPointMake(x, y);

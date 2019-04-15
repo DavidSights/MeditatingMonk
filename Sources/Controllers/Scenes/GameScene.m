@@ -50,11 +50,6 @@ enum GameState {
 
         updateScoreActionKey = @"updateScoreTimer";
 
-//        [self setUpScoreboard];
-//        [self setUpAndShowTitleViews];
-//        [self setUpCreditsNode];
-//        [self setUpTipCloudWithSize:size];
-
         // Set up sound controller
         self.soundController = [[SoundController alloc] initForScene:self];
         [self.soundController playMusic];
@@ -71,7 +66,14 @@ enum GameState {
 - (void)setUpWithStage:(id<StageType>)stage {
     self.stage = stage;
     [self addChild:self.stage.node];
-    [self addMonk:UIScreen.mainScreen.bounds.size];
+
+    CGSize size = UIScreen.mainScreen.bounds.size;
+    [self addMonk:size];
+    [self setUpTipCloudWithSize:size];
+
+    [self setUpAndShowTitleViews];
+    [self setUpScoreboard];
+    [self setUpCreditsNode];
 }
 
 /// Set up and add the cloud node to this scene.
@@ -115,7 +117,6 @@ enum GameState {
     // Set up scoreboard.
     self.scoreboard = [[ScoreBoard alloc] init:self.size];
     self.scoreboard.position = CGPointMake(self.size.width/2, self.size.height * 2);
-    [self addChild:self.scoreboard];
 }
 
 - (void)addMonk:(CGSize)size {
@@ -339,6 +340,21 @@ enum GameState {
 
 // MARK: - Scoreboard
 
+- (void)showScoreboard {
+    [self addChild:self.scoreboard];
+    CGSize size = self.view.frame.size;
+    SKAction *showAction = [SKAction moveTo:CGPointMake(size.width/2, size.height/2) duration:.5];
+    [self.scoreboard runAction:showAction];
+}
+
+- (void)hideScoreboard {
+    CGSize size = self.view.frame.size;
+    SKAction *hideAction = [SKAction moveTo:CGPointMake(size.width/2, size.height*2) duration:.5];
+    [self.scoreboard runAction:hideAction completion:^{
+        [self removeChildrenInArray:@[self.scoreboard]];
+    }];
+}
+
 - (void)handleScoreboardInteractionForName:(NSString *)name {
 
     if ([name isEqual: @"replayButton"]) {
@@ -432,7 +448,7 @@ enum GameState {
 
 - (void)startGame {
     self.gameState = newGame;
-    [self.scoreboard hideScore];
+    [self hideScoreboard];
     [self hideTipCloud];
     [self.soundController playMusic];
 }
@@ -442,24 +458,24 @@ enum GameState {
 
     if (self.gameState != playing) { return; }
 
-    // Stop the timer.
-    [self removeActionForKey:updateScoreActionKey];
-
+    [self.soundController stopMusic];
     [self.monkNode openEyes];
 
+    [self updateHighScoreIfNecessary];
+    DataManager.combinedScores += DataManager.currentScore;
+
+    // Stop the counting points timer
+    [self removeActionForKey:updateScoreActionKey];
     [self hideScoreLabel];
 
+    // Update and show the scoreboard.
     [self.scoreboard reloadData];
-    [self showScoreBoardAndHideScoreCounter];
-    [self handleHighScore];
-
-    DataManager.combinedScores += DataManager.currentScore;
+    [self showScoreboard];
+    self.gameState = scoreboard;
 
     if (DataManager.currentScore >= 10) {
         [self showTipCloud];
     }
-
-    [self.soundController stopMusic];
 }
 
 #pragma mark - Score
@@ -471,16 +487,8 @@ enum GameState {
     self.scoreLabelDropShadow.text = currentScoreString;
 }
 
-- (void)showScoreBoardAndHideScoreCounter {
-    [self removeActionForKey:updateScoreActionKey];
-    [self.scoreboard reloadData];
-    [self hideScoreLabel];
-    [self.scoreboard showScore];
-    self.gameState = scoreboard;
-}
-
 /// Updates the high score if necessary, and plays a sound based on score.
-- (void)handleHighScore {
+- (void)updateHighScoreIfNecessary {
     if (DataManager.currentScore > DataManager.highScore) {
         DataManager.highScore = DataManager.currentScore;
         [self.soundController playHighScoreSound];
