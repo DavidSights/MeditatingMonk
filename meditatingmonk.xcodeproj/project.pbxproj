@@ -18,6 +18,7 @@
 		9A043F0C22541E85001A7F60 /* BitMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F0B22541E85001A7F60 /* BitMask.swift */; };
 		9A043F0E2255B1FF001A7F60 /* StageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F0D2255B1FF001A7F60 /* StageType.swift */; };
 		9A043F112255B234001A7F60 /* StageDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A043F102255B234001A7F60 /* StageDescription.swift */; };
+		9A151AA32264446500B967BA /* NodeID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A151AA22264446500B967BA /* NodeID.swift */; };
 		9A15660A199A528A00F35B2F /* backgroundiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */; };
 		9A15660B199A528A00F35B2F /* grassAndTreeiPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */; };
 		9A1892A219BBADD30016F95A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A1892A119BBADD30016F95A /* icon@2x.png */; };
@@ -108,6 +109,7 @@
 		9A043F0B22541E85001A7F60 /* BitMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMask.swift; sourceTree = "<group>"; };
 		9A043F0D2255B1FF001A7F60 /* StageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageType.swift; sourceTree = "<group>"; };
 		9A043F102255B234001A7F60 /* StageDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageDescription.swift; sourceTree = "<group>"; };
+		9A151AA22264446500B967BA /* NodeID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeID.swift; sourceTree = "<group>"; };
 		9A156608199A528A00F35B2F /* backgroundiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgroundiPhone@2x.png"; sourceTree = "<group>"; };
 		9A156609199A528A00F35B2F /* grassAndTreeiPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grassAndTreeiPhone@2x.png"; sourceTree = "<group>"; };
 		9A1892A119BBADD30016F95A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 				9AD5316D2249CE8B004DBEC1 /* Colors.swift */,
 				9A043EFE22514A25001A7F60 /* FontManager.swift */,
 				9A043F0B22541E85001A7F60 /* BitMask.swift */,
+				9A151AA22264446500B967BA /* NodeID.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				9AD5316C2249ACB5004DBEC1 /* PhysicsManager.swift in Sources */,
 				9AD53154223F0AAB004DBEC1 /* DeviceManager.swift in Sources */,
 				9A49D6CB197F48590078C2D6 /* ScoreBoard.m in Sources */,
+				9A151AA32264446500B967BA /* NodeID.swift in Sources */,
 				9A043F052252D5A7001A7F60 /* TipCloudNode.swift in Sources */,
 				9A8F84F5197354EC0085296D /* GameScene.m in Sources */,
 				9A043F112255B234001A7F60 /* StageDescription.swift in Sources */,

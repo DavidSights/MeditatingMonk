@@ -366,7 +366,7 @@ enum GameState {
     } else if ([name isEqual: @"creditsButton"]) {
         [self creditsButtonPressed];
 
-    } else if ([name isEqualToString:facebookNodeId] || [name isEqualToString:twitterNodeId]) {
+    } else if ([name isEqualToString:NodeID.facebookButton] || [name isEqualToString:NodeID.twitterButton]) {
         [self shareButtonPressed];
     }
 }
