@@ -127,6 +127,33 @@ enum GameState {
     [self addChild:self.monkNode];
 }
 
+// MARK: - Game Management
+
+- (void)startGame {
+    self.gameState = newGame;
+    [self hideScoreboard];
+    [self hideTipCloud];
+    [self.soundController playMusic];
+}
+
+/// Handles all behavior related to the end of a game.
+- (void)endGame {
+
+    if (self.gameState != playing) { return; }
+
+    [self.soundController stopMusic];
+    [self.monkNode openEyes];
+    [self hideScoreLabel];
+    [self showScoreboard];
+    [self updateHighScoreIfNecessary];
+
+    DataManager.combinedScores += DataManager.currentScore;
+
+    if (DataManager.currentScore >= 10) {
+        [self showTipCloud];
+    }
+}
+
 #pragma mark - Grpahics and Animations
 
 - (void)hideTitleLabels {
@@ -208,14 +235,8 @@ enum GameState {
 }
 
 - (void)showCredits {
-
-    if (self.creditsNode == nil) {
-        NSLog(@"CREDITS IS NIL");
-    }
-
-    self.creditsNode.position = CGPointMake(self.size.width/2, self.size.height *2);
+    self.creditsNode.position = CGPointMake(self.size.width/2, self.size.height*2);
     self.creditsNode.alpha = 0;
-
     [self addChild:self.creditsNode];
     [self.creditsNode runAction:[SKAction fadeInWithDuration:.4]];
     [self.creditsNode runAction:[SKAction moveTo:CGPointMake(self.size.width/2, self.size.height/2) duration:.3]];
@@ -247,6 +268,7 @@ enum GameState {
 }
 
 - (void)hideScoreLabel {
+    [self removeActionForKey:updateScoreActionKey];
 
     float DS = 3.7;
     if (self.size.height == 1024 && self.size.width == 768) { DS = DS + 10; }
@@ -341,10 +363,12 @@ enum GameState {
 // MARK: - Scoreboard
 
 - (void)showScoreboard {
+    [self.scoreboard reloadData];
     [self addChild:self.scoreboard];
     CGSize size = self.view.frame.size;
     SKAction *showAction = [SKAction moveTo:CGPointMake(size.width/2, size.height/2) duration:.5];
     [self.scoreboard runAction:showAction];
+    self.gameState = scoreboard;
 }
 
 - (void)hideScoreboard {
@@ -357,7 +381,7 @@ enum GameState {
 
 - (void)handleScoreboardInteractionForName:(NSString *)name {
 
-    if ([name isEqual: @"replayButton"]) {
+    if ([name isEqual: NodeID.replayButton]) {
         [self replayButtonPressed];
 
     } else if ([name isEqual:@"gameCenterButton"]) {
@@ -441,40 +465,6 @@ enum GameState {
         [self endGame];
     } else if (contact.bodyA.categoryBitMask == BitMaskAccessor.lowerBoundary || contact.bodyB.categoryBitMask == BitMaskAccessor.lowerBoundary) {
         [self endGame];
-    }
-}
-
-// MARK: - Game Management
-
-- (void)startGame {
-    self.gameState = newGame;
-    [self hideScoreboard];
-    [self hideTipCloud];
-    [self.soundController playMusic];
-}
-
-/// Handles all behavior related to the end of a game.
-- (void)endGame {
-
-    if (self.gameState != playing) { return; }
-
-    [self.soundController stopMusic];
-    [self.monkNode openEyes];
-
-    [self updateHighScoreIfNecessary];
-    DataManager.combinedScores += DataManager.currentScore;
-
-    // Stop the counting points timer
-    [self removeActionForKey:updateScoreActionKey];
-    [self hideScoreLabel];
-
-    // Update and show the scoreboard.
-    [self.scoreboard reloadData];
-    [self showScoreboard];
-    self.gameState = scoreboard;
-
-    if (DataManager.currentScore >= 10) {
-        [self showTipCloud];
     }
 }
 

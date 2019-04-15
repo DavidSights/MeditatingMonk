@@ -10,6 +10,9 @@ import Foundation
 
 /// Node ID constants.
 @objc class NodeID: NSObject {
+
+    // Scoreboard
+    @objc static let replayButton = "ReplayButton"
     @objc static let facebookButton = "FacebookButton"
     @objc static let twitterButton = "TwitterButton"
 }

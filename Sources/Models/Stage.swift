@@ -63,9 +63,6 @@ class Stage: NSObject {
         nodes.append(lowerBoundaryNode)
 
         for node in nodes { stageNode.addChild(node) }
-
-        // For debug purposes only.
-        visualizeBoundaries()
     }
 
     /// This is a simple way to visualize this stage's boundaries.

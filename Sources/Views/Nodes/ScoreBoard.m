@@ -157,7 +157,7 @@
     // Set up the buttons.
 
     self.replayButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"buttoniPad" : @"buttoniPhone")
-                                       identifierName:@"replayButton"
+                                       identifierName:NodeID.replayButton
                                             positionX:-80
                                             positionY:(DeviceManager.isTablet ? -290 : -110)];
 
@@ -179,7 +179,7 @@
     // Set up the icons.
 
     self.replayIcon = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"playIconiPad" : @"playIconiPhone")
-                                     identifierName:@"replayButton"
+                                     identifierName:NodeID.replayButton
                                           positionX:0
                                           positionY:0];
 
