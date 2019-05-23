@@ -40,14 +40,14 @@ enum StageDescription {
     var upperBoundaryPositionY: CGFloat {
         switch self {
         case .mountains:
-            return centerBasedPosition(195)
+            return centerBasedPosition(DeviceManager.isTablet ? 360 : 195)
         }
     }
 
     var lowerBoundaryPositionY: CGFloat {
         switch self {
         case .mountains:
-            return centerBasedPosition(-145)
+            return centerBasedPosition(DeviceManager.isTablet ? -444 : -145)
         }
     }
 

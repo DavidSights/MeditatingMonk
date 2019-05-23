@@ -9,7 +9,7 @@
 class MonkNode: SKNode {
 
     private static let eyesOpenImageName = DeviceManager.isTablet ? "monkEyesOpeniPad" : "monkEyesOpeniPhone"
-    private static let eyesClosedImageName = DeviceManager.isTablet ? "monkEyesClosediPad" : "monkEyesClosediPhone"
+    private static let eyesClosedImageName = DeviceManager.isTablet ? "monkiPadEyesClosediPad" : "monkEyesClosediPhone"
 
     private var image: SKSpriteNode
     private var openEyesAction: SKAction!
