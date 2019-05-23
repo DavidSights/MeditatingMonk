@@ -21,7 +21,7 @@ class GameSceneViewController: UIViewController {
         gameScene.gameSceneDelegate = self
         gameScene.setUpWith(Stage(.mountains))
 
-        if let skView = self.view as? SKView {
+        if let skView = view as? SKView {
             skView.presentScene(gameScene)
         }
     }
@@ -39,7 +39,7 @@ extension GameSceneViewController: GameSceneDelegate {
                                      style: .default,
                                      handler: nil)
         alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true)
     }
 
     func shareScore(_ score: String) {
@@ -54,7 +54,7 @@ extension GameSceneViewController: GameSceneDelegate {
         activityViewController.popoverPresentationController?.sourceView = view
 
         // Show the share sheet.
-        present(activityViewController, animated: true, completion: nil)
+        present(activityViewController, animated: true)
     }
 }
 
@@ -63,10 +63,10 @@ extension GameSceneViewController: GameSceneDelegate {
 extension GameSceneViewController: EmailManagerDelegate {
 
     func showEmailViewController(_ emailViewController: UIViewController) {
-        present(emailViewController, animated: true, completion: nil)
+        present(emailViewController, animated: true)
     }
 
     func dismissEmailViewController(_ emailViewController: UIViewController) {
-        emailViewController.dismiss(animated: true, completion: nil)
+        emailViewController.dismiss(animated: true)
     }
 }

@@ -43,7 +43,7 @@ import Foundation
 
     /// Erases the user's high score.
     @objc class func resetHighScore() {
-        self.highScore = 0
+        highScore = 0
         // TODO: If possible, reset GameCenter's recorded high score as well.
     }
 }

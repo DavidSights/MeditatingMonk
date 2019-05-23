@@ -29,10 +29,10 @@ class PhysicsManager: NSObject {
             return 1000
 
         case 1:
-            return 1150
+            return 1050
 
         case 2:
-            return 1250
+            return 1100
 
         default:
             #if DEBUG
