@@ -14,11 +14,11 @@ enum BitMask {
     var value: UInt32 {
         switch self {
         case .playerBody:
-            return 0x1
+            return 1
         case .upperBoundary:
-            return 0x1 << 1
+            return 2
         case .lowerBoundary:
-            return 0x1 << 2
+            return 3
         }
     }
 }
@@ -27,5 +27,5 @@ enum BitMask {
 @objc class BitMaskAccessor: NSObject {
     @objc static let playerBoundary = BitMask.playerBody.value
     @objc static let upperBoundary = BitMask.upperBoundary.value
-    @objc static let lowerBoundary = BitMask.upperBoundary.value
+    @objc static let lowerBoundary = BitMask.lowerBoundary.value
 }
