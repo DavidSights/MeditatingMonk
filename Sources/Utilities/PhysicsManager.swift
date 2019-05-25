@@ -12,7 +12,13 @@ class PhysicsManager: NSObject {
 
     /// This provides the player with a consistent first jump
     /// at the beginning of every game.
-    @objc static let newGameJump = CGVector(dx: 0, dy: 1000)
+    @objc static let newGameJump = CGVector(dx: 0, dy: DeviceManager.isTablet ? tabletNewJump : mobileBase)
+
+    private static let mobileBase = 1000
+    private static let tabletBase = 12000
+
+    // The new jump on tablet is very different from the base jump, and needs its own value.
+    private static let tabletNewJump = 7000
 
     /// A jump value that varies between 3 options for increased difficulty.
     @objc class func jump() -> CGVector {
@@ -21,18 +27,18 @@ class PhysicsManager: NSObject {
 
     private class func randomJumpValue() -> Int {
 
-        let randomNumber = arc4random()%3
+        let randomNumber = arc4random() % 3
 
         switch randomNumber {
 
         case 0:
-            return 1000
+            return DeviceManager.isTablet ? tabletBase : mobileBase
 
         case 1:
-            return 1050
+            return (DeviceManager.isTablet ? tabletBase : mobileBase) + 50
 
         case 2:
-            return 1100
+            return (DeviceManager.isTablet ? tabletBase : mobileBase) + 100
 
         default:
             #if DEBUG
