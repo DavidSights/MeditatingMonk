@@ -23,9 +23,9 @@ class TipCloudNode: SKNode {
 
     private func setUpLabel() {
         // TOOD: Update font size for iPad.
-        label.fontSize =  DeviceManager.isTablet ? 10 : 10
+        label.fontSize =  DeviceManager.isTablet ? 20 : 10
         label.fontName = FontManager.appFontName
-        label.position = CGPoint(x: 0, y: -5)
+        label.position = CGPoint(x: 0, y: DeviceManager.isTablet ? -12 : -5)
         label.numberOfLines = 0
         label.fontColor = .tipLabel
         addChild(label)

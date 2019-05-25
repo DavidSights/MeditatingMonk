@@ -81,7 +81,7 @@ enum GameState {
 - (void)setUpTipCloudWithSize:(CGSize)size {
     TipCloudNode *tipCloudNode = [TipCloudNode new];
     self.tipCloudNode = tipCloudNode;
-    self.tipCloudNode.position = CGPointMake(size.width/2, size.height + 45);
+    self.tipCloudNode.position = CGPointMake(size.width/2, size.height + (DeviceManager.isTablet ? 90 : 45));
     [self addChild:tipCloudNode];
 }
 
@@ -169,8 +169,8 @@ enum GameState {
 
     int taptoStartFontSize = DeviceManager.isTablet ? 40 : 20;
     int directionsFontSize = DeviceManager.isTablet ? 28 : 14;
-    float dropShadowDistance = (DeviceManager.isTablet ? 5 : 2.5);
-    float dropShadowDistance2 = (DeviceManager.isTablet ? 5 : 2);
+    float dropShadowDistance = DeviceManager.isTablet ? 5 : 2.5;
+    float dropShadowDistance2 = DeviceManager.isTablet ? 5 : 2;
 
     // Set up the title.
     SKSpriteNode *titleImageNode = [SKSpriteNode spriteNodeWithImageNamed: (!DeviceManager.isTablet ? @"title" : @"titleiPad")];
@@ -280,13 +280,13 @@ enum GameState {
 }
 
 - (void)showTipCloud {
-    SKAction *showAction = [SKAction moveTo:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - 50) duration:0.25];
+    SKAction *showAction = [SKAction moveTo:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height - (DeviceManager.isTablet ? 100 : 50)) duration:0.25];
     [self.tipCloudNode runAction:showAction];
     [self.tipCloudNode reloadTip];
 }
 
 - (void)hideTipCloud {
-    SKAction *hideAction = [SKAction moveTo:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height + 45) duration:0.25];
+    SKAction *hideAction = [SKAction moveTo:CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height + (DeviceManager.isTablet ? 90 : 45)) duration:0.25];
     [self.tipCloudNode runAction:hideAction];
 }
 
