@@ -10,6 +10,8 @@ import UIKit
 
 class PhysicsManager: NSObject {
 
+    // MARK: - Static Properties
+
     /// This provides the player with a consistent first jump
     /// at the beginning of every game.
     @objc static let newGameJump = CGVector(dx: 0, dy: DeviceManager.isTablet ? tabletNewJump : mobileBase)
@@ -19,6 +21,8 @@ class PhysicsManager: NSObject {
 
     // The new jump on tablet is very different from the base jump, and needs its own value.
     private static let tabletNewJump = 7000
+
+    // MARK: - Convenience Methods
 
     /// A jump value that varies between 3 options for increased difficulty.
     @objc class func jump() -> CGVector {

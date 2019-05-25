@@ -24,20 +24,20 @@
 
     SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     title.text = @"Meditating Monk was made by";
-    title.fontColor = Colors.creditsLightColor;
+    title.fontColor = UIColor.creditsLight;
     [self addChild:title];
 
     SKLabelNode *nameDavid = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
-    nameDavid.fontColor = Colors.creditsDarkColor;
+    nameDavid.fontColor = UIColor.creditsDark;
 
     SKLabelNode *nameDavy = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
-    nameDavy.fontColor = Colors.creditsDarkColor;
+    nameDavy.fontColor = UIColor.creditsDark;
 
     SKLabelNode *descriptionDavid = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
-    descriptionDavid.fontColor = Colors.creditsLightColor;
+    descriptionDavid.fontColor = UIColor.creditsLight;
 
     SKLabelNode *descriptionDavy = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
-    descriptionDavy.fontColor = Colors.creditsLightColor;
+    descriptionDavy.fontColor = UIColor.creditsLight;
 
     SKLabelNode *returnToGame = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     returnToGame.fontColor = [SKColor whiteColor];
@@ -100,14 +100,14 @@
     SKSpriteNode *rateButton = [SKSpriteNode spriteNodeWithImageNamed:button];
     SKLabelNode *rateLabel = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
 
-    backLabel.fontColor = Colors.creditsDarkColor;
+    backLabel.fontColor = UIColor.creditsDark;
 
     backLabel.text = @"Go Back";
     backLabel.name = @"goBack";
 
     backButton.name = @"goBack";
 
-    rateLabel.fontColor = Colors.creditsDarkColor;
+    rateLabel.fontColor = UIColor.creditsDark;
 
     rateLabel.text = @"Rate";
     rateLabel.name = @"rate";

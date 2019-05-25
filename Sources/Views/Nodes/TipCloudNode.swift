@@ -27,7 +27,7 @@ class TipCloudNode: SKNode {
         label.fontName = FontManager.appFontName
         label.position = CGPoint(x: 0, y: -5)
         label.numberOfLines = 0
-        label.fontColor = Colors.tipLabelColor
+        label.fontColor = .tipLabel
         addChild(label)
         reloadTip()
     }

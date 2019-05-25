@@ -10,7 +10,7 @@ import UIKit
 
 class DeviceManager: NSObject {
 
-    /// Describes whether or not the user is using an iPad device.
+    /// Describes whether or not the user is using a tablet device.
     @objc static var isTablet: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }

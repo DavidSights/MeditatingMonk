@@ -1,5 +1,5 @@
 //
-//  Colors.swift
+//  UIColor+MeditatingMonk.swift
 //  MeditatingMonk
 //
 //  Created by David Seitz Jr on 3/25/19.
@@ -8,21 +8,21 @@
 
 import UIKit
 
-class Colors: NSObject {
+extension UIColor {
 
-    @objc static var creditsDarkColor: UIColor {
+    @objc static var creditsDark: UIColor {
         return rgbColor(r: 134,
                         g: 114,
                         b: 58)
     }
 
-    @objc static var creditsLightColor: UIColor {
+    @objc static var creditsLight: UIColor {
         return rgbColor(r: 155,
                         g: 136,
                         b: 72)
     }
 
-    static var tipLabelColor: UIColor {
+    static var tipLabel: UIColor {
         return rgbColor(r: 111,
                         g: 158,
                         b: 183)
