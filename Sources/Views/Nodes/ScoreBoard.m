@@ -150,40 +150,40 @@
 
     // Set up the container view.
 
-    self.scoreBoardView = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"scoreboardiPad" : @"scoreboardiPhone")
+    self.scoreBoardView = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"scoreboardiPad" : @"scoreboardiPhone"
                                          identifierName:nil
                                               positionX:0
                                               positionY:50];
     // Set up the buttons.
 
-    self.replayButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"buttoniPad" : @"buttoniPhone")
+    self.replayButton = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"buttoniPad" : @"buttoniPhone"
                                        identifierName:NodeID.replayButton
-                                            positionX:-80
-                                            positionY:(DeviceManager.isTablet ? -290 : -110)];
+                                            positionX: DeviceManager.isTablet ? -160 : -80
+                                            positionY:DeviceManager.isTablet ? -290 : -110];
 
 
-    self.gameCenterButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"buttoniPad" : @"buttoniPhone")
+    self.gameCenterButton = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"buttoniPad" : @"buttoniPhone"
                                            identifierName:@"gameCenterButton"
-                                                positionX:self.replayButton.position.x*-1
+                                                positionX:self.replayButton.position.x * -1
                                                 positionY:self.replayButton.position.y];
 
-    self.twitterButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"twitterButtoniPad" : @"twitterButtoniPhone")
+    self.twitterButton = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"twitterButtoniPad" : @"twitterButtoniPhone"
                                         identifierName:NodeID.twitterButton
-                                             positionX:-70
-                                             positionY:(DeviceManager.isTablet ? -140 : -60)];
+                                             positionX: DeviceManager.isTablet ? - 140 : -70
+                                             positionY:DeviceManager.isTablet ? -140 : -60];
 
-    self.facebookButton = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"facebookButtoniPad" : @"facebookButtoniPhone")
+    self.facebookButton = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"facebookButtoniPad" : @"facebookButtoniPhone"
                                          identifierName:NodeID.facebookButton
-                                              positionX:70
+                                              positionX:self.twitterButton.position.x * -1
                                               positionY:self.twitterButton.position.y];
     // Set up the icons.
 
-    self.replayIcon = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"playIconiPad" : @"playIconiPhone")
+    self.replayIcon = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"playIconiPad" : @"playIconiPhone"
                                      identifierName:NodeID.replayButton
                                           positionX:0
                                           positionY:0];
 
-    self.gameCenterIcon = [self imageSpriteWithFileName:(DeviceManager.isTablet ? @"gameCenterIconiPad" : @"gameCenterIconiPhone")
+    self.gameCenterIcon = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"gameCenterIconiPad" : @"gameCenterIconiPhone"
                                          identifierName:@"gameCenterButton"
                                               positionX:0
                                               positionY:0];
