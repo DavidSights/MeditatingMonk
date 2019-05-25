@@ -167,10 +167,10 @@ enum GameState {
 
 - (void)setUpAndShowTitleViews {
 
-    int taptoStartFontSize = 20;
-    int directionsFontSize = 14;
-    float dropShadowDistance = (DeviceManager.isTablet ? 3.8 : 2.5);
-    float dropShadowDistance2 = (DeviceManager.isTablet ? 3.8 : 2);
+    int taptoStartFontSize = DeviceManager.isTablet ? 40 : 20;
+    int directionsFontSize = DeviceManager.isTablet ? 28 : 14;
+    float dropShadowDistance = (DeviceManager.isTablet ? 5 : 2.5);
+    float dropShadowDistance2 = (DeviceManager.isTablet ? 5 : 2);
 
     // Set up the title.
     SKSpriteNode *titleImageNode = [SKSpriteNode spriteNodeWithImageNamed: (!DeviceManager.isTablet ? @"title" : @"titleiPad")];
