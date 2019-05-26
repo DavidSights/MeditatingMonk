@@ -20,7 +20,7 @@
 
     self.name = @"CreditsNode";
 
-    [self addChild:[SKSpriteNode spriteNodeWithImageNamed:@"creditsBackground02iPhone"]];
+    [self addChild:[SKSpriteNode spriteNodeWithImageNamed:DeviceManager.isTablet ? @"creditsBackgroundiPad" : @"creditsBackground02iPhone"]];
 
     SKLabelNode *title = [SKLabelNode labelNodeWithFontNamed:FontManager.appFontName];
     title.text = @"Meditating Monk was made by";

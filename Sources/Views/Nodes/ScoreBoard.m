@@ -158,7 +158,7 @@
 
     self.replayButton = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"buttoniPad" : @"buttoniPhone"
                                        identifierName:NodeID.replayButton
-                                            positionX: DeviceManager.isTablet ? -160 : -80
+                                            positionX:DeviceManager.isTablet ? -160 : -80
                                             positionY:DeviceManager.isTablet ? -290 : -110];
 
 
@@ -169,7 +169,7 @@
 
     self.twitterButton = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"twitterButtoniPad" : @"twitterButtoniPhone"
                                         identifierName:NodeID.twitterButton
-                                             positionX: DeviceManager.isTablet ? - 140 : -70
+                                             positionX:DeviceManager.isTablet ? - 140 : -70
                                              positionY:DeviceManager.isTablet ? -140 : -60];
 
     self.facebookButton = [self imageSpriteWithFileName:DeviceManager.isTablet ? @"facebookButtoniPad" : @"facebookButtoniPhone"

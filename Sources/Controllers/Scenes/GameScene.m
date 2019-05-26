@@ -251,7 +251,7 @@ enum GameState {
 - (void)showScoreLabelIfNecessary {
 
     int scoreLabelYPosition = (self.size.height - (DeviceManager.isTablet ? 80 : 47));
-    float dropShadowOffset = (DeviceManager.isTablet ? 3.9 : 3.7);
+    float dropShadowOffset = (DeviceManager.isTablet ? 7 : 3.7);
 
     // Prevent unnecessarily setting up the score label again.
     if (self.scoreLabel.position.y == scoreLabelYPosition) { return; }

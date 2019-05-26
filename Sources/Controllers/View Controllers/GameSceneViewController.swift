@@ -25,6 +25,10 @@ class GameSceneViewController: UIViewController {
             skView.presentScene(gameScene)
         }
     }
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 // MARK: - Game Scene Delegate
